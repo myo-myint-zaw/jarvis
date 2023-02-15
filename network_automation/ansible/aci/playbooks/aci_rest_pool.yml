@@ -1,0 +1,74 @@
+---
+- name: Create IP addresses
+  hosts: apic
+  connection: local
+  gather_facts: no
+
+  tasks:
+  - name: Get facts from XLSX file
+    xls_to_facts:
+      src: ../ACI_Deployment_Template.xlsx
+
+  - name: Create IP addresses
+    aci_rest:
+      hostname: "{{ inventory_hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      validate_certs: no
+      method: post
+      path: /api/mo/uni/tn-mgmt.json
+      content: |
+        {
+         "fvTenant": {
+          "attributes": {
+            "dn": "uni/tn-mgmt",
+            "status": "modified",
+            "name": "mgmt"
+          },
+          "children": [{
+            "fvnsAddrInst": {
+               "attributes": {
+                 "dn": "uni/tn-mgmt/addrinst-{{ item.Policy_Name }}inbaddr",
+                 "status": "{{ item.StatusCode }}",
+                 "addr": {{ item.INB_GW }}/{{ item.INB_subnetmask }},
+                 "name": "{{ item.Policy_Name }}inbaddr",
+                 "rn": "addrinst-{{ item.Policy_Name }}inbaddr"
+               },
+               "children": [{
+                 "fvnsUcastAddrBlk": {
+                   "attributes": {
+                     "dn": "uni/tn-mgmt/addrinst-{{ item.Policy_Name }}inbaddr/fromaddr-[{{ item.INB_IP }}]-toaddr-[{{ item.INB_IP }}]",
+                     "status": "{{ item.StatusCode }}",
+                     "from": "{{ item.INB_IP }}",
+                     "to": "{{ item.INB_IP }}"
+                   },
+                   "children": []
+                 }
+               }]
+             }
+           },
+           {
+             "fvnsAddrInst": {
+               "attributes": {
+                 "dn": "uni/tn-mgmt/addrinst-{{ item.Policy_Name }}oobaddr",
+                 "status": "{{ item.StatusCode }}",
+                 "addr": "{{ item.OOB_GW }}/{{ item.OOB_subnetmask }}",
+                 "name": "{{ item.Policy_Name }}oobaddr",
+                 "rn": "addrinst-{{ item.Policy_Name }}oobaddr"
+               },
+               "children": [{
+                 "fvnsUcastAddrBlk": {
+                   "attributes": {
+                     "dn": "uni/tn-mgmt/addrinst-{{ item.Policy_Name }}oobaddr/fromaddr-[{{ item.OOB_IP }}]-toaddr-[{{ item.OOB_IP }}]",
+                     "status": "{{ item.StatusCode }}",
+                     "from": "{{ item.OOB_IP }}",
+                     "to": "{{ item.OOB_IP }}"
+                   },
+                   "children": []
+                 }
+               }]
+             }
+           }]
+         }
+        }
+    with_items: "{{ spreadsheet_Fabric_Node }}"

@@ -1,0 +1,23 @@
+---
+- name: Configure VRF
+  hosts: apic
+  connection: local
+  gather_facts: no
+
+  tasks:
+  - name: Get facts from XLSX file
+    xls_to_facts:
+      src: ../ACI_Deployment_Template.xlsx
+
+  - name: Add a new vrf to tenant
+    aci_vrf:
+      hostname: "{{ inventory_hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      validate_certs: no
+      tenant: "{{ item.Tenant }}"
+      vrf: "{{ item.VRF }}"
+      policy_control_preference: "{{ item.Policy_Control_Enforcement }}"
+      policy_control_direction: "{{ item.Policy_Control_Direction }}"
+      state: "{{ item.State }}"
+    with_items: "{{ spreadsheet_Tenant_AP_EPG }}"

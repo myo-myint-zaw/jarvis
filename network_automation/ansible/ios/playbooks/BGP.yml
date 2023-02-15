@@ -1,0 +1,35 @@
+- hosts: ios-routers
+  gather_facts: no
+
+  tasks:
+   - name: Get facts from XLSX file
+     run_once: true
+     delegate_to: localhost
+     xls_to_facts:
+       src: ../IOS_Deployment_Template.xlsx
+
+   - name: configure global bgp
+     ios_bgp:
+       config:
+         bgp_as: "{{ item.bgp_as }}"
+         router_id: "{{ item.router_id }}"
+         log_neighbor_changes: "{{ item.log_neighbor_changes }}"
+         neighbors:
+           - neighbor: "{{ item.bgp_neighbor }}"
+             remote_as: "{{ item.remote_as }}"
+             timers:
+               keepalive: "{{ item.keepalive }}"
+               holdtime: "{{ item.holdtime }}"
+               min_neighbor_holdtime: "{{ item.min_neighbor_holdtime }}"
+         networks:
+           - prefix: "{{ item.networks_prefix }}"
+             route_map: "{{ item.route_map }}"
+             masklen: "{{ item.networks_mask }}"
+         address_family:
+           - afi: "{{ item.address_family }}"
+             redistribute:
+               - protocol: "{{ item.redistribute_protocol }}"
+                 id: "{{ item.protocol_id }}"
+                 metric: "{{ item.metric }}"
+       operation: merge
+     with_items: "{{ spreadsheet_BGP }}"

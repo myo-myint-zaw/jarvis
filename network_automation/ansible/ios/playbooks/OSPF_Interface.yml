@@ -1,0 +1,79 @@
+- hosts: ios-routers
+  gather_facts: no
+
+  tasks:
+    - name: Get facts from XLSX file
+      run_once: true
+      delegate_to: localhost
+      xls_to_facts:
+       src: ../IOS_Deployment_Template.xlsx
+
+    - name: enable ipv6 routing
+      ios_config:
+        lines:
+          - ipv6 unicast-routing
+      when: item.mgmt_ip == inventory_hostname
+      with_items:  "{{ spreadsheet_OSPFv3 }}"
+
+    - name: Configure OSPF for interface
+      ios_config:
+        lines:
+          - ospfv3 hello-interval {{ item.hello_time }}
+          - ospfv3 dead-interval {{ item.dead_time }}
+          - ospfv3 authentication ipsec spi {{ item.spi }} {{ item.auth_type }} 7 {{ item.auth_key }}
+          - ospfv3 network {{ item.network_type }}
+#         - negotiation auto
+          - ospfv3 {{ item.process_id }} ipv4 area {{ item.area }}
+          - ospfv3 {{ item.process_id }} ipv6 area {{ item.area }}
+        parents: interface {{ item.interface }}
+      when: item.mgmt_ip == inventory_hostname and item.loopback_int == "no"
+      with_items:  "{{ spreadsheet_OSPFv3 }}"
+
+    - name: Configure OSPF for loopback interface
+      ios_config:
+        lines:
+          - ospfv3 {{ item.process_id }} ipv4 area {{ item.area }}
+          - ospfv3 {{ item.process_id }} ipv6 area {{ item.area }}
+        parents: interface {{ item.interface }}
+      when: item.mgmt_ip == inventory_hostname and item.loopback_int == "yes"
+      with_items:  "{{ spreadsheet_OSPFv3 }}"
+
+    - name: Configure passive-interface default for interface ipv4
+      ios_config:
+        lines:
+          - passive-interface default
+        parents: 
+          - router ospfv3 {{ item.process_id }}
+          - address-family ipv4 unicast
+      when: item.mgmt_ip == inventory_hostname
+      with_items:  "{{ spreadsheet_OSPFv3}}"
+
+    - name: Configure passive-interface default for interface ipv6
+      ios_config:
+        lines:
+          - passive-interface default
+        parents: 
+          - router ospfv3 {{ item.process_id }}
+          - address-family ipv6 unicast
+      when: item.mgmt_ip == inventory_hostname
+      with_items:  "{{ spreadsheet_OSPFv3 }}"
+
+    - name: Configure no passive-interface for interface ipv4
+      ios_config:
+        lines:
+          - no passive-interface {{ item.interface }}
+        parents: 
+          - router ospfv3 {{ item.process_id }}
+          - address-family ipv4 unicast
+      when: item.mgmt_ip == inventory_hostname and item.passive_interface == "off"
+      with_items:  "{{ spreadsheet_OSPFv3 }}"
+
+    - name: Configure no passive-interface for interface ipv6
+      ios_config:
+        lines:
+          - no passive-interface {{ item.interface }}
+        parents: 
+          - router ospfv3 {{ item.process_id }}
+          - address-family ipv6 unicast
+      when: item.mgmt_ip == inventory_hostname and item.passive_interface == "off"
+      with_items:  "{{ spreadsheet_OSPFv3 }}"

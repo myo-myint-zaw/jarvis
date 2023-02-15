@@ -1,0 +1,31 @@
+---
+- name: Get fabric node
+  hosts: apic
+  connection: local
+  gather_facts: no
+
+  tasks:
+  - name: Get facts from XLSX file
+    xls_to_facts:
+      src: ../../ACI_Deployment_Template.xlsx
+    no_log: True
+
+  - name: Get Fabric nodes
+    aci_fabric_node:
+      hostname: "{{ inventory_hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      validate_certs: no
+      role: "{{  item.Device_Type }}"
+      description: "{{ item.Device_Purpose }}"
+      serial: "{{ item.Serial_Number }}"
+      node_id: "{{ item.Node_ID }}"
+      switch: "{{ item.Policy_Name }}"
+      state: query
+    with_items: "{{ spreadsheet_Fabric_Node}}"
+    no_log: True
+    register: fabric_output
+
+  - name: Json Query
+    set_fact:
+     query_result: "{{ fabric_output | json_query('results[*].current[*].fabricNodeIdentP.attributes.name')}}"

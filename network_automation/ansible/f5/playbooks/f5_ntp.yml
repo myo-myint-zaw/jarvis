@@ -1,0 +1,48 @@
+- name: Setup NTP
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  environment:
+    F5_USER: "{{ username }}"
+    F5_PASSWORD: "{{ password }}"
+    F5_VALIDATE_CERTS: "no"
+
+
+  tasks:
+  - name: Get facts from XLSX file
+    xls_to_facts:
+      src: ../F5_Deployment_Template.xlsx
+
+  - name: set primary_server mgmt IP variable
+    set_fact:
+      primary_server: "{{ item.mgmt_ip }}"
+    with_items: "{{ spreadsheet_Base_Configuration }}"
+    when: item.primary_node  == "yes"
+
+  - debug:
+      msg: Primary F5 mgmt IP is {{ primary_server }}
+
+  - name: set secondary_server mgmt IP variable
+    set_fact:
+      secondary_server: "{{ item.mgmt_ip }}"
+    with_items: "{{ spreadsheet_Base_Configuration }}"
+    when: item.primary_node != "yes"
+
+  - debug:
+      msg: Secondary F5 mgmt IP is {{ secondary_server }}
+
+  - name: set ntp on {{ primary_server }} and {{ secondary_server }}
+    bigip_device_ntp:
+      ntp_servers:
+        - "{{ item[1].NTP_1 }}"
+        - "{{ item[1].NTP_2 }}"
+      timezone: Asia/Singapore
+      provider:
+        password: "{{ password }}"
+        server: "{{ item[0] }}"
+        user: "{{ username }}"
+    delegate_to: localhost
+    with_nested:
+      - [ "{{ primary_server }}", "{{ secondary_server }}" ]
+      - "{{ spreadsheet_Banner_Syslog_NTP }}"
+    ignore_errors: yes

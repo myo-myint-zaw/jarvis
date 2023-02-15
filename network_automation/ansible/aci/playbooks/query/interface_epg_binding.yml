@@ -1,0 +1,63 @@
+---
+- name: Get Interface in EPG
+  hosts: apic
+  connection: local
+  gather_facts: no
+
+  tasks:
+  - name: Get facts from XLSX file
+    xls_to_facts:
+      src: ../../ACI_Deployment_Template.xlsx
+    no_log: True
+
+  - name: Get non vpc interface binding to epg
+    aci_static_binding_to_epg:
+      hostname: "{{ inventory_hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      validate_certs: no
+      tenant: "{{ item.Tenant }}"
+      ap: "{{ item.AP }}"
+      epg: "{{ item.EPG }}"
+      encap_id: "{{ item.VLAN }}"
+      interface_mode: "{{ item.Interface_Mode }}"
+      interface_type: "{{ item.Interface_Type }}"
+      # interface: "{{ item.Interface_Policy_GP }}"
+      interface: "{{ item.Interface }}"
+      leafs: "{{ item.Leafs }}"
+      pod_id: "{{ item.Pod_ID }}"
+      deploy_immediacy: immediate
+      state: query
+    when: item.Interface_Type != "vpc"
+    with_items: "{{ spreadsheet_Interface_EPG_Binding }}"
+    no_log: True
+    register: non_vpc
+
+  - name: Get vpc interface binding to epg
+    aci_static_binding_to_epg:
+      hostname: "{{ inventory_hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      validate_certs: no
+      tenant: "{{ item.Tenant }}"
+      ap: "{{ item.AP }}"
+      epg: "{{ item.EPG }}"
+      encap_id: "{{ item.VLAN }}"
+      interface_mode: "{{ item.Interface_Mode }}"
+      interface_type: "{{ item.Interface_Type }}"
+      interface: "{{ item.Interface_Policy_GP }}"
+      # interface: "{{ item.Interface }}"
+      leafs: "{{ item.Leafs }}"
+      pod_id: "{{ item.Pod_ID }}"
+      deploy_immediacy: immediate
+      state: query
+    when: item.Interface_Type == "vpc"
+    with_items: "{{ spreadsheet_Interface_EPG_Binding }}"
+    no_log: True
+    register: vpc
+
+  - name: Json Query Non VPC
+    set_fact:
+     query_result:
+       non_vpc: "{{ non_vpc | json_query('results[*].current[*].fvRsPathAtt.attributes.tDn') }}"
+       vpc: "{{ vpc | json_query('results[*].current[*].fvRsPathAtt.attributes.tDn') }}"

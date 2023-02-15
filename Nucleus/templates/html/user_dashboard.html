@@ -1,0 +1,88 @@
+{% block content %}
+<head>
+<title>User Dashboard</title>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/nucleus.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/w3.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}" />
+<link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.ico' %}" />
+</head>
+<header>
+<nav class="nav">
+<div class="w3-bar">
+<a href="/platform" class="w3-bar-item w3-button w3-black menu_button w3-hover-blue-gray">Home</a>
+<div class="w3-dropdown-hover w3-right">
+<button class="w3-button w3-hover-blue-gray" style="color:white">{{ request.user }} &#9662;</button>
+<div class="w3-dropdown-content w3-bar-block w3-border" style="right:0">
+<a href="/logout" class="w3-bar-item w3-button w3-hover-blue-gray">Logout</a>
+</div>
+</div>
+</div>
+<div class="w3-bar w3-black">
+<div class="w3-bar-item w3-white menu_button">User Dashboard</div>
+<a href="/automation_modules" class="w3-bar-item w3-button w3-black menu_button w3-hover-blue-gray">Automation Modules</a>
+</div>
+</nav>
+</header>
+<body>
+<nav id="mySidebar" class="w3-sidebar w3-top w3-large w3-padding" style="z-index:3;background-color:#006672;color:white;width:288px;font-weight:bold;display:none"><br>
+<div class="w3-container">
+<h3 class="w3-padding-64"><b>Network Automation</b></h3>
+</div>
+<div class="w3-bar-block">
+<a href="/platform" class="w3-bar-item w3-button w3-hover-blue-grey" style="font-size:17px">
+Home
+</a>
+<div class="w3-bar-item w3-button w3-hover-blue-grey" style="font-size:17px;background-color:#065972">
+User Dashboard
+</div>
+<a href="/automation_modules" class="w3-bar-item w3-button w3-hover-blue-grey" style="font-size:17px">
+Automation Modules
+</a>
+<div class="w3-dropdown-hover w3-right">
+<button class="w3-button w3-hover-blue-gray" style="color:white">{{ request.user }} &#9662;</button>
+<div class="w3-dropdown-content w3-bar-block w3-border" style="right:0;font-weight:normal">
+<a href="/logout" class="w3-bar-item w3-button w3-hover-blue-gray">Logout</a>
+</div>
+</div>
+</div>
+<button class="button w3-bar-item w3-hover-blue-grey" style="position:absolute;bottom:20px;right:20px" onclick="sidebar_close()">Close &nbsp; &times;
+</button>
+</nav>
+<button id="SideBarButton" class="button" style="position:fixed;left:0;top:53%;width:30px;border-top-left-radius:0;border-bottom-left-radius:0" onclick="sidebar_open()">
+&#9776;
+</button>
+<div class="w3-container" style="position:absolute;top:120px;left:20px" id="heading">
+<h1 class="w3-xxlarge w3-text-black"><b>Last Activity</b></h1>
+<hr style="width:50px;border:5px solid #065972" class="w3-round">
+</div>
+<button id="export" class="button" style="position:relative;left:91%;top:180px;width:70px" title="Export to XLS format">Export</button>
+<table class="w3-card" id="table_data" style="position:relative;top:200px;left:50px">
+<tr>
+<th>User</th>
+<th onclick="w3.sortHTML('#table_data','.item','td:nth-child(2)')" style="cursor:pointer">
+Action <i class="fa fa-sort" style="font-size:13px"></i>
+</th>
+<th>Template Name</th>
+<th onclick="w3.sortHTML('#table_data','.item','td:nth-child(4)')" style="cursor:pointer">
+Date <i class="fa fa-sort" style="font-size:13px"></i>
+</th>
+<th onclick="w3.sortHTML('#table_data','.item','td:nth-child(5)')" style="cursor:pointer">
+Time <i class="fa fa-sort" style="font-size:13px"></i>
+</th>
+<th onclick="w3.sortHTML('#table_data','.item','td:nth-child(6)')" style="cursor:pointer">
+Result <i class="fa fa-sort" style="font-size:13px"></i>
+</th>
+</tr>
+</table>
+<br><br><br><br><br><br><br><br><br><br><br><br>
+<a href="#" id="scroll"><span></span></a>
+</body>
+{% endblock content%}
+{% block javascripts %}
+<script type="text/javascript">/*<![CDATA[*/let audit_logs=JSON.parse(" {{ audit_logs | escapejs }} ");let audit_table=document.getElementById("table_data");for(let i=0;i<audit_logs.length;i++){let row=document.createElement("TR");row.className="item";let user=document.createElement("TD");let action=document.createElement("TD");let template_name=document.createElement("TD");let date=document.createElement("TD");let time=document.createElement("TD");let result=document.createElement("TD");let formatted_date=new Date(audit_logs[i].fields.date);formatted_date=formatted_date.getDate()+"-"+formatted_date.toLocaleString("en-us",{month:"short"})+"-"+formatted_date.getFullYear();user.appendChild(document.createTextNode(audit_logs[i].fields.user));action.appendChild(document.createTextNode(audit_logs[i].fields.action));template_name.appendChild(document.createTextNode(audit_logs[i].fields.template_name));date.appendChild(document.createTextNode(formatted_date));time.appendChild(document.createTextNode(audit_logs[i].fields.time));result.appendChild(document.createTextNode(audit_logs[i].fields.result));audit_logs[i].fields.result==="PASS"?result.style.color="#006400":result.style.color="#8B0000";row.appendChild(user);row.appendChild(action);row.appendChild(template_name);row.appendChild(date);row.appendChild(time);row.appendChild(result);audit_table.appendChild(row)}/*]]>*/</script>
+<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/table2excel.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/w3.js' %}"></script>
+<script type="text/javascript">$("#export").click(function(){$("#table_data").table2excel({name:"Last Activity",filename:"Last_Activity",fileext:".xlsx"})});function sidebar_open(){$("#mySidebar").css("display","block");$(".nav").css("display","none");$(".sub_nav").css("display","none");$("#heading").css("left","330px");$("#heading").css("top","60px");$("#table_data").css("width","73%");$("#table_data").css("top","200px");$("#table_data").css("left","340px")}function sidebar_close(){$("#mySidebar").css("display","none");$(".nav").css("display","block");$(".sub_nav").css("display","block");$("#heading").css("left","20px");$("#heading").css("top","120px");$("#table_data").css("width","95%");$("#table_data").css("top","200px");$("#table_data").css("left","50px")};</script>
+{% endblock javascripts %}

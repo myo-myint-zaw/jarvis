@@ -1,0 +1,42 @@
+---
+- name: Get IP addresses
+  hosts: apic
+  connection: local
+  gather_facts: no
+
+
+  tasks:
+  - name: Get facts from XLSX file
+    xls_to_facts:
+      src: ../../ACI_Deployment_Template.xlsx
+    no_log: True
+
+  - name: Get Inband IP Address
+    aci_rest:
+      hostname: "{{ inventory_hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      validate_certs: no
+      method: get
+      path: /api/node/mo/uni/tn-mgmt/addrinst-{{ item.Policy_Name }}inbaddr/fromaddr-[{{ item.INB_IP }}]-toaddr-[{{ item.INB_IP }}].json
+    with_items: "{{ spreadsheet_Fabric_Node }}"
+    no_log: True
+    register: inband_output
+
+  - name: Get Outband IP Address
+    aci_rest:
+      hostname: "{{ inventory_hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      validate_certs: no
+      method: get
+      path: /api/node/mo/uni/tn-mgmt/addrinst-{{ item.Policy_Name }}oobaddr/fromaddr-[{{ item.OOB_IP }}]-toaddr-[{{ item.OOB_IP }}].json
+    with_items: "{{ spreadsheet_Fabric_Node }}"
+    no_log: True
+    register: outband_output
+
+  - name: Json Query Inband IP
+    set_fact:
+     query_result:
+      inband_addr: "{{ inband_output | json_query('results[*].imdata[*].fvnsUcastAddrBlk.attributes.from') }}"
+      outband_addr: "{{ outband_output | json_query('results[*].imdata[*].fvnsUcastAddrBlk.attributes.from') }}"

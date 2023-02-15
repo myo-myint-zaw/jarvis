@@ -1,0 +1,54 @@
+---
+- name: Get Interface Policy Group
+  hosts: apic
+  connection: local
+  gather_facts: False
+
+  tasks:
+  - name: Get facts from XLSX file
+    xls_to_facts:
+      src: ../../ACI_Deployment_Template.xlsx
+    no_log: True
+
+  - name: Get interface policy group for vPC or PC
+    aci_interface_policy_leaf_policy_group:
+      hostname: "{{ inventory_hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      validate_certs: no
+      lag_type: "{{ item.Link_Type }}"
+      policy_group: "{{ item.Interface_Policy_Group }}"
+      link_level_policy: "{{ item.Link_Level_Policy }}"
+      cdp_policy: "{{ item.CDP_Policy }}"
+      lldp_policy: "{{ item.LLDP_Policy }}"
+      port_channel_policy: "{{ item.LACP_Policy }}"
+      aep: "{{ item.AEP }}"
+      state: query
+    when: item.Link_Type == "node" or item.Link_Type == "link"
+    with_items: "{{ spreadsheet_Int_Policy_Group }}"
+    no_log: True
+    register: interface_policy_vpc
+
+  - name: Get interface policy group for access port
+    aci_interface_policy_leaf_policy_group:
+      hostname: "{{ inventory_hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      validate_certs: no
+      lag_type: "{{ item.Link_Type }}"
+      policy_group: "{{ item.Interface_Policy_Group }}"
+      link_level_policy: "{{ item.Link_Level_Policy }}"
+      cdp_policy: "{{ item.CDP_Policy }}"
+      lldp_policy: "{{ item.LLDP_Policy }}"
+      aep: "{{ item.AEP }}"
+      state: query
+    when: item.Link_Type == "leaf"
+    with_items: "{{ spreadsheet_Int_Policy_Group }}"
+    no_log: True
+    register: interface_policy_access
+
+  - name: Json Query
+    set_fact:
+     query_result:
+       interface_policy_vpc: "{{ interface_policy_vpc | json_query('results[*].current[*].infraAccBndlGrp.attributes.name')}}"
+       interface_policy_access: "{{ interface_policy_access | json_query('results[*].current[*].infraAccPortGrp.attributes.name')}}"

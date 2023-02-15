@@ -1,0 +1,30 @@
+- hosts: all
+  gather_facts: no
+
+  tasks:
+    - name: Get facts from XLSX file
+      run_once: true
+      delegate_to: localhost
+      xls_to_facts:
+       src: ../IOS_Deployment_Template.xlsx
+
+    - name: configure logging for non-buffered
+      ios_logging:
+        dest: "{{ item.Destination }}"
+        name: "{{ item.name }}"
+        facility:  "{{ item.facility }}"
+        level:  "{{ item.level }}"
+        state: present
+      when: item.buffered == 'N.A'
+      with_items: "{{ spreadsheet_Logging }}"
+
+    - name: configure logging for buffered
+      ios_logging:
+        dest: buffered
+        facility:  "{{ item.facility }}"
+        level:  "{{ item.level }}" 
+        size: "{{ item.buffered_size }}"
+      when: item.buffered != 'N.A'
+      with_items: "{{ spreadsheet_Logging }}"
+
+

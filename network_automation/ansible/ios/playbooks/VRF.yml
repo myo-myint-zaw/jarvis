@@ -1,0 +1,60 @@
+- hosts: ios-routers
+  gather_facts: no
+
+  tasks:
+    - name: Get facts from XLSX file
+      run_once: true
+      delegate_to: localhost
+      xls_to_facts:
+       src: ../IOS_Deployment_Template.xlsx
+
+    - name: Configure VRF 
+      ios_vrf:
+        name: "{{ item.vrf_name }}"
+        description: "{{ item.description }}"
+        rd: "{{ item.rd }}"
+        route_export: "{{ item.route_export }}"
+        route_import: "{{ item.route_import1 }}"
+#        state: "{{ item.state }}"
+      when: item.mgmt_ip == inventory_hostname and item.state == "present"
+      with_items: "{{ spreadsheet_VRF }}"
+
+    - name: Configure Second Route Target Import 
+      ios_vrf:
+        name: "{{ item.vrf_name }}"
+        route_import: "{{ item.route_import2 }}"
+      when: item.route_import2 != "N.A." and item.state == "present" and item.mgmt_ip == inventory_hostname
+      with_items: "{{ spreadsheet_VRF }}"
+
+    - name: Configure Third Route Target Import 
+      ios_vrf:
+        name: "{{ item.vrf_name }}"
+        route_import: "{{ item.route_import3 }}"
+      when: item.route_import3 != "N.A." and item.state == "present" and item.mgmt_ip == inventory_hostname
+      with_items: "{{ spreadsheet_VRF }}"
+
+      # ios_vrf cannot remove individual rt import
+    - name: Remove First Route Target Import 
+      ios_config:
+        lines:
+          - no route-target import {{ item.route_import1 }}
+        parents: vrf definition {{ item.vrf_name }}
+      when: item.route_import1 != "N.A." and item.state == "absent" and item.mgmt_ip == inventory_hostname
+      with_items: "{{ spreadsheet_VRF }}"
+
+    - name: Remove Second Route Target Import
+      ios_config:
+        lines:
+          - no route-target import {{ item.route_import2 }}
+        parents: vrf definition {{ item.vrf_name }}
+      when: item.route_import2 != "N.A." and item.state == "absent" and item.mgmt_ip == inventory_hostname
+      with_items: "{{ spreadsheet_VRF }}"
+
+    - name: Remove Third Route Target Import
+      ios_config:
+        lines:
+          - no route-target import {{ item.route_import3 }}
+        parents: vrf definition {{ item.vrf_name }}
+      when: item.route_import3 != "N.A." and item.state == "absent" and item.mgmt_ip == inventory_hostname
+      with_items: "{{ spreadsheet_VRF }}"
+

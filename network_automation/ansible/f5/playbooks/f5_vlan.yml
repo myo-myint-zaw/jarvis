@@ -1,0 +1,70 @@
+- name: Setup Pool
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  environment:
+    F5_USER: "{{ username }}"
+    F5_PASSWORD: "{{ password }}"
+    F5_VALIDATE_CERTS: "no"
+
+
+  tasks:
+  - name: Get facts from XLSX file
+    xls_to_facts:
+      src: ../F5_Deployment_Template.xlsx
+
+  - name: set primary_server mgmt IP variable
+    set_fact:
+      primary_server: "{{ item.mgmt_ip }}"
+    with_items: "{{ spreadsheet_Base_Configuration }}"
+    when: item.primary_node  == "yes"
+
+  - debug:
+      msg: Primary Server mgmt IP is {{ primary_server }}
+
+  - name: set secondary_server mgmt IP variable
+    set_fact:
+      secondary_server: "{{ item.mgmt_ip }}"
+    with_items: "{{ spreadsheet_Base_Configuration }}"
+    when: item.primary_node != "yes"
+
+  - debug:
+      msg: Secondary Server mgmt IP is {{ secondary_server }}
+
+  - name: Set VLANS on all devices
+    bigip_vlan:
+      name: "{{ item[0].vlan_name }}"
+      tag: "{{ item[0].vlan_id }}"
+      provider:
+        server: "{{ item[1] }}"
+    delegate_to: localhost
+    with_nested:
+      - "{{ spreadsheet_Interface_Configuration }}"
+      - [ "{{ primary_server }}", "{{ secondary_server }}"]
+    ignore_errors: yes
+
+  - name: Set untagged interfaces on all devices
+    bigip_vlan:
+      untagged_interface: "{{ item[0].untagged_interface }}"
+      name: "{{ item[0].vlan_name }}"
+      provider:
+        server: "{{ item[1] }}"
+    delegate_to: localhost
+    with_nested:
+      - "{{ spreadsheet_Interface_Configuration }}"
+      - [ "{{ primary_server }}", "{{ secondary_server }}" ]
+    when: item[0].untagged_interface != 'N.A'
+    ignore_errors: yes
+
+  - name: Set tagged interfaces on all devices
+    bigip_vlan:
+      tagged_interface: "{{ item[0].tagged_interface }}"
+      name: "{{ item[0].vlan_name }}"
+      provider:
+        server: "{{ item[1] }}"
+    delegate_to: localhost
+    with_nested:
+      - "{{ spreadsheet_Interface_Configuration }}"
+      - [ "{{ primary_server }}", "{{ secondary_server }}" ]
+    when: item[0].tagged_interface != 'N.A'
+    ignore_errors: yes

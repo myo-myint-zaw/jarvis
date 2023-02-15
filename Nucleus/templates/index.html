@@ -1,0 +1,43 @@
+{% block content%}
+<head>
+<title>Jarvis Network Administration</title>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/nucleus.css' %}" />
+<link rel="stylesheet" href="{% static 'css/w3.css' %}" />
+<style>body::-webkit-scrollbar{display:none}</style>
+<link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.ico' %}"/>
+</head>
+<header>
+<nav class="nav">
+<div class="w3-bar" style="color:white;font-size:12px"></div>
+</nav>
+</header>
+<body>
+<img src="{% static 'img/ncs_logo.png' %}" style="position:absolute;left:41%;top:120px">
+<div style="text-align:center;color:#006672;font-size:20px;font-weight:100;font-family:inherit;display:block;position:absolute;top:240px;left:31%">
+<span title="Just A Rather Very Intelligent System" style="font-size: 30px">Jarvis</span><br>
+Network Infrastructure Automation & Administration </span><br>
+(version 21.1.1)
+</div>
+<div style="position:absolute;top:360px;left:30%;padding:1px 16px;height:70%">
+<div style="color:black;font-size:10px;text-align:center;left:37%">
+Disconnect NOW if you have not been explicitly authorized to use this system.
+</div><br><br><br>
+<form id="login_form" action="" method="post">
+<label for="username" style="color:black;font-size:11px">&nbsp;&nbsp;&nbsp;Username</label>
+<input type="text" id="username" name="username" size="12" required/>&nbsp;&nbsp;&nbsp;
+<label for="password" style="color:black;font-size:11px">Password</label>
+<input type="password" id="password" name="password" size="12" required/>&nbsp;&nbsp;&nbsp;&nbsp;
+<input class="button" type="submit" value="Login" style="width:60px" onclick="return login_validate()" />
+</form>
+</div>
+<footer>
+COPYRIGHT &copy; 2020 <a href="https://www.ncs.com.sg">NCS</a> PTE LTD. ALL RIGHTS RESERVED.
+</footer>
+</body>
+{% endblock %}
+{% block javascripts %}
+<script type="text/javascript" src="{% static 'js/custom_alert.js' %}"></script>
+<script type="text/javascript">window.addEventListener('scroll',()=>{window.scrollTo(0,0);});function login_validate(){if((document.getElementById("username").value===""||document.getElementById("password").value==="")){swal({title:"Empty Credentials",icon:"error"});return false;}
+return true;}</script>
+{% endblock javascripts %}

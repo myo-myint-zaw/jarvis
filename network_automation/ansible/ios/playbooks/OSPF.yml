@@ -1,0 +1,34 @@
+---
+- hosts: ios-routers
+  gather_facts: no
+
+  vars:
+    interface: "{{ interface_list }}"
+  tasks:
+  - name: Get facts from XLSX file
+    run_once: true
+    delegate_to: localhost
+    xls_to_facts:
+      src: ../IOS_Deployment_Template.xlsx
+
+  - name: Configure OSPF
+    ios_config:
+      lines:
+        - router-id {{ item.router_id }}
+#       - network {{ item.network_prefix }} {{ item.wildcard_mask }} area {{ item.area }}
+        - bfd {{ item.bfd_interface }}
+      save_when: modified
+      parents: ['router ospf {{ item.process_id }}']
+    when: item.mgmt_ip == inventory_hostname and item.state == 'present'
+    with_items: "{{ spreadsheet_OSPFv2 }}"
+
+  - name: Remove Configuration of OSPF (network advertisment)
+    ios_config: 
+      lines:
+        - no network {{ item.network_prefix }} {{ item.wildcard_mask }} area {{ item.area }}
+#       - no router-id {{ item.router_id }}
+        - no bfd {{ item.bfd_interface }}
+      save_when: modified
+      parents: ['router ospf {{ item.process_id }}']
+    when: item.mgmt_ip == inventory_hostname and item.state == 'absent'
+    with_items: "{{ spreadsheet_OSPFv2 }}"

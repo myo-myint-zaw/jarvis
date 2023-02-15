@@ -1,0 +1,19 @@
+- hosts: all
+  gather_facts: no
+
+  tasks:
+   - name: Get facts from XLSX file
+     run_once: true
+     delegate_to: localhost
+     xls_to_facts:
+       src: ../IOS_Deployment_Template.xlsx
+
+   - name: Configure AAA
+     ios_config:
+       lines:
+         - aaa new-model
+         - aaa group server tacacs+ {{ item.aaa_group_name }}
+         - tacacs-server host {{ item.tacacs_server }} key {{ item.key }}
+       save_when: modified
+     with_items: "{{ spreadsheet_AAA }}"
+

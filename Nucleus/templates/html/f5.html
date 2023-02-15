@@ -1,0 +1,166 @@
+{% block content %}
+<head>
+<meta charset="UTF-8">
+<title>F5</title>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/nucleus.css' %}" />
+<link rel="stylesheet" href="{% static 'css/w3.css' %}" />
+<link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.ico' %}" />
+</head>
+<header>
+<nav class="nav" style="position:fixed;z-index:3;width:100%">
+<div class="w3-bar">
+<a href="/platform" class="w3-bar-item w3-button w3-black menu_button w3-hover-blue-gray">Home</a>
+<div class="w3-dropdown-hover w3-right">
+<button class="w3-button w3-hover-blue-gray" style="color:white">{{ request.user }} &#9662;</button>
+<div class="w3-dropdown-content w3-bar-block w3-border" style="right:0">
+<a href="/logout" class="w3-bar-item w3-button w3-hover-blue-gray">Logout</a>
+</div>
+</div>
+</div>
+<div class="w3-bar w3-black sub_nav">
+<a href="/user_dashboard" class="w3-bar-item w3-button w3-black menu_button w3-hover-blue-gray">User Dashboard</a>
+<a href="/automation_modules" class="w3-bar-item w3-button w3-black menu_button w3-hover-blue-gray">Automation Modules</a>
+<div class="w3-bar-item w3-white menu_button">F5</div>
+</div>
+</nav>
+</header>
+<body>
+<nav id="mySidebar" class="w3-sidebar w3-top w3-large w3-padding" style="z-index:3;background-color:#006672;color:white;width:288px;font-weight:bold;display:none"><br>
+<div class="w3-container">
+<h3 class="w3-padding-64"><b>Network Automation</b></h3>
+</div>
+<div class="w3-bar-block">
+<a href="/platform" class="w3-bar-item w3-button w3-hover-blue-grey" style="font-size:17px">
+Home
+</a>
+<a href="/user_dashboard" class="w3-bar-item w3-button w3-hover-blue-grey" style="font-size:17px">
+User Dashboard
+</a>
+<a href="/automation_modules" class="w3-bar-item w3-button w3-hover-blue-grey" style="font-size:17px">
+Automation Modules
+</a>
+<div class="w3-bar-item w3-button w3-hover-blue-grey" style="font-size:17px;background-color:#065972">
+F5
+</div>
+<div class="w3-dropdown-hover w3-right">
+<button class="w3-button w3-hover-blue-gray" style="color:white">{{ request.user }} &#9662;</button>
+<div class="w3-dropdown-content w3-bar-block w3-border" style="right:0;font-weight:normal">
+<a href="/logout" class="w3-bar-item w3-button w3-hover-blue-gray">Logout</a>
+</div>
+</div>
+</div>
+<button class="button w3-bar-item w3-hover-blue-grey" style="position:absolute;bottom:20px;right:20px" onclick="sidebar_close()">Close &nbsp; &times;
+</button>
+</nav>
+<button id="SideBarButton" class="button" style="position:fixed;left:0;top:53%;width:30px;border-top-left-radius:0;border-bottom-left-radius:0" onclick="sidebar_open()">
+&#9776;
+</button>
+<div class="w3-container" style="position:absolute;top:120px;left:60px" id="heading">
+<h1 class="w3-xxlarge w3-text-black"><b>F5</b></h1>
+<hr style="width:50px;border:5px solid #006672" class="w3-round">
+<p>There are five steps to automate F5 configuration management.</p>
+<ol>
+<li>Choose an option from F5 menu under F5 to perform a config change</li>
+<li>Download Config Template which is a spreadsheet to fill in Engineering data</li>
+<li>Upload the Template which was downloaded in step 2 with the required Config changes</li>
+<li>Enter F5 System Credentials and click Execute</li>
+<li>Verify the Results</li>
+</ol>
+<br>
+<h3 class="w3-text-black"><b>1. F5 Menu</b></h3>
+<div class="w3-dropdown-click">
+<a href="javascript:void(0)" class="w3-bar-item w3-button w3-hover-blue-grey" style="border-radius:5px;position:absolute;left:30px;top:-20px" onclick="drop_menu('f5_menu')">F5 &#9662;
+</a>
+<div class="w3-dropdown-content w3-bar-block w3-card-4" style="top:0;left:100%;width:220px" id="f5_menu">
+<div class="w3-dropdown-hover">
+<a href="javascript:void(0)" class="w3-bar-item w3-button w3-hover-blue-grey" onclick="drop_menu('fabric_menu')">System Config&#9656;
+</a>
+<div class="w3-dropdown-content w3-bar-block w3-card-4" id="fabric_menu" style="top:0;left:100%;width:max-content">
+<a href="javascript:selected_option('1.1')" class="w3-bar-item w3-button w3-hover-blue-grey">
+DNS Server Configuration</a>
+<a href="javascript:selected_option('1.2')" class="w3-bar-item w3-button w3-hover-blue-grey">
+NTP Configuration</a>
+<a href="javascript:selected_option('1.3')" class="w3-bar-item w3-button w3-hover-blue-grey">
+Syslog Configuration</a>
+</div>
+</div>
+<div class="w3-dropdown-hover">
+<a href="javascript:void(0)" class="w3-bar-item w3-button w3-hover-blue-grey" onclick="drop_menu('access_menu')">Network Config &#9656;
+</a>
+<div class="w3-dropdown-content w3-bar-block w3-card-4" id="access_menu" style="top:0;left:100%;width:max-content">
+<a href="javascript:selected_option('2.1')" class="w3-bar-item w3-button w3-hover-blue-grey">
+Trunk Interface Configuration</a>
+<a href="javascript:selected_option('2.2')" class="w3-bar-item w3-button w3-hover-blue-grey">
+VLAN Configuration</a>
+<a href="javascript:selected_option('2.3')" class="w3-bar-item w3-button w3-hover-blue-grey">
+Self-IP Configuration</a>
+</div>
+</div>
+<div class="w3-dropdown-hover">
+<a href="javascript:void(0)" class="w3-bar-item w3-button w3-hover-blue-grey" onclick="drop_menu('tenant_menu')">LTM Config &#9656;
+</a>
+<div class="w3-dropdown-content w3-bar-block w3-card-4" id="tenant_menu" style="top:0;left:100%;width:max-content">
+<a href="javascript:selected_option('3.1')" class="w3-bar-item w3-button w3-hover-blue-grey">
+Configure LTM Virtual Server and Pool Member</a>
+<a href="javascript:selected_option('3.2')" class="w3-bar-item w3-button w3-hover-blue-grey">
+Configure LTM Pool and Pool Member</a>
+<a href="javascript:selected_option('3.3')" class="w3-bar-item w3-button w3-hover-blue-grey">
+Update LTM Virtual Server</a>
+<a href="javascript:selected_option('3.4')" class="w3-bar-item w3-button w3-hover-blue-grey">
+Update LTM Pool Member(s)</a>
+</div>
+</div>
+</div>
+</div>
+<div style="display:inline-flex">
+<h5 style="position:relative;left:130px;top:5px">Menu Option:</h5>
+<input readonly class="input_value" id="menu_option" name="menu_option" type="text" title="" style="position:relative;left:130px"/>
+</div>
+<br><br><br>
+<h3 class="w3-text-black"><b>2. Download Template</b></h3>
+<h5 style="position:relative;left:30px;top:10px">
+Download F5 Deployment Template
+</h5><br>
+<a href="/download_template/f5">
+<button class="button" style="width:100px;position:relative;left:30px">Download</button>
+</a>
+<br><br><br>
+<h3 class="w3-text-black"><b>3. Upload Template</b></h3>
+<h5 style="position:relative;left:30px;top:10px">Upload F5 Engineering Deployment Data</h5>
+<input style="position:relative;left:30px;top:17px;width:400px" id="uploaded_file" name="uploaded_file" type=file accept=".xls, .xlsx" required onchange="get_template_name()"/>
+<br><br><br><br>
+<h3 class="w3-text-black"><b>4. Execute</b></h3>
+<h5 style="position:relative;left:30px;top:5px">F5 User Name:
+<input type="text" id="f5_username" name="f5_username" class="input_value" required/></h5>
+<h5 style="position:relative;left:30px;top:1px">F5 Password:&nbsp;&nbsp;
+&nbsp;<input type="password" id="f5_password" name="f5_password" class="input_value" required/></h5>
+<h5 style="position:relative;left:30px;top:-2px">
+<p id="template_name">Template Name: </p>
+<button class="button" id="execute_f5" style="width:100px" onclick="execute_f5()">
+Execute F5
+</button>
+</h5>
+<br><br>
+<h3 class="w3-text-black"><b>5. Result</b></h3>
+<br>
+<div class="progress_bar"></div>
+<textarea id="output" class="w3-mission w3-card" rows="15" cols="130">{{ output }}
+        </textarea>
+<br><br><br>
+<button class="button" id="download_result" style="width:130px;position:relative;left:30px">
+Download Result
+</button>
+<a href="/f5_log">
+<button class="button" style="width:100px;position:relative;left:80px">View Log</button>
+</a>
+<br><br><br><br>
+<a href="#" id="scroll"><span></span></a>
+</div>
+</body>
+{% endblock content%}
+{% block javascripts %}
+<script type="text/javascript" src="{% static 'js/custom_alert.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/f5.js' %}"></script>
+{% endblock javascripts %}

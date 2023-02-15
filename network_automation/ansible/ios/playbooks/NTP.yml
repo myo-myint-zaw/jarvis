@@ -1,0 +1,39 @@
+- hosts: all
+  gather_facts: no
+
+  tasks:    
+    - name: Get facts from XLSX file
+      run_once: true
+      delegate_to: localhost
+      xls_to_facts:
+       src: ../IOS_Deployment_Template.xlsx
+
+    - name: Set NTP Source
+      ios_config:
+        lines:
+          - ntp server {{ item.ntp_server }} key {{ item.key_id }}
+          - ntp source {{ item.source_interface }}
+#          - ntp access-group {{ item.ntp_acl }} 
+#            no group configured in the excel file
+#          - ntp logging
+          - ntp authentication-key {{ item.key_id }} md5 {{ item.auth_key }}
+        save_when: modified
+      when: item.state == "present"
+      with_items: "{{ spreadsheet_NTP }}"
+
+    - name: Configure logging
+      ios_config:
+        lines:
+          - ntp logging
+      when: item.ntp_logging  == "on"
+      with_items: "{{ spreadsheet_NTP}}"
+      ignore_errors: yes
+
+    - name: Remove NTP Servers
+      ios_config:
+        lines:
+          - "no ntp server {{ntp_servers}}"
+        save_when: modified
+      when: item.state == "absent"
+      with_items: "{{ spreadsheet_NTP }}"
+

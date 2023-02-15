@@ -1,0 +1,60 @@
+- name: Setup Pool
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  environment:
+    F5_USER: "{{ username }}"
+    F5_PASSWORD: "{{ password }}"
+    F5_VALIDATE_CERTS: "no"
+
+
+  tasks:
+  - name: Get facts from XLSX file
+    xls_to_facts:
+      src: ../F5_Deployment_Template.xlsx
+
+  - name: set primary_server mgmt IP variable
+    set_fact:
+      primary_server: "{{ item.mgmt_ip }}"
+    with_items: "{{ spreadsheet_Base_Configuration }}"
+    when: item.primary_node  == "yes"
+
+  - debug:
+      msg: Primary Server mgmt IP is {{ primary_server }}
+
+  - name: set secondary_server mgmt IP variable
+    set_fact:
+      secondary_server: "{{ item.mgmt_ip }}"
+    with_items: "{{ spreadsheet_Base_Configuration }}"
+    when: item.primary_node != "yes"
+
+  - debug:
+      msg: Secondary Server mgmt IP is {{ secondary_server }}
+
+  - name: create f5_trunk
+    bigip_command:
+      provider:
+        server: "{{ item[1] }}"
+        password: "{{ password }}"
+        user: "{{ username }}"
+        validate_certs: no
+      commands: tmsh create /net trunk {{ item[0].Trunk }}
+    with_nested:
+      - "{{ spreadsheet_Interface_Configuration }}"
+      - [ "{{ primary_server }}", "{{ secondary_server }}"]
+    when: item[0].Trunk != 'N.A'
+    ignore_errors: yes
+
+
+  - name: modify f5_trunk
+    bigip_command:
+      provider:
+        server: "{{ item[1] }}"
+        password: "{{ password }}"
+        user: "{{ username }}"
+        validate_certs: no
+      commands: tmsh modify /net trunk {{ item[0].Trunk }} interfaces add { {{ item[0].Member_Interface }} }
+    with_nested:
+      - "{{ spreadsheet_Interface_Configuration }}"
+      - [ "{{ primary_server }}", "{{ secondary_server }}"]
+    when: item[0].Trunk != 'N.A'

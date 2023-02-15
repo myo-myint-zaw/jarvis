@@ -1,0 +1,28 @@
+---
+- hosts: ios-routers
+  gather_facts: no
+
+  tasks:
+  - name: Get facts from XLSX file
+    run_once: true
+    delegate_to: localhost
+    xls_to_facts:
+      src: ../IOS_Deployment_Template.xlsx
+
+  - name: Configure VRRP 
+    ios_config:
+      lines:
+        - vrrp {{ item.vrrp_group }} ip {{ item.vrrp_group_ip }}
+        - vrrp {{ item.vrrp_group }} priority {{ item.vrrp_priority }}
+        - vrrp {{ item.vrrp_group }} preempt
+      parents: interface {{ item.interface }}
+    when: item.mgmt_ip == inventory_hostname
+    with_items:  "{{ spreadsheet_VRRP }}"
+
+  - name: Configure VRRP Authentication
+    ios_config:
+      lines:
+        - vrrp {{ item.vrrp_group }} authentication md5 key-string {{ item.md5_key }}
+      parents: interface {{ item.interface }}
+    when: item.mgmt_ip == inventory_hostname and item.md5_key != "N.A."
+    with_items:  "{{ spreadsheet_VRRP }}"

@@ -1,0 +1,106 @@
+- hosts: ios-switches
+  gather_facts: no
+
+  tasks:
+   - name: Get facts from XLSX file
+     run_once: true
+     delegate_to: localhost
+     xls_to_facts:
+       src: ../IOS_Deployment_Template.xlsx
+
+   - name: Create link aggregation group
+     ios_linkagg:
+       group: "{{ item.lag_id }}"
+       state: present
+     when: item.mgmt_ip == inventory_hostname and item.switch_port_mode == "l2"
+     with_items: "{{ spreadsheet_etherchannel }}"
+     ignore_errors: yes
+
+   - name: Configure L2 interface
+     ios_config:
+       lines:
+         - switchport
+       parents: interface port-channel {{ item.lag_id }}
+     when: item.mgmt_ip == inventory_hostname and item.switch_port_mode == "l2"
+     with_items: "{{ spreadsheet_etherchannel }}"
+     ignore_errors: yes
+     
+   - name: Adding interface member1 to Port-channel
+     ios_config:
+       lines:
+         - channel-group {{ item.lag_id }} mode {{ item.mode }}
+       parents: interface {{ item.member1 }}
+     when: item.mgmt_ip == inventory_hostname and item.member1 != "N.A"
+     with_items: "{{ spreadsheet_etherchannel }}"
+     ignore_errors: yes     
+
+   - name: Adding interface member2 to Port-channel
+     ios_config:
+       lines:
+         - channel-group {{ item.lag_id }} mode {{ item.mode }}
+       parents: interface {{ item.member2 }}
+     when: item.mgmt_ip == inventory_hostname and item.member2 != "N.A"
+     with_items: "{{ spreadsheet_etherchannel }}"
+     ignore_errors: yes  
+
+   - name: Adding interface member3 to Port-channel
+     ios_config:
+       lines:
+         - channel-group {{ item.lag_id }} mode {{ item.mode }}
+       parents: interface {{ item.member3 }}
+     when: item.mgmt_ip == inventory_hostname and item.member3 != "N.A"
+     with_items: "{{ spreadsheet_etherchannel }}"
+     ignore_errors: yes
+
+   - name: Adding interface member4 to Port-channel
+     ios_config:
+       lines:
+         - channel-group {{ item.lag_id }} mode {{ item.mode }}
+       parents: interface {{ item.member4 }}
+     when: item.mgmt_ip == inventory_hostname and item.member4 != "N.A"
+     with_items: "{{ spreadsheet_etherchannel }}"
+     ignore_errors: yes    
+
+   - name: Adding interface member5 to Port-channel
+     ios_config:
+       lines:
+         - channel-group {{ item.lag_id }} mode {{ item.mode }}
+       parents: interface {{ item.member5 }}
+     when: item.mgmt_ip == inventory_hostname and item.member5 != "N.A"
+     with_items: "{{ spreadsheet_etherchannel }}"
+     ignore_errors: yes
+     
+   - name: Adding interface member6 to Port-channel
+     ios_config:
+       lines:
+         - channel-group {{ item.lag_id }} mode {{ item.mode }}
+       parents: interface {{ item.6 }}
+     when: item.mgmt_ip == inventory_hostname and item.member6 != "N.A"
+     with_items: "{{ spreadsheet_etherchannel }}"
+     ignore_errors: yes
+
+   - name: Adding interface member7 to Port-channel
+     ios_config:
+       lines:
+         - channel-group {{ item.lag_id }} mode {{ item.mode }}
+       parents: interface {{ item.member7 }}
+     when: item.mgmt_ip == inventory_hostname and item.member7 != "N.A"
+     with_items: "{{ spreadsheet_etherchannel }}"
+     ignore_errors: yes
+
+   - name: Adding interface member8 to Port-channel
+     ios_config:
+       lines:
+         - channel-group {{ item.lag_id }} mode {{ item.mode }}
+       parents: interface {{ item.member8 }}
+     when: item.mgmt_ip == inventory_hostname and item.member8 != "N.A"
+     with_items: "{{ spreadsheet_etherchannel }}"
+     ignore_errors: yes
+
+   - name: Configure description to the port-channel
+     ios_interfaces:
+       config:
+        - name: "Port-channel{{ item.lag_id }}"
+          description: "{{ item.description }}"
+     with_items: "{{ spreadsheet_etherchannel }}"
+     ignore_errors: yes

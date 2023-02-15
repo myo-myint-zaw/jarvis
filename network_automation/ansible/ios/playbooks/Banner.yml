@@ -1,0 +1,27 @@
+- hosts: all
+  gather_facts: no
+
+  tasks:
+    - name: Get facts from XLSX file
+      run_once: true
+      delegate_to: localhost
+      xls_to_facts:
+       src: ../IOS_Deployment_Template.xlsx
+
+    - name: Configure login banner
+      ios_banner:
+        banner: login
+        text: "{{item.content}}"
+        state: present
+      when:  item.Type  == 'login'
+      with_items: "{{ spreadsheet_Banner }}"
+
+    - name: Configure motd banner
+      ios_banner:
+        banner: motd
+        text: "{{item.content}}"
+        state: present
+      when:  item.Type  == 'motd'
+      with_items: "{{ spreadsheet_Banner }}"
+
+

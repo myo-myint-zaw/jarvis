@@ -1,0 +1,24 @@
+---
+- name: Configure Port Channel Policy
+  hosts: apic
+  connection: local
+  gather_facts: no
+
+  tasks:
+  - name: Get facts from XLSX file
+    xls_to_facts:
+      src: ../ACI_Deployment_Template.xlsx
+
+  - name: Add a new port channel policy
+    aci_interface_policy_port_channel:
+      hostname: "{{ inventory_hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      validate_certs: no
+      port_channel: "{{ item.LACP_Policy }}"
+      description: "{{ item.LACP_Description }}"
+      mode: "{{ item.LACP_Mode }}"
+      min_links: "{{ item.Min_Number_of_Links }}"
+      max_links: "{{ item.Max_Number_of_Links }}"
+      state: present
+    with_items: "{{ spreadsheet_PortChannel_Policy}}"

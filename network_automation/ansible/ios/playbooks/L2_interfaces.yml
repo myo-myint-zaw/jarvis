@@ -1,0 +1,56 @@
+- hosts: ios-switches
+  gather_facts: no
+
+  tasks:
+    - name: Get facts from XLSX file
+      run_once: true
+      delegate_to: localhost
+      xls_to_facts:
+        src: ../IOS_Deployment_Template.xlsx
+
+    - name: Merge access mode l2 interface configuration with device configuration
+      ios_l2_interfaces:
+        config:
+          - name: "{{ item.interface }}"
+            access:
+              vlan: "{{ item.access_vlan }}"
+        state: merged
+      when: item.mgmt_ip == inventory_hostname and item.mode == "access"
+      with_items: "{{ spreadsheet_L2_Interface }}"
+      ignore_errors: yes
+
+    - name: Merge access mode l2 interface configuration with device configuration
+      ios_interfaces:
+        config:
+          - name: "{{ item.interface }}"
+            description:  "{{ item.description }}"
+            enabled: "{{ item.enable }}"
+            mtu: "{{item.mtu}}"
+            duplex: "{{ item.duplex }}"
+            speed: "{{ item.speed }}"
+        state: merged
+      when: item.mgmt_ip == inventory_hostname
+      with_items: "{{ spreadsheet_L2_Interface }}"
+      ignore_errors: yes
+
+    - name: Merge trunk mode l2 interface configuration with device configuration
+      ios_l2_interfaces:
+        config:
+          - name: "{{ item.interface }}"
+            trunk:
+              encapsulation: "{{ item.encapsulation }}"
+              allowed_vlans: "{{ item.trunk_allowed_vlans }}" 
+#              native_vlan: "{{ item.native_vlan }}" 
+        state: merged
+      when: item.mgmt_ip == inventory_hostname and item.mode == "trunk"
+      with_items: "{{ spreadsheet_L2_Interface }}"
+      ignore_errors: yes
+      
+    - name: Configure Trunk interface
+      ios_config:
+        lines:
+          - switchport mode trunk
+        parents: interface {{ item.interface }}
+      when: item.mgmt_ip == inventory_hostname and item.mode == "trunk"
+      with_items: "{{ spreadsheet_L2_Interface }}"
+      ignore_errors: yes

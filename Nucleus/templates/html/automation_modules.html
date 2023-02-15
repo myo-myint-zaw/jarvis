@@ -1,0 +1,114 @@
+{% block content %}
+<head>
+<meta content="notranslate">
+<title>Automation Dashboard</title>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/nucleus.css' %}" />
+<link rel="stylesheet" href="{% static 'css/w3.css' %}" />
+<link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.ico' %}" />
+</head>
+<header>
+<nav class="nav">
+<div class="w3-bar">
+<a href="/platform" class="w3-bar-item w3-button w3-black menu_button w3-hover-blue-gray">Home</a>
+<div class="w3-dropdown-hover w3-right">
+<button class="w3-button w3-hover-blue-gray" style="color:white">{{ request.user }} &#9662;</button>
+<div class="w3-dropdown-content w3-bar-block w3-border" style="right:0">
+<a href="/logout" class="w3-bar-item w3-button w3-hover-blue-gray">Logout</a>
+</div>
+</div>
+</div>
+<div class="w3-bar w3-black sub_nav">
+<a href="/user_dashboard" class="w3-bar-item w3-button w3-black menu_button w3-hover-blue-gray">User Dashboard</a>
+<div class="w3-bar-item w3-white menu_button">Automation Modules</div>
+</div>
+</nav>
+</header>
+<body>
+<nav id="mySidebar" class="w3-sidebar w3-top w3-large w3-padding" style="z-index:3;background-color:#006672;color:white;width:288px;font-weight:bold;display:none"><br>
+<div class="w3-container">
+<h3 class="w3-padding-64"><b>Network Automation</b></h3>
+</div>
+<div class="w3-bar-block">
+<a href="/platform" class="w3-bar-item w3-button w3-hover-blue-grey" style="font-size:17px">
+Home
+</a>
+<a href="/user_dashboard" class="w3-bar-item w3-button w3-hover-blue-grey" style="font-size:17px">
+User Dashboard
+</a>
+<div class="w3-bar-item w3-button w3-hover-blue-grey" style="font-size:17px;background-color:#065972">
+Automation Modules
+</div>
+<div class="w3-dropdown-hover w3-right">
+<button class="w3-button w3-hover-blue-gray" style="color:white">{{ request.user }} &#9662;</button>
+<div class="w3-dropdown-content w3-bar-block w3-border" style="right:0;font-weight:normal">
+<a href="/logout" class="w3-bar-item w3-button w3-hover-blue-gray">Logout</a>
+</div>
+</div>
+</div>
+<button class="button w3-bar-item w3-hover-blue-grey" style="position:absolute;bottom:20px;right:20px" onclick="sidebar_close()">Close &nbsp; &times;
+</button>
+</nav>
+<button id="SideBarButton" class="button" style="position:fixed;left:0;top:53%;width:30px;border-top-left-radius:0;border-bottom-left-radius:0" onclick="sidebar_open()">
+&#9776;
+</button>
+<div class="w3-container" style="position:absolute;top:120px;left:60px" id="heading">
+<h1 class="w3-xxlarge w3-text-black"><b>Devices</b></h1>
+<hr style="width:50px;border:5px solid #006672" class="w3-round">
+</div>
+<div class="w3-row-padding" style="position:absolute;left:80px;top:240px">
+<div class="aci w3-col w3-center m4 w3-padding-large w3-margin-bottom grayout">
+<img src="{% static 'img/box.png' %}" alt="ACI" />
+<br><a href="/aci" style="text-decoration:none">Cisco ACI</a>
+</div>
+<div class="ios w3-col w3-center m4 w3-padding-large w3-margin-bottom grayout">
+<img src="{% static 'img/box.png' %}" alt="IOS" />
+<br><a href="/ios" style="text-decoration:none">IOS</a>
+</div>
+<div class="f5 w3-col w3-center m4 w3-padding-large w3-margin-bottom grayout">
+<img src="{% static 'img/box.png' %}" alt="F5" />
+<br><a href="/f5" style="text-decoration:none">F5</a>
+</div>
+<div class="viptela w3-col w3-center m4 w3-padding-large w3-margin-bottom grayout">
+<img src="{% static 'img/box.png' %}" alt="Cisco SD-WAN" />
+<br><a href="/viptela" style="text-decoration:none">Cisco SD-WAN</a>
+</div>
+<div class="ftd w3-col w3-center m4 w3-padding-large w3-margin-bottom grayout">
+<img src="{% static 'img/box.png' %}" alt="FTD" />
+<br><a href="/ftd" style="text-decoration:none">FTD</a>
+</div>
+<div class="infoblox w3-col w3-center m4 w3-padding-large w3-margin-bottom grayout">
+<img src="{% static 'img/box.png' %}" alt="Infoblox" />
+<br><a href="/infoblox" style="text-decoration:none">Infoblox</a>
+</div>
+<div class="nx_os w3-col w3-center m4 w3-padding-large w3-margin-bottom grayout">
+<img src="{% static 'img/box.png' %}" alt="NX-OS" />
+<br><a href="/nx_os" style="text-decoration:none">NX-OS</a>
+</div>
+<div class="allot w3-col w3-center m4 w3-padding-large w3-margin-bottom grayout">
+<img src="{% static 'img/box.png' %}" alt="Allot" />
+<br><a href="/allot" style="text-decoration:none">Allot</a>
+</div>
+<div class="palo_alto w3-col w3-center m4 w3-padding-large w3-margin-bottom grayout">
+<img src="{% static 'img/box.png' %}" alt="Palo Alto" />
+<br><a href="/palo_alto" style="text-decoration:none">Palo Alto</a>
+</div>
+<div class="proxy w3-col w3-center m4 w3-padding-large grayout">
+<img src="{% static 'img/box.png' %}" alt="McAfee Proxy" />
+<br><a href="/mcafee_proxy" style="text-decoration:none">McAfee Proxy</a>
+</div>
+<div class="algosec w3-col w3-center m4 w3-padding-large grayout">
+<img src="{% static 'img/box.png' %}" alt="Algosec" />
+<br><a href="/algosec" style="text-decoration:none">Algosec</a>
+</div>
+<div class="aeos w3-col w3-center m4 w3-padding-large grayout">
+<img src="{% static 'img/box.png' %}" alt="AEOS" />
+<br><a href="/aeos" style="text-decoration:none">AE OS</a>
+</div>
+</div>
+</body>
+{% endblock %}
+{% block javascripts %}
+<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+<script type="text/javascript">let unfreeze_aci="{{ freeze.aci_box }}";if(unfreeze_aci==="True"){document.querySelector(".aci").classList.remove("grayout")}let unfreeze_f5="{{ freeze.f5_box }}";if(unfreeze_f5==="True"){document.querySelector(".f5").classList.remove("grayout")}let unfreeze_viptela="{{ freeze.viptela_box }}";if(unfreeze_viptela==="True"){document.querySelector(".viptela").classList.remove("grayout")}let unfreeze_ftd="{{ freeze.ftd_box }}";if(unfreeze_ftd==="True"){document.querySelector(".ftd").classList.remove("grayout")}let unfreeze_infoblox="{{ freeze.infoblox_box }}";if(unfreeze_infoblox==="True"){document.querySelector(".infoblox").classList.remove("grayout")}let unfreeze_ios="{{ freeze.ios_box }}";if(unfreeze_ios==="True"){document.querySelector(".ios").classList.remove("grayout")}let unfreeze_nxos="{{ freeze.nxos_box }}";if(unfreeze_nxos==="True"){document.querySelector(".nx_os").classList.remove("grayout")}let unfreeze_allot="{{ freeze.allot_box }}";if(unfreeze_allot==="True"){document.querySelector(".allot").classList.remove("grayout")}let unfreeze_paloalto="{{ freeze.paloalto_box }}";if(unfreeze_paloalto==="True"){document.querySelector(".palo_alto").classList.remove("grayout")}let unfreeze_proxy="{{ freeze.proxy_box }}";if(unfreeze_proxy==="True"){document.querySelector(".proxy").classList.remove("grayout")}let unfreeze_algosec="{{ freeze.algosec_box }}";if(unfreeze_algosec==="True"){document.querySelector(".algosec").classList.remove("grayout")}let unfreeze_aeos="{{ freeze.aeos_box }}";if(unfreeze_aeos==="True"){document.querySelector(".aeos").classList.remove("grayout")}function sidebar_open(){$("#mySidebar").css("display","block");$(".nav").css("display","none");$(".sub_nav").css("display","none");$("#heading").css("left","330px");$("#heading").css("top","40px");$(".w3-row-padding").css("left","360px");$(".w3-row-padding").css("top","190px")}function sidebar_close(){$("#mySidebar").css("display","none");$(".nav").css("display","block");$(".sub_nav").css("display","block");$("#heading").css("left","60px");$("#heading").css("top","120px");$(".w3-row-padding").css("left","80px");$(".w3-row-padding").css("top","240px")};</script>
+{% endblock javascripts %}

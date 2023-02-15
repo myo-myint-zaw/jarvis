@@ -1,0 +1,40 @@
+---
+- name: Get Static Node Management Address
+  hosts: apic
+  connection: local
+  gather_facts: no
+
+  tasks:
+  - name: Get facts from XLSX file
+    xls_to_facts:
+      src: ../../ACI_Deployment_Template.xlsx
+
+  - name: Get Static Node Management OOB Address
+    aci_rest:
+      hostname: "{{ inventory_hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      validate_certs: no
+      method: get
+      path: /api/node/mo/uni/tn-mgmt/mgmtp-default/oob-default/rsooBStNode-[topology/pod-1/node-{{ item.Node_ID }}].json
+    with_items: "{{ spreadsheet_Fabric_Node }}"
+    no_log: True
+    register: static_node_output
+
+  - name: Get Static Node Management INB Address
+    aci_rest:
+      hostname: "{{ inventory_hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      validate_certs: no
+      method: get
+      path: /api/node/mo/uni/tn-mgmt/mgmtp-default/inb-default/rsinBStNode-[topology/pod-1/node-{{ item.Node_ID }}].json
+    with_items: "{{ spreadsheet_Fabric_Node }}"
+    no_log: True
+    register: static_node_output
+
+  - name: Json Query Inband IP
+    set_fact:
+     query_result:
+      oob_addr: "{{ static_node_output | json_query('results[*].imdata[*].mgmtRsOoBStNode.attributes.addr') }}"
+      inb_addr: "{{ static_node_output | json_query('results[*].imdata[*].mgmtRsInBStNode.attributes.addr') }}"

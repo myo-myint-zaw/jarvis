@@ -1,0 +1,20 @@
+---
+- name: Configure Tenant
+  hosts: apic
+  connection: local
+  gather_facts: no
+
+  tasks:
+  - name: Get facts from XLSX file
+    xls_to_facts:
+      src: ../ACI_Deployment_Template.xlsx
+
+  - name: Add/Delete a Tenant
+    aci_tenant:
+      hostname: "{{ inventory_hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      validate_certs: no
+      tenant: "{{ item.Tenant }}"
+      state: "{{ item.State }}"
+    with_items: "{{ spreadsheet_Tenant_AP_EPG }}"

@@ -1,0 +1,19 @@
+- hosts: ios-switches
+  gather_facts: no
+
+  tasks:
+    - name: Get facts from XLSX file
+      run_once: true
+      delegate_to: localhost
+      xls_to_facts:
+       src: ../IOS_Deployment_Template.xlsx
+
+    - name: Merge provided configuration with device configuration
+      ios_vlans:
+        config:
+          - name: "{{item.name}}"
+            vlan_id: "{{item.vlan_id}}"
+            state: active
+        state: merged 
+#     when: item.mgmt_ip == inventory_hostname
+      with_items: "{{ spreadsheet_VLAN }}"

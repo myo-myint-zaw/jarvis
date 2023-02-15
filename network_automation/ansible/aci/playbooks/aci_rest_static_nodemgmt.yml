@@ -1,0 +1,71 @@
+---
+- name: Configure Static Node Management Address
+  hosts: apic
+  connection: local
+  gather_facts: no
+
+  tasks:
+  - name: Get facts from XLSX file
+    xls_to_facts:
+      src: ../ACI_Deployment_Template.xlsx
+
+  - name: Configure Static Node Management Address
+    aci_rest:
+      hostname: "{{ inventory_hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      validate_certs: no
+      method: post
+      path: /api/node/mo/uni/tn-mgmt/mgmtp-default.json
+      content: |
+        {
+            "mgmtMgmtP": {
+                "attributes": {
+                    "dn": "uni/tn-mgmt/mgmtp-default",
+                    "status": "modified"
+                },
+                "children": [
+                    {
+                        "mgmtInB": {
+                            "attributes": {
+                                "dn": "uni/tn-mgmt/mgmtp-default/inb-default",
+                                "status": "modified"
+                            },
+                            "children": [
+                                {
+                                    "mgmtRsInBStNode": {
+                                        "attributes": {
+                                            "tDn": "topology/pod-1/node-{{ item.Node_ID }}",
+                                            "addr": "{{ item.INB_IP }}/{{ item.INB_subnetmask }}",
+                                            "gw": "{{ item.INB_GW }}"
+                                        },
+                                        "children": []
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "mgmtOoB": {
+                            "attributes": {
+                                "dn": "uni/tn-mgmt/mgmtp-default/oob-default",
+                                "status": "modified"
+                            },
+                            "children": [
+                                {
+                                    "mgmtRsOoBStNode": {
+                                        "attributes": {
+                                            "tDn": "topology/pod-1/node-{{ item.Node_ID }}",
+                                            "addr": "{{ item.OOB_IP }}/{{ item.OOB_subnetmask }}",
+                                            "gw": "{{ item.OOB_GW }}"
+                                        },
+                                        "children": []
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    with_items: "{{ spreadsheet_Fabric_Node }}"

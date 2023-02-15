@@ -1,0 +1,14 @@
+[Unit]
+Description=Jarvis App
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=jarvis
+ExecStart=/usr/bin/python3 /var/www/jarvis/start_jarvis.py
+
+[Install]
+WantedBy=multi-user.target

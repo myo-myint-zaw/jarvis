@@ -1,0 +1,56 @@
+- name: Setup DNS
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  environment:
+    F5_USER: "{{ username }}"
+    F5_PASSWORD: "{{ password }}"
+    F5_VALIDATE_CERTS: "no"
+
+
+  tasks:
+  - name: Get facts from XLSX file
+    xls_to_facts:
+      src: ../F5_Deployment_Template.xlsx
+
+  - name: set primary_server mgmt IP variable
+    set_fact:
+      primary_server: "{{ item.mgmt_ip }}"
+    with_items: "{{ spreadsheet_Base_Configuration }}"
+    when: item.primary_node  == "yes"
+
+  - debug:
+      msg: Primary Server mgmt IP is {{ primary_server }}
+
+  - name: set secondary_server mgmt IP variable
+    set_fact:
+      secondary_server: "{{ item.mgmt_ip }}"
+    with_items: "{{ spreadsheet_Base_Configuration }}"
+    when: item.primary_node != "yes"
+
+  - debug:
+      msg: Secondary Server mgmt IP is {{ secondary_server }}
+
+  - name: set dns on {{ primary_server }} and {{ secondary_server }}
+    bigip_device_dns:
+      name_servers:
+        - "{{ item.DNS_Server_IP_1 }}"
+        - "{{ item.DNS_Server_IP_2 }}"
+      state: present
+      provider:
+        server: "{{ primary_server }}"
+    delegate_to: localhost
+    with_items:  "{{ spreadsheet_Banner_Syslog_NTP }}"
+    ignore_errors: yes
+
+  - name: set dns on {{ primary_server }} and {{ secondary_server }}
+    bigip_device_dns:
+      name_servers:
+        - "{{ item.DNS_Server_IP_1 }}"
+        - "{{ item.DNS_Server_IP_2 }}"
+      state: present
+      provider:
+        server: "{{ secondary_server }}"
+    delegate_to: localhost
+    with_items: "{{ spreadsheet_Banner_Syslog_NTP }}"
+    ignore_errors: yes

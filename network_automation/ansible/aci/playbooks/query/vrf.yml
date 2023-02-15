@@ -1,0 +1,30 @@
+---
+- name: Get VRF
+  hosts: apic
+  connection: local
+  gather_facts: no
+
+  tasks:
+  - name: Get facts from XLSX file
+    xls_to_facts:
+      src: ../../ACI_Deployment_Template.xlsx
+    no_log: True
+
+  - name: Get vrf of tenant
+    aci_vrf:
+      hostname: "{{ inventory_hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      validate_certs: no
+      tenant: "{{ item.Tenant }}"
+      vrf: "{{ item.VRF }}"
+      policy_control_preference: "{{ item.Policy_Control_Enforcement }}"
+      policy_control_direction: "{{ item.Policy_Control_Direction }}"
+      state: query
+    with_items: "{{ spreadsheet_Tenant_AP_EPG }}"
+    no_log: True
+    register: vrf_output
+
+  - name: Json Query
+    set_fact:
+      query_result: "{{ vrf_output | json_query('results[*].current[*].fvCtx.attributes.name') }}"

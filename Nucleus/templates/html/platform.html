@@ -1,0 +1,41 @@
+{% block content %}
+<head>
+<meta content="notranslate">
+<title>Jarvis Network Infrastructure</title>
+{% load static %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="{% static 'css/nucleus.css' %}" />
+<link rel="stylesheet" href="{% static 'css/w3.css' %}" />
+<style>body{background-image:url("{% static 'img/platform.png' %}");background-size:auto}</style>
+<link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.ico' %}"/>
+</head>
+<header>
+<nav class="nav">
+<div class="w3-bar">
+<a href="/platform" class="w3-bar-item w3-button w3-black menu_button w3-hover-blue-gray" id="home">Home</a>
+<div class="w3-dropdown-hover w3-right">
+<button class="w3-button w3-hover-blue-gray" style="color:white">{{ request.user }} &#9662;</button>
+<div class="w3-dropdown-content w3-bar-block w3-border" style="right:0">
+<a href="/logout" class="w3-bar-item w3-button w3-hover-blue-gray">Logout</a>
+</div>
+</div>
+</div>
+<div class="w3-bar w3-black">
+<a href="#" class="w3-bar-item w3-button w3-black menu_button w3-hover-blue-gray">Network At A Glance</a>
+<a href="#" class="w3-bar-item w3-button w3-black menu_button w3-hover-blue-gray">Operations Dashboard</a>
+<a href="/user_dashboard" class="w3-bar-item w3-button w3-black menu_button w3-hover-blue-gray">Automation Platform
+</a>
+<a href="/admin" class="w3-bar-item w3-button w3-black menu_button w3-hover-blue-gray" id="user_management">User Management
+</a>
+</div>
+</nav>
+</header>
+<body>
+<div style="position:absolute;top:200px;left:67%;display:block">
+<a href="/user_dashboard" style="opacity:0">Link to User Dashboard <div style="height:330px"></div></a>
+</div>
+</body>
+{% endblock %}
+{% block javascripts %}
+<script type="text/javascript">let display_user_management="{{ display_user_management }}";if(display_user_management==="no"){document.getElementById("user_management").style.display="none"};</script>
+{% endblock javascripts %}

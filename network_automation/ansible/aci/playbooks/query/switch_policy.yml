@@ -1,0 +1,28 @@
+---
+- name: Get Switch Policies
+  hosts: apic
+  connection: local
+  gather_facts: no
+
+  tasks:
+  - name: Get facts from XLSX file
+    xls_to_facts:
+      src: ../../ACI_Deployment_Template.xlsx
+    no_log: True
+
+  - name: Get Switch profile
+    aci_switch_policy_leaf_profile:
+      hostname: "{{ inventory_hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      validate_certs: no
+      leaf_profile: "{{ item.Switch_Profile }}"
+      description: "{{ item.Description }}"
+      state: query
+    with_items: "{{ spreadsheet_Switch_Policy }}"
+    no_log: True
+    register: switch_output
+
+  - name: Json Query
+    set_fact:
+     query_result: "{{ switch_output | json_query('results[*].current[*].infraNodeP.attributes.name')}}"

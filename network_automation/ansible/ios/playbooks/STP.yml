@@ -1,0 +1,17 @@
+- hosts: ios-switches
+  gather_facts: no
+
+  tasks:
+  - name: Get facts from XLSX file
+    run_once: true
+    delegate_to: localhost
+    xls_to_facts:
+      src: ../IOS_Deployment_Template.xlsx
+
+  - name: Configure STP
+    ios_config:
+      lines:
+        - vtp mode {{ item.vtp_mode }}
+        - spanning-tree mode {{ item.Spanning_tree_mode }}
+        - spanning-tree vlan {{ item.Spanning_tree_vlan }} priority {{ item.Priority }}
+    with_items: "{{ spreadsheet_STP }}"

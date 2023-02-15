@@ -1,0 +1,22 @@
+---
+- name: Configure L2 Interface Policy
+  hosts: apic
+  connection: local
+  gather_facts: no
+
+  tasks:
+  - name: Get facts from XLSX file
+    xls_to_facts:
+      src: ../ACI_Deployment_Template.xlsx
+
+  - name: Add a l2 interface policy
+    aci_interface_policy_l2:
+      hostname: "{{ inventory_hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      validate_certs: no
+      l2_policy: '{{ item.L2_Interface }}'
+      vlan_scope: '{{ item.VLAN_Scope }}'
+      description: '{{ item.L2_Description }}'
+      state: present
+    with_items: "{{ spreadsheet_L2_Interface_Policy}}"

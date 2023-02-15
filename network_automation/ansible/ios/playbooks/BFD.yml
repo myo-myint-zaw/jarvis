@@ -1,0 +1,20 @@
+- hosts: ios-routers
+  gather_facts: no
+
+  tasks:
+   - name: Get facts from XLSX file
+     run_once: true
+     delegate_to: localhost
+     xls_to_facts:
+       src: ../IOS_Deployment_Template.xlsx
+   
+   - name: Configure bfd
+     ios_config:
+       lines:
+         - ip address {{ item.IP_Address }} {{ item.Subnet_Mask }}
+         - ip ospf network {{ item.OSPF_Network }}
+         - bfd interval {{ item.bfd_interval }} min_rx {{ item.bfd_min_rx }} multiplier {{ item.bfd_multiplier }}
+       save_when: modified
+       parents: interface {{ item.interface }}
+     with_items: "{{ spreadsheet_BFD }}"
+        

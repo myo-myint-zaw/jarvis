@@ -1,0 +1,62 @@
+- hosts: ios-routers
+  gather_facts: no
+
+  tasks:
+    - name: Get facts from XLSX file
+      run_once: true
+      delegate_to: localhost
+      xls_to_facts:
+       src: ../IOS_Deployment_Template.xlsx
+
+    - name: Configure Encapsulation on Interfaces
+      ios_config:
+        lines:
+          - encapsulation dot1Q {{ item.encap_vlan }}
+        parents: interface {{ item.interface }}
+      when: item.encap_vlan != "N.A."  and item.mgmt_ip == inventory_hostname
+      with_items:  "{{ spreadsheet_L3_Interface }}"
+
+    - name: Set interface description  
+      ios_interfaces:
+        config:
+          - name:  "{{ item.interface }}"
+            description: "{{ item.description }}"
+            enabled: yes
+      when: item.description != "N.A." and item.mgmt_ip == inventory_hostname
+      with_items:  "{{ spreadsheet_L3_Interface }}"
+
+    - name: Set interface vrf
+      ios_vrf:
+        interfaces: "{{ item.interface }}"
+        name: "{{ item.vrf }}"
+      when: item.vrf != "N.A." and item.mgmt_ip == inventory_hostname
+      with_items:  "{{ spreadsheet_L3_Interface }}"
+
+    - name: Set IPv4 address  
+      ios_l3_interfaces:
+        config:
+          - name:  "{{ item.interface }}"
+            ipv4:
+            - address: "{{ item.ipv4_address }}{{ item.ipv4_subnetmask }}"
+      when: item.ipv4_address != "N.A." and item.mgmt_ip == inventory_hostname
+      with_items:  "{{ spreadsheet_L3_Interface }}"
+      tags: ip
+
+    - name: Set IPv6 address 
+      ios_l3_interfaces:
+        config:
+          - name: "{{ item.interface }}"
+            ipv6: 
+            - address: "{{ item.ipv6 }}"
+      when: item.ipv6 != "N.A." and item.mgmt_ip == inventory_hostname
+      with_items:  "{{ spreadsheet_L3_Interface }}"
+
+    - name: Configure Interface for loopback
+      ios_config:
+        lines:
+          - description {{ item.description }}
+          - ip address {{ item.ipv4_address }} {{ item.ipv4_subnetmask }}
+          - ipv6 address {{ item.ipv6 }} eui-64
+        parents: interface {{ item.interface }}
+      when: "'Loopback' in item.interface and item.mgmt_ip == inventory_hostname"
+      with_items:  "{{ spreadsheet_L3_Interface }}"

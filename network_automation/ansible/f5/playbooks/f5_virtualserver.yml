@@ -1,0 +1,111 @@
+- name: Setup LTM VirtualServer
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  environment:
+    F5_USER: "{{ username }}"
+    F5_PASSWORD: "{{ password }}"
+    F5_VALIDATE_CERTS: "no"
+
+
+  tasks:
+  - name: Get facts from XLSX file
+    xls_to_facts:
+      src: ../F5_Deployment_Template.xlsx
+
+  - name: set primary_server mgmt IP variable
+    set_fact:
+      primary_server: "{{ item.mgmt_ip }}"
+    with_items: "{{ spreadsheet_Base_Configuration }}"
+    when: item.primary_node  == "yes"
+
+  - debug:
+      msg: Primary Server mgmt IP is {{ primary_server }}
+
+  - name: set secondary_server mgmt IP variable
+    set_fact:
+      secondary_server: "{{ item.mgmt_ip }}"
+    with_items: "{{ spreadsheet_Base_Configuration }}"
+    when: item.primary_node != "yes"
+
+  - debug:
+      msg: Secondary Server mgmt IP is {{ secondary_server }}
+
+  - name: Create pools
+    bigip_pool:
+      name: "{{ item.pool_name }}"
+      lb_method: "{{ item.lb_method }}"
+      slow_ramp_time: "120"
+      partition: "{{ item.Route_Domain }}"
+      #monitor_type: "{{ item.monitor_type }}"
+      monitors: "{{ item.monitors }}"
+      state: "{{ item.state }}"
+      provider:
+        server: "{{ primary_server }}"
+    delegate_to: localhost
+    with_items: "{{ spreadsheet_LTM_Service }}"
+
+  - name: Add nodes to pools
+    bigip_pool_member:
+      pool: "{{ item.pool_name }}"
+      partition: "{{ item.Route_Domain }}"
+      host: "{{ item.pool_member }}"
+      port: "{{ item.pool_port }}"
+      state: "{{ item.state }}"
+      #description: "{{ item.description }}"
+      provider:
+        server: "{{ primary_server }}"
+    delegate_to: localhost
+    with_items: "{{ spreadsheet_LTM_Service }}"
+
+  - name: Add Standard virtual servers
+    bigip_virtual_server:
+      partition: "{{ item.Route_Domain }}"
+      name: "{{ item.vs_name }}"
+      destination: "{{ item.vs_ip }}"
+      port: "{{ item.vs_port }}"
+      profiles:
+        - tcp
+      pool: "{{ item.pool_name }}"
+      state: "{{ item.state }}"
+      provider:
+        server: "{{ primary_server }}"
+    delegate_to: localhost
+    with_items: "{{ spreadsheet_LTM_Service }}"
+
+  - name: Add Automap SNAT
+    bigip_virtual_server:
+      name: "{{ item.vs_name }}"
+      snat: Automap
+      provider:
+        server: "{{ primary_server }}"
+    delegate_to: localhost
+    with_items: "{{ spreadsheet_LTM_Service }}"
+    when: item.automap == 'yes'
+
+  - name: Add HTTP profiles
+    bigip_command:
+      commands: modify ltm virtual {{ item.vs_name }} profiles add { {{ item.http_profile }} }
+      provider:
+        server: "{{ primary_server }}"
+    delegate_to: localhost
+    with_items: "{{ spreadsheet_LTM_Service }}"
+    when: item.http_profile != 'N.A'
+
+  - name: Add clientssl profiles
+    bigip_command:
+      commands: modify ltm virtual {{ item.vs_name }} profiles add { {{ item.clientssl_profile }} }
+      provider:
+        server: "{{ primary_server }}"
+    delegate_to: localhost
+    with_items: "{{ spreadsheet_LTM_Service }}"
+    when: item.clientssl_profile != 'N.A'
+
+  - name: Add serverssl profiles
+    bigip_command:
+      commands: modify ltm virtual {{ item.vs_name }} profiles add { {{ item.serverssl_profile }} }
+      provider:
+        server: "{{ primary_server }}"
+    delegate_to: localhost
+    with_items: "{{ spreadsheet_LTM_Service }}"
+    when: item.serverssl_profile != 'N.A'

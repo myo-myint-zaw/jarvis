@@ -1,0 +1,45 @@
+- hosts: ios-routers
+  gather_facts: no
+
+  tasks: 
+   - name: Get facts from XLSX file
+     run_once: true
+     delegate_to: localhost
+     xls_to_facts:
+       src: ../IOS_Deployment_Template.xlsx
+
+   - name: Add static route ipv4
+     ios_static_route:
+        aggregate:
+          - { prefix: "{{item.prefix}}", mask: "{{item.mask}}", interface: "{{item.interface}}", next_hop: "{{item.next_hop}}",
+           vrf: "{{None if item.vrf == 'N.A.' else item.vrf }}", track: "{{None if item.track == 'N.A.' else item.track }}", admin_distance: "{{item.admin_distance}}", tag: "{{item.tag}}", name: "{{item.name}}" }
+        state: present
+     when: item.state == 'present' and item.version == 'ipv4' and item.mgmt_ip == inventory_hostname
+     with_items: "{{ spreadsheet_Static_Routes }}"
+     ignore_errors: yes
+
+   - name: Add static route ipv6
+     ios_config:
+       lines:
+        - ipv6 route {{item.prefix}}{{item.mask}} {{item.interface}} {{item.next_hop}} {{item.admin_distance}} tag {{item.tag}} name {{item.name}}
+     when: item.state == 'present' and item.version == 'ipv6' and item.mgmt_ip == inventory_hostname
+     with_items: "{{ spreadsheet_Static_Routes }}"
+     ignore_errors: yes
+
+   - name: Remove static route aggregates ipv4
+     ios_static_route:
+        aggregate:
+          - { prefix: "{{item.prefix}}", mask: "{{item.mask}}", interface: "{{item.interface}}", next_hop: "{{item.next_hop}}",
+           vrf: "{{item.vrf}}", track: "{{item.track}}", admin_distance: "{{item.admin_distance}}", tag: "{{item.tag}}", name: "{{item.name}}" }
+        state: absent
+     when: item.state == 'absent' and item.version == 'ipv4' and item.mgmt_ip == inventory_hostname
+     with_items: "{{ spreadsheet_Static_Routes }}"
+     ignore_errors: yes
+
+   - name: Remove static route ipv6
+     ios_config:
+       lines:
+        - no ipv6 route {{item.prefix}}{{item.mask}} {{item.interface}} {{item.next_hop}} {{item.admin_distance}} tag {{item.tag}} name {{item.name}}
+     when: item.state == 'absent' and item.version == 'ipv6' and item.mgmt_ip == inventory_hostname
+     with_items: "{{ spreadsheet_Static_Routes }}"
+     ignore_errors: yes

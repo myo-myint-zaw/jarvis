@@ -1,0 +1,43 @@
+---
+- name: Configure Interface Policy Group
+  hosts: apic
+  connection: local
+  gather_facts: False
+
+  tasks:
+  - name: Get facts from XLSX file
+    xls_to_facts:
+      src: ../ACI_Deployment_Template.xlsx
+
+  - name: Add/Delete a interface policy group for vPC or PC
+    aci_interface_policy_leaf_policy_group:
+      hostname: "{{ inventory_hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      validate_certs: no
+      lag_type: "{{ item.Link_Type }}"
+      policy_group: "{{ item.Interface_Policy_Group }}"
+      link_level_policy: "{{ item.Link_Level_Policy }}"
+      cdp_policy: "{{ item.CDP_Policy }}"
+      lldp_policy: "{{ item.LLDP_Policy }}"
+      port_channel_policy: "{{ item.LACP_Policy }}"
+      aep: "{{ item.AEP }}"
+      state: "{{ item.State }}"
+    when: item.Link_Type == "node" or item.Link_Type == "link"
+    with_items: "{{ spreadsheet_Int_Policy_Group }}"
+
+  - name: Add/Delete a interface policy group for access port
+    aci_interface_policy_leaf_policy_group:
+      hostname: "{{ inventory_hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      validate_certs: no
+      lag_type: "{{ item.Link_Type }}"
+      policy_group: "{{ item.Interface_Policy_Group }}"
+      link_level_policy: "{{ item.Link_Level_Policy }}"
+      cdp_policy: "{{ item.CDP_Policy }}"
+      lldp_policy: "{{ item.LLDP_Policy }}"
+      aep: "{{ item.AEP }}"
+      state: "{{ item.State }}"
+    when: item.Link_Type == "leaf"
+    with_items: "{{ spreadsheet_Int_Policy_Group }}"

@@ -1,0 +1,96 @@
+- name: Setup Pool
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  environment:
+    F5_USER: "{{ username }}"
+    F5_PASSWORD: "{{ password }}"
+    F5_VALIDATE_CERTS: "no"
+
+
+  tasks:
+  - name: Get facts from XLSX file
+    xls_to_facts:
+      src: ../F5_Deployment_Template.xlsx
+
+  - name: set primary_server mgmt IP variable
+    set_fact:
+      primary_server: "{{ item.mgmt_ip }}"
+    with_items: "{{ spreadsheet_Base_Configuration }}"
+    when: item.primary_node  == "yes"
+
+  - debug:
+      msg: Primary Server mgmt IP is {{ primary_server }}
+
+  - name: set secondary_server mgmt IP variable
+    set_fact:
+      secondary_server: "{{ item.mgmt_ip }}"
+    with_items: "{{ spreadsheet_Base_Configuration }}"
+    when: item.primary_node != "yes"
+
+  - debug:
+      msg: Secondary Server mgmt IP is {{ secondary_server }}
+
+  - name: Set non-floating self IPs on {{ primary_server }}
+    bigip_selfip:
+      name: "{{ item.primary_address }}"
+      address: "{{ item.primary_address }}"
+      netmask: "{{ item.netmask }}"
+      vlan: "{{ item.vlan_name }}"
+      route_domain: "{{ item.Route_domain_ID }}"
+      state: "present"
+      allow_service:
+          - default
+      provider:
+        server: "{{ primary_server }}"
+    delegate_to: localhost
+    with_items: "{{ spreadsheet_Interface_Configuration }}"
+    ignore_errors: yes
+
+  - name: Set floating self IPs on {{ primary_server }}
+    bigip_selfip:
+      name: "{{ item.floating }}"
+      address: "{{ item.floating }}"
+      netmask: "{{ item.netmask }}"
+      vlan: "{{ item.vlan_name }}"
+      route_domain: "{{ item.Route_domain_ID }}"
+      traffic_group: "traffic-group-1"
+      allow_service:
+          - default
+      provider:
+        server: "{{ primary_server }}"
+    delegate_to: localhost
+    with_items: "{{ spreadsheet_Interface_Configuration }}"
+    ignore_errors: yes
+
+  - name: Set non-floating self IPs on {{ secondary_server }}
+    bigip_selfip:
+      name: "{{ item.secondary_address }}"
+      address: "{{ item.secondary_address }}"
+      netmask: "{{ item.netmask }}"
+      vlan: "{{ item.vlan_name }}"
+      route_domain: "{{ item.Route_domain_ID }}"
+      state: "present"
+      allow_service:
+          - default
+      provider:
+        server: "{{ secondary_server }}"
+    delegate_to: localhost
+    with_items: "{{ spreadsheet_Interface_Configuration }}"
+    ignore_errors: yes
+
+  - name: Set floating self IPs on {{ secondary_server }}
+    bigip_selfip:
+      name: "{{ item.floating }}"
+      address: "{{ item.floating }}"
+      netmask: "{{ item.netmask }}"
+      vlan: "{{ item.vlan_name }}"
+      route_domain: "{{ item.Route_domain_ID }}"
+      traffic_group: "traffic-group-1"
+      allow_service:
+          - default
+      provider:
+        server: "{{ secondary_server}}"
+    delegate_to: localhost
+    with_items: "{{ spreadsheet_Interface_Configuration }}"
+    ignore_errors: yes

@@ -1,0 +1,128 @@
+---
+- name: Configure VPool, Domain, AEP
+  hosts: apic
+  connection: local
+  gather_facts: no
+
+  tasks:
+  - name: Get facts from XLSX file
+    xls_to_facts:
+      src: ../ACI_Deployment_Template.xlsx
+
+  - name: Add/Delete a vlan pool
+    aci_encap_pool:
+     hostname: "{{ inventory_hostname }}"
+     username: "{{ username }}"
+     password: "{{ password }}"
+     validate_certs: no
+     pool: "{{ item.VLAN_Names }}"
+     pool_type: vlan
+     pool_allocation_mode: "{{ item.Allocation_Mode }}"
+     state: "{{ item.State }}"
+    with_items: "{{ spreadsheet_VLAN_AEP_Dom }}"
+
+  - name: Add/Delete a vlan range
+    aci_vlan_pool_encap_block:
+     hostname: "{{ inventory_hostname }}"
+     username: "{{ username }}"
+     password: "{{ password }}"
+     validate_certs: False
+     pool: "{{ item.VLAN_Names }}"
+     block_name: "{{ item.VLAN_Names }}"
+     block_start: "{{ item.Start_VLAN }}"
+     block_end: "{{ item.End_VLAN }}"
+     allocation_mode: "{{ item.Allocation_Mode }}"
+     pool_allocation_mode: "{{ item.Allocation_Mode }}"
+     state: "{{ item.State }}"
+    with_items: "{{ spreadsheet_VLAN_AEP_Dom }}"
+
+  - name: Add/Delete a domain
+    aci_domain:
+      hostname: "{{ inventory_hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      validate_certs: False
+      domain: "{{ item.Domain }}"
+      domain_type: "{{ item.Domain_Type}}"
+      state: "{{ item.State }}"
+    when: item.Domain_Type != "vmm"
+    with_items: "{{ spreadsheet_VLAN_AEP_Dom }}"
+
+  - name: Add/Delete a domain for vmm domain
+    aci_domain:
+      hostname: "{{ inventory_hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      validate_certs: False
+      domain: "{{ item.Domain }}"
+      domain_type: "{{ item.Domain_Type}}"
+      vm_provider: "{{ item.VM_Provider }}"
+      state: "{{ item.State }}"
+    when: item.Domain_Type == "vmm"
+    with_items: "{{ spreadsheet_VLAN_AEP_Dom }}"
+
+  - name: Bind/Detach Domain to VLAN pool
+    aci_domain_to_vlan_pool:
+      hostname: "{{ inventory_hostname }}"
+      username: '{{ username }}'
+      password: "{{ password }}"
+      validate_certs: False
+      domain: "{{ item.Domain }}"
+      domain_type: "{{ item.Domain_Type}}"
+      pool: "{{ item.VLAN_Names }}"
+      pool_allocation_mode: "{{ item.Allocation_Mode }}"
+      state: "{{ item.State }}"
+    when: item.Domain_Type != "vmm"
+    with_items: "{{ spreadsheet_VLAN_AEP_Dom }}"
+
+  - name: Bind/Detech Domain to VLAN pool for vmm domain
+    aci_domain_to_vlan_pool:
+      hostname: "{{ inventory_hostname }}"
+      username: '{{ username }}'
+      password: "{{ password }}"
+      validate_certs: False
+      domain: "{{ item.Domain }}"
+      domain_type: "{{ item.Domain_Type}}"
+      vm_provider: "{{ item.VM_Provider }}"
+      pool: "{{ item.VLAN_Names }}"
+      pool_allocation_mode: "{{ item.Allocation_Mode }}"
+      state: "{{ item.State }}"
+    when: item.Domain_Type == "vmm"
+    with_items: "{{ spreadsheet_VLAN_AEP_Dom }}"
+
+  - name: Add/Delete a AEP
+    aci_aep:
+      hostname: "{{ inventory_hostname }}"
+      username: '{{ username }}'
+      password: "{{ password }}"
+      validate_certs: False
+      aep: "{{ item.AEP }}"
+      state: "{{ item.State }}"
+    with_items: "{{ spreadsheet_VLAN_AEP_Dom }}"
+
+  - name: Add/Delete AEP to domain binding
+    aci_aep_to_domain:
+      hostname: "{{ inventory_hostname }}"
+      username: '{{ username }}'
+      password: "{{ password }}"
+      validate_certs: False
+      aep: "{{ item.AEP }}"
+      domain: "{{ item.Domain }}"
+      domain_type: "{{ item.Domain_Type}}"
+      state: "{{ item.State }}"
+    when: item.Domain_Type != "vmm"
+    with_items: "{{ spreadsheet_VLAN_AEP_Dom }}"
+
+  - name: Add/Delete AEP to domain binding for vmm domain
+    aci_aep_to_domain:
+      hostname: "{{ inventory_hostname }}"
+      username: '{{ username }}'
+      password: "{{ password }}"
+      validate_certs: False
+      aep: "{{ item.AEP }}"
+      domain: "{{ item.Domain }}"
+      domain_type: "{{ item.Domain_Type}}"
+      vm_provider: "{{ item.VM_Provider }}"
+      state: "{{ item.State }}"
+    when: item.Domain_Type == "vmm"
+    with_items: "{{ spreadsheet_VLAN_AEP_Dom }}"

@@ -1,0 +1,21 @@
+---
+- name: Configure CDP Policy
+  hosts: apic
+  connection: local
+  gather_facts: no
+
+  tasks:
+  - name: Get facts from XLSX file
+    xls_to_facts:
+      src: ../ACI_Deployment_Template.xlsx
+
+  - name: Add a new CDP policy
+    aci_interface_policy_cdp:
+      host: '{{ inventory_hostname }}'
+      username: '{{ username }}'
+      password: "{{ password }}"
+      validate_certs: no
+      cdp_policy: '{{ item.CDP_Policy }}'
+      description: '{{ item.CDP_Description }}'
+      admin_state: '{{ item.CDP_State }}'
+    with_items: "{{ spreadsheet_CDP_Policy}}"

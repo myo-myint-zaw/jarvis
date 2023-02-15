@@ -1,0 +1,28 @@
+---
+- hosts: ios-routers
+  gather_facts: no
+
+  tasks:
+  - name: Get facts from XLSX file
+    run_once: true
+    delegate_to: localhost
+    xls_to_facts:
+      src: ../IOS_Deployment_Template.xlsx
+
+  - name: Configure HSRP 
+    ios_config:
+      lines:
+        - standby {{ item.hsrp_group }} ip {{ item.hsrp_group_ip }}
+        - standby {{ item.hsrp_group }} priority {{ item.hsrp_priority }}
+        - standby {{ item.hsrp_group }} preempt
+      parents: interface {{ item.interface }}
+    when: item.mgmt_ip == inventory_hostname
+    with_items:  "{{ spreadsheet_HSRP }}"
+
+  - name: Configure HSRP Authentication
+    ios_config:
+      lines:
+        - standby {{ item.hsrp_group }} authentication md5 key-string {{ item.md5_key }}
+      parents: interface {{ item.interface }}
+    when: item.mgmt_ip == inventory_hostname and item.md5_key != "N.A."
+    with_items:  "{{ spreadsheet_HSRP }}"

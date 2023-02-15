@@ -1,0 +1,21 @@
+---
+- name: Configure AP
+  hosts: apic
+  connection: local
+  gather_facts: no
+
+  tasks:
+  - name: Get facts from XLSX file
+    xls_to_facts:
+      src: ../ACI_Deployment_Template.xlsx
+
+  - name: Add/Delete a Application Profiles
+    aci_ap:
+      hostname: "{{ inventory_hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      validate_certs: no
+      tenant: "{{ item.Tenant }}"
+      ap: "{{ item.AP }}"
+      state: "{{ item.State }}"
+    with_items: "{{ spreadsheet_Tenant_AP_EPG }}"

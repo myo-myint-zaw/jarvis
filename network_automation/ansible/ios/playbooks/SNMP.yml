@@ -1,0 +1,32 @@
+- hosts: all
+  gather_facts: no
+
+  tasks:
+   - name: Get facts from XLSX file
+     run_once: true
+     delegate_to: localhost
+     xls_to_facts:
+       src: ../IOS_Deployment_Template.xlsx
+
+   - name: Configure SNMP for version v2c
+     ios_config:
+         lines:
+           - snmp-server host {{ item.snmp_server }} {{ item.version }}
+           - snmp-server community {{ item.community }} {{ item.permission }}
+           - snmp-server trap-source {{ item.source_interface }}
+           - snmp-server contact {{ item.snmp_contact }}
+         save_when: modified
+     when: item.version == 'v2c'
+     with_items:  "{{ spreadsheet_SNMP }}"
+
+   - name: Configure SNMP for version v3
+     ios_config:
+         lines:
+           - snmp-server host {{ item.snmp_server }} version 3 auth {{ item.snmpv3_username }}
+#           - snmp-server community {{ item.community }} {{ item.permission }}
+           - snmp-server trap-source {{ item.source_interface }}
+           - snmp-server user {{ item.snmpv3_username }} {{ item.snmpv3_group }} v3 auth {{ item.snmpv3_auth_protocol }} {{ item.snmpv3_password }} priv {{ item.snmpv3_privacy }} {{ item.snmpv3_privacy_bit }} {{ item.snmpv3_privacy_key }} access {{ item.acl }}
+         save_when: modified
+     when: item.version == 'v3'
+     with_items:  "{{ spreadsheet_SNMP }}"
+

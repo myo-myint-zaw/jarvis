@@ -1,0 +1,70 @@
+{% block content %}
+<head>
+<meta charset="UTF-8">
+<title>AE OS</title>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/nucleus.css' %}" />
+<link rel="stylesheet" href="{% static 'css/w3.css' %}" />
+<link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.ico' %}" />
+</head>
+<header>
+<nav class="nav" style="position:fixed;z-index:3;width:100%">
+<div class="w3-bar">
+<a href="/platform" class="w3-bar-item w3-button w3-black menu_button w3-hover-blue-gray">Home</a>
+<div class="w3-dropdown-hover w3-right">
+<button class="w3-button w3-hover-blue-gray" style="color:white">{{ request.user }} &#9662;</button>
+<div class="w3-dropdown-content w3-bar-block w3-border" style="right:0">
+<a href="/logout" class="w3-bar-item w3-button w3-hover-blue-gray">Logout</a>
+</div>
+</div>
+</div>
+<div class="w3-bar w3-black sub_nav">
+<a href="/user_dashboard" class="w3-bar-item w3-button w3-black menu_button w3-hover-blue-gray">User Dashboard</a>
+<a href="/automation_modules" class="w3-bar-item w3-button w3-black menu_button w3-hover-blue-gray">Automation Modules</a>
+<div class="w3-bar-item w3-white menu_button">AE OS</div>
+</div>
+</nav>
+</header>
+<body>
+<nav id="mySidebar" class="w3-sidebar w3-top w3-large w3-padding" style="z-index:3;background-color:#006672;color:white;width:288px;font-weight:bold;display:none"><br>
+<div class="w3-container">
+<h3 class="w3-padding-64"><b>Network Automation</b></h3>
+</div>
+<div class="w3-bar-block">
+<a href="/platform" class="w3-bar-item w3-button w3-hover-blue-grey" style="font-size:17px">
+Home
+</a>
+<a href="/user_dashboard" class="w3-bar-item w3-button w3-hover-blue-grey" style="font-size:17px">
+User Dashboard
+</a>
+<a href="/automation_modules" class="w3-bar-item w3-button w3-hover-blue-grey" style="font-size:17px">
+Automation Modules
+</a>
+<div class="w3-bar-item w3-button w3-hover-blue-grey" style="font-size:17px;background-color:#065972">
+AE OS
+</div>
+<div class="w3-dropdown-hover w3-right">
+<button class="w3-button w3-hover-blue-gray" style="color:white">{{ request.user }} &#9662;</button>
+<div class="w3-dropdown-content w3-bar-block w3-border" style="right:0;font-weight:normal">
+<a href="/logout" class="w3-bar-item w3-button w3-hover-blue-gray">Logout</a>
+</div>
+</div>
+</div>
+<button class="button w3-bar-item w3-hover-blue-grey" style="position:absolute;bottom:20px;right:20px" onclick="sidebar_close()">Close &nbsp; &times;
+</button>
+</nav>
+<button id="SideBarButton" class="button" style="position:fixed;left:0;top:53%;width:30px;border-top-left-radius:0;border-bottom-left-radius:0" onclick="sidebar_open()">
+&#9776;
+</button>
+<div class="w3-container" style="position:absolute;top:120px;left:60px" id="heading">
+<h1 class="w3-xxlarge w3-text-black"><b>AE OS</b></h1>
+<hr style="width:50px;border:5px solid #006672" class="w3-round">
+<br><br><br><br>
+<a href="#" id="scroll"><span></span></a>
+</div>
+</body>
+{% endblock content%}
+{% block javascripts %}
+<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+<script type="text/javascript">function sidebar_open(){$("#mySidebar").css("display","block");$(".nav").css("display","none");$(".sub_nav").css("display","none");$("#heading").css("left","330px");$("#heading").css("top","40px")}function sidebar_close(){$("#mySidebar").css("display","none");$(".nav").css("display","block");$(".sub_nav").css("display","block");$("#heading").css("left","60px");$("#heading").css("top","120px")};</script>
+{% endblock javascripts %}

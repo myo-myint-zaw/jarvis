@@ -1,0 +1,45 @@
+---
+- name: Get EPGs and Contracts
+  hosts: apic
+  connection: local
+  gather_facts: no
+
+  tasks:
+  - name: Get facts from XLSX file
+    xls_to_facts:
+      src: ../../ACI_Deployment_Template.xlsx
+    no_log: True
+
+  - name: Get EPGs
+    aci_epg:
+      hostname: "{{ inventory_hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      validate_certs: no
+      tenant: "{{ item.Tenant }}"
+      ap: "{{ item.AP }}"
+      epg: "{{ item.EPG }}"
+      bd: "{{ item.BD }}"
+      state: query
+    with_items: "{{ spreadsheet_Tenant_AP_EPG }}"
+    no_log: True
+    register: epg_output
+
+  - name: Get Contracts
+    aci_contract:
+      hostname: "{{ inventory_hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      validate_certs: no
+      tenant: "{{ item.Tenant }}"
+      contract: "{{ item.Contract }}"
+      state: query
+    with_items: "{{ spreadsheet_Tenant_AP_EPG }}"
+    no_log: True
+    register: contract_output
+
+  - name: Json Query
+    set_fact:
+      query_result:
+        epg: "{{ epg_output | json_query('results[*].current[*].fvAEPg.attributes.name') }}"
+        contract: "{{ contract_output | json_query('results[*].current[*].vzBrCP.attributes.name') }}"

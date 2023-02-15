@@ -1,0 +1,5 @@
+[vmanage]
+#192.168.12.2 username=admin password=P@ssw0rd123 ansible_connection=local
+#10.88.88.110 username=admin password=admin ansible_connection=local
+10.88.88.110 ansible_connection=local
+

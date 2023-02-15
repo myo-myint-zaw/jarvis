@@ -1,0 +1,41 @@
+- hosts: all
+  gather_facts: no
+
+  tasks:
+   - name: Get facts from XLSX file
+     run_once: true
+     delegate_to: localhost
+     xls_to_facts:
+       src: ../IOS_Deployment_Template.xlsx
+
+   - name: Configure hostname and domain name
+     ios_system:
+        hostname: "{{ item.hostname }}"
+        domain_name: "{{ item.domain_name }}"
+        name_servers: "{{ item.name_server }}"
+     when: item.mgmt_ip == inventory_hostname
+     with_items: "{{ spreadsheet_BaseConfiguration }}"
+
+#   - name: Set timezone
+#     ios_config:
+#           lines:
+#            - clock timezone "{{ item.timezone }}"
+##           save_when: modified
+#     when: item.mgmt_ip == inventory_hostname
+#     with_items: "{{ spreadsheet_BaseConfiguration }}"
+
+   - name: Add user
+     ios_user:
+       name: "{{ item.username }}"
+       configured_password: "{{ item.password }}"
+       password_type: password
+       state: present
+     when: item.mgmt_ip == inventory_hostname
+     with_items: "{{ spreadsheet_BaseConfiguration }}"
+
+   - name: Encrypted password and write the running configuration to memory
+     ios_config:
+           lines: service password-encryption
+#           save_when: modified
+     when: item.mgmt_ip == inventory_hostname and item.encrypt_password == 'Enable'
+     with_items: "{{ spreadsheet_BaseConfiguration }}"

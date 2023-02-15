@@ -1,0 +1,23 @@
+---
+- name: Configure Switch vPC Pairs
+  hosts: apic
+  connection: local
+  gather_facts: no
+
+  tasks:
+  - name: Get facts from XLSX file
+    xls_to_facts:
+      src: ../ACI_Deployment_Template.xlsx
+
+  - name: Add/Delete vPC Group
+    aci_switch_policy_vpc_protection_group:
+      hostname: "{{ inventory_hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      validate_certs: no
+      protection_group: "{{ item.vPC_Explicit_Protection_Group }}"
+      protection_group_id: "{{ item.vPC_Domain_ID }}"
+      switch_1_id: "{{ item.Switch_1 }}"
+      switch_2_id: "{{ item.Switch_2 }}"
+      state: "{{ item.State }}"
+    with_items: "{{ spreadsheet_vPC_Protection_Gr }}"

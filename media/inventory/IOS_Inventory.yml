@@ -1,0 +1,12 @@
+[ios-routers]
+192.168.12.12 ansible_ssh_user=cisco ansible_ssh_pass=cisco ansible_network_os=ios ansible_connection=network_cli ansible_become=yes ansible_become_method=enable ansible_become_pass=cisco
+192.168.12.14 ansible_ssh_user=cisco ansible_ssh_pass=cisco ansible_network_os=ios ansible_connection=network_cli ansible_become=yes ansible_become_method=enable ansible_become_pass=cisco
+192.168.12.15 ansible_ssh_user=cisco ansible_ssh_pass=cisco ansible_network_os=ios ansible_connection=network_cli ansible_become=yes ansible_become_method=enable ansible_become_pass=cisco
+192.168.12.16 ansible_ssh_user=cisco ansible_ssh_pass=cisco ansible_network_os=ios ansible_connection=network_cli ansible_become=yes ansible_become_method=enable ansible_become_pass=cisco
+
+[ios-switches]
+192.168.12.61 ansible_ssh_user=cisco ansible_ssh_pass=cisco ansible_network_os=ios ansible_connection=network_cli ansible_become=yes ansible_become_method=enable ansible_become_pass=cisco
+192.168.12.62 ansible_ssh_user=cisco ansible_ssh_pass=cisco ansible_network_os=ios ansible_connection=network_cli ansible_become=yes ansible_become_method=enable ansible_become_pass=cisco
+
+[all:vars]
+ansible_connection = local

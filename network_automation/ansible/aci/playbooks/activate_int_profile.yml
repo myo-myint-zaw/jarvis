@@ -1,0 +1,47 @@
+---
+- name: Activate Interface Profile
+  hosts: apic
+  connection: local
+  gather_facts: no
+
+  tasks:
+  - name: Get facts from XLSX file
+    xls_to_facts:
+      src: ../ACI_Deployment_Template.xlsx
+
+  - name: Add/Delete a interface policy leaf profile
+    aci_interface_policy_leaf_profile:
+      hostname: "{{ inventory_hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      validate_certs: no
+      leaf_interface_profile: "{{ item.Interface_Profile }}"
+      description: "{{ item.Description }}"
+      state: "{{ item.State }}"
+    with_items: "{{ spreadsheet_Activate_Int_Profile }}"
+
+  - name: Add/Delete a interface policy leaf profile interface selector
+    aci_access_port_to_interface_policy_leaf_profile:
+      hostname: "{{ inventory_hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      validate_certs: no
+      leaf_interface_profile: "{{ item.Interface_Profile }}"
+      access_port_selector: "{{ item.Interface_Selector }}"
+      leaf_port_blk: "{{ item.Interface_Selector }}"
+      from_port: "{{ item.Start_Port }}"
+      to_port: "{{ item.End_Port }}"
+      policy_group: "{{ item.Interface_Policy_Group }}"
+      state: "{{ item.State }}"
+    with_items: "{{ spreadsheet_Activate_Int_Profile }}"
+
+  - name: Bind/Detach an interface selector profile to switch policy leaf profile
+    aci_interface_selector_to_switch_policy_leaf_profile:
+      hostname: "{{ inventory_hostname }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      validate_certs: no
+      interface_selector: "{{ item.Interface_Profile }}"
+      leaf_profile: "{{ item.Switch_Profile }}"
+      state: "{{ item.State }}"
+    with_items: "{{ spreadsheet_Activate_Int_Profile }}"

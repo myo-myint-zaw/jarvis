@@ -1,0 +1,22 @@
+---
+- name: Configure LLDP Policy
+  hosts: apic
+  connection: local
+  gather_facts: no
+
+  tasks:
+  - name: Get facts from XLSX file
+    xls_to_facts:
+      src: ../ACI_Deployment_Template.xlsx
+
+  - name: Add a new LLDP policy
+    aci_interface_policy_lldp:
+      host: '{{ inventory_hostname }}'
+      username: '{{ username }}'
+      password: "{{ password }}"
+      validate_certs: no
+      lldp_policy: '{{ item.LLDP_Policy }}'
+      description: '{{ item.LLDP_Description }}'
+      receive_state: '{{ item.LLDP_State }}'
+      transmit_state: '{{ item.LLDP_State  }}'
+    with_items: "{{ spreadsheet_LLDP_Policy}}"

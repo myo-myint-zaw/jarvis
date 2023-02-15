@@ -1,0 +1,383 @@
+[
+    {
+        "deviceType": [
+            "vedge-cloud"
+        ],
+        "deviceModels": [
+            {
+                "name": "vedge-cloud",
+                "displayName": "vEdge Cloud",
+                "deviceType": "vedge",
+                "isCliSupported": false,
+                "isCiscoDeviceModel": true
+            }
+        ],
+        "feature": "vmanage-default",
+        "factoryDefault": false,
+        "templateName": "vEdge-Cloud-Security",
+        "templateDescription": "vEdge-Cloud-Security",
+        "templateType": "security-vedge",
+        "templateMinVersion": "15.0.0",
+        "templateDefinition": {
+            "ipsec": {
+                "rekey": {
+                    "vipObjectType": "object",
+                    "vipType": "constant",
+                    "vipValue": 86400,
+                    "vipVariableName": "security_rekey"
+                },
+                "replay-window": {
+                    "vipObjectType": "object",
+                    "vipType": "constant",
+                    "vipValue": "512.0",
+                    "vipVariableName": "security_replay_window"
+                },
+                "authentication-type": {
+                    "vipType": "constant",
+                    "vipValue": [
+                        "none"
+                    ],
+                    "vipObjectType": "list",
+                    "vipVariableName": "security_authenticationType"
+                }
+            }
+        }
+    },
+    {
+        "deviceType": [
+            "vedge-1000"
+        ],
+        "deviceModels": [
+            {
+                "name": "vedge-1000",
+                "displayName": "vEdge 1000",
+                "deviceType": "vedge",
+                "isCliSupported": false,
+                "isCiscoDeviceModel": true
+            }
+        ],
+        "feature": "vmanage-default",
+        "factoryDefault": false,
+        "templateName": "vEdge1000-Security",
+        "templateDescription": "vEdge1000-Security",
+        "templateType": "security-vedge",
+        "templateMinVersion": "15.0.0",
+        "templateDefinition": {
+            "ipsec": {
+                "rekey": {
+                    "vipObjectType": "object",
+                    "vipType": "constant",
+                    "vipValue": 86400,
+                    "vipVariableName": "security_rekey"
+                },
+                "replay-window": {
+                    "vipObjectType": "object",
+                    "vipType": "constant",
+                    "vipValue": "512.0",
+                    "vipVariableName": "security_replay_window"
+                },
+                "authentication-type": {
+                    "vipType": "constant",
+                    "vipValue": [
+                        "sha1-hmac"
+                    ],
+                    "vipObjectType": "list",
+                    "vipVariableName": "security_authenticationType"
+                }
+            }
+        }
+    },
+    {
+        "deviceType": [
+            "vedge-2000"
+        ],
+        "deviceModels": [
+            {
+                "name": "vedge-2000",
+                "displayName": "vEdge 2000",
+                "deviceType": "vedge",
+                "isCliSupported": false,
+                "isCiscoDeviceModel": true
+            }
+        ],
+        "feature": "vmanage-default",
+        "factoryDefault": false,
+        "templateName": "vEdge2000-Security",
+        "templateDescription": "vEdge2000-Security",
+        "templateType": "security-vedge",
+        "templateMinVersion": "15.0.0",
+        "templateDefinition": {
+            "ipsec": {
+                "rekey": {
+                    "vipObjectType": "object",
+                    "vipType": "constant",
+                    "vipValue": 86400,
+                    "vipVariableName": "security_rekey"
+                },
+                "replay-window": {
+                    "vipObjectType": "object",
+                    "vipType": "constant",
+                    "vipValue": "512.0",
+                    "vipVariableName": "security_replay_window"
+                },
+                "authentication-type": {
+                    "vipType": "constant",
+                    "vipValue": [
+                        "ah-sha1-hmac"
+                    ],
+                    "vipObjectType": "list",
+                    "vipVariableName": "security_authenticationType"
+                }
+            }
+        }
+    },
+    {
+        "deviceType": [
+            "vedge-5000"
+        ],
+        "deviceModels": [
+            {
+                "name": "vedge-5000",
+                "displayName": "vEdge 5000",
+                "deviceType": "vedge",
+                "isCliSupported": false,
+                "isCiscoDeviceModel": true
+            }
+        ],
+        "feature": "vmanage-default",
+        "factoryDefault": false,
+        "templateName": "vEdge5000-Security",
+        "templateDescription": "vEdge5000-Security",
+        "templateType": "security-vedge",
+        "templateMinVersion": "15.0.0",
+        "templateDefinition": {
+            "ipsec": {
+                "rekey": {
+                    "vipObjectType": "object",
+                    "vipType": "constant",
+                    "vipValue": 86400,
+                    "vipVariableName": "security_rekey"
+                },
+                "replay-window": {
+                    "vipObjectType": "object",
+                    "vipType": "constant",
+                    "vipValue": "512.0",
+                    "vipVariableName": "security_replay_window"
+                },
+                "authentication-type": {
+                    "vipType": "constant",
+                    "vipValue": [
+                        "ah-no-id"
+                    ],
+                    "vipObjectType": "list",
+                    "vipVariableName": "security_authenticationType"
+                }
+            }
+        }
+    },
+    {
+        "deviceType": [
+            "vedge-ISRv"
+        ],
+        "deviceModels": [
+            {
+                "name": "vedge-ISRv",
+                "displayName": "ISRv",
+                "deviceType": "vedge",
+                "isCliSupported": false,
+                "isCiscoDeviceModel": true
+            }
+        ],
+        "feature": "vmanage-default",
+        "factoryDefault": false,
+        "templateName": "ISRv-Security",
+        "templateDescription": "ISRv-Security",
+        "templateType": "security-vedge",
+        "templateMinVersion": "15.0.0",
+        "templateDefinition": {
+            "ipsec": {
+                "rekey": {
+                    "vipObjectType": "object",
+                    "vipType": "constant",
+                    "vipValue": 86400,
+                    "vipVariableName": "security_rekey"
+                },
+                "replay-window": {
+                    "vipObjectType": "object",
+                    "vipType": "constant",
+                    "vipValue": "512.0",
+                    "vipVariableName": "security_replay_window"
+                },
+                "authentication-type": {
+                    "vipType": "constant",
+                    "vipValue": [
+                        "sha1-hmac",
+                        "ah-sha1-hmac"
+                    ],
+                    "vipObjectType": "list",
+                    "vipVariableName": "security_authenticationType"
+                }
+            }
+        }
+    },
+    {
+        "deviceType": [
+            "vedge-1000"
+        ],
+        "deviceModels": [
+            {
+                "name": "vedge-1000",
+                "displayName": "vEdge 1000",
+                "deviceType": "vedge",
+                "isCliSupported": false,
+                "isCiscoDeviceModel": true
+            }
+        ],
+        "feature": "vmanage-default",
+        "factoryDefault": false,
+        "templateName": "AgencyA-Security",
+        "templateDescription": "AgencyA-Security",
+        "templateType": "security-vedge",
+        "templateMinVersion": "15.0.0",
+        "templateDefinition": {
+            "ipsec": {
+                "rekey": {
+                    "vipObjectType": "object",
+                    "vipType": "constant",
+                    "vipValue": 86400,
+                    "vipVariableName": "security_rekey"
+                },
+                "replay-window": {
+                    "vipObjectType": "object",
+                    "vipType": "constant",
+                    "vipValue": "512.0",
+                    "vipVariableName": "security_replay_window"
+                },
+                "authentication-type": {
+                    "vipType": "constant",
+                    "vipValue": [
+                        "sha1-hmac",
+                        "ah-no-id"
+                    ],
+                    "vipObjectType": "list",
+                    "vipVariableName": "security_authenticationType"
+                }
+            }
+        }
+    },
+    {
+        "deviceType": [
+            "vedge-1000",
+            "vedge-2000"
+        ],
+        "deviceModels": [
+            {
+                "name": "vedge-1000",
+                "displayName": "vEdge 1000",
+                "deviceType": "vedge",
+                "isCliSupported": false,
+                "isCiscoDeviceModel": true
+            },
+            {
+                "name": "vedge-2000",
+                "displayName": "vEdge 2000",
+                "deviceType": "vedge",
+                "isCliSupported": false,
+                "isCiscoDeviceModel": true
+            }
+        ],
+        "feature": "vmanage-default",
+        "factoryDefault": false,
+        "templateName": "AgencyB-Security",
+        "templateDescription": "AgencyB-Security",
+        "templateType": "security-vedge",
+        "templateMinVersion": "15.0.0",
+        "templateDefinition": {
+            "ipsec": {
+                "rekey": {
+                    "vipObjectType": "object",
+                    "vipType": "constant",
+                    "vipValue": 86400,
+                    "vipVariableName": "security_rekey"
+                },
+                "replay-window": {
+                    "vipObjectType": "object",
+                    "vipType": "constant",
+                    "vipValue": "512.0",
+                    "vipVariableName": "security_replay_window"
+                },
+                "authentication-type": {
+                    "vipType": "constant",
+                    "vipValue": [
+                        "sha1-hmac",
+                        "ah-sha1-hmac",
+                        "ah-no-id"
+                    ],
+                    "vipObjectType": "list",
+                    "vipVariableName": "security_authenticationType"
+                }
+            }
+        }
+    },
+    {
+        "deviceType": [
+            "vedge-1000",
+            "vedge-2000",
+            "vedge-5000"
+        ],
+        "deviceModels": [
+            {
+                "name": "vedge-1000",
+                "displayName": "vEdge 1000",
+                "deviceType": "vedge",
+                "isCliSupported": false,
+                "isCiscoDeviceModel": true
+            },
+            {
+                "name": "vedge-2000",
+                "displayName": "vEdge 2000",
+                "deviceType": "vedge",
+                "isCliSupported": false,
+                "isCiscoDeviceModel": true
+            },
+            {
+                "name": "vedge-5000",
+                "displayName": "vEdge 5000",
+                "deviceType": "vedge",
+                "isCliSupported": false,
+                "isCiscoDeviceModel": true
+            }
+        ],
+        "feature": "vmanage-default",
+        "factoryDefault": false,
+        "templateName": "AgencyC-Security",
+        "templateDescription": "AgencyC-Security",
+        "templateType": "security-vedge",
+        "templateMinVersion": "15.0.0",
+        "templateDefinition": {
+            "ipsec": {
+                "rekey": {
+                    "vipObjectType": "object",
+                    "vipType": "constant",
+                    "vipValue": 86400,
+                    "vipVariableName": "security_rekey"
+                },
+                "replay-window": {
+                    "vipObjectType": "object",
+                    "vipType": "constant",
+                    "vipValue": "512.0",
+                    "vipVariableName": "security_replay_window"
+                },
+                "authentication-type": {
+                    "vipType": "constant",
+                    "vipValue": [
+                        "ah-sha1-hmac",
+                        "ah-no-id"
+                    ],
+                    "vipObjectType": "list",
+                    "vipVariableName": "security_authenticationType"
+                }
+            }
+        }
+    }
+]

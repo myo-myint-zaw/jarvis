@@ -5,8 +5,8 @@
   gather_facts: no
   vars:
     templatename: []
-    templateid: []
-
+    file_contents: "{{ lookup('file', './templates/ospf_interface_data.json') }}"
+    # templateid: []
   tasks:
   - name: Get facts from XLSX file
     xls_to_facts:
@@ -36,7 +36,7 @@
 
   - name: Get Template ID
     uri:
-      url: https://{{ host_ip }}:443/dataservice/template/feature?summary=true
+      url: https://{{ host_ip }}:443/dataservice/template/feature
       method: 'GET'
       validate_certs: no
       headers:
@@ -46,41 +46,43 @@
     no_log: true
     register: featuretemplate
 
-  - name: Mapping Template Name and Template ID
-    set_fact:
-      tnameid: "{{ tnameid | default ({}) | combine({ item.templateName : item.templateId }) }}"
-    with_items:
-      - "{{ featuretemplate | json_query('json.data[]') }}"
-    no_log: true
-
   - name: Appending Template Name from SpreedSheet to templatename list
     set_fact:
       templatename: "{{ templatename + [item.Name] }}"
     no_log: true
-    # when: item.State == "absent"
     when: item.Name != None
-    with_items: "{{ spreadsheet_Delete_Feature_Template }}"
+    with_items: "{{ spreadsheet_OSPF_Interface }}"
 
   - name: Filter Template ID
     set_fact: 
       f_tid: >-
         {%- set f_tid = []-%}
-        {%- for key, value in tnameid.items() -%}
-          {%- for i in templatename -%}
-            {%- if i == key -%}
-              {%- set _ = f_tid.append(value) -%}
+        {%- for i in featuretemplate | json_query('json.data[]') -%}
+          {%- for j in templatename -%}
+            {%- if i.templateName == j -%}
+              {%- set _ = f_tid.append(i) -%}
             {%- endif -%}
           {%- endfor -%}
         {%- endfor -%}
         {{ f_tid }}
 
-  - name: Delete Feature Template 
+  - name: Save output to a file
+    copy: content="{{ f_tid | to_nice_json }}" dest="templates/ospf_int_output.json"
+
+  - name: Prepare payload
+    command: "python spreadsheet_parser.py SDWAN_Deployment_Template.xlsx OSPF_Interface"
+    no_log: true
+
+  - name: Update Feature Template - OSPF Area and Interfaces
     uri:
-      url: https://{{ host_ip }}:443/dataservice/template/feature/{{ item }}
-      method: DELETE
+      url: https://{{ host_ip }}:443/dataservice/template/feature/{{ item.templateId }}
+      method: 'PUT'
       validate_certs: no
       headers:
-        Accept: 'application/json'
+        Content-Type: 'application/json'
         Cookie: "{{ cookie }}"
       return_content: yes
-    with_items: "{{ f_tid }}"
+      body_format: json
+      body: "{{ item }}"
+    with_items: "{{ file_contents }}"
+

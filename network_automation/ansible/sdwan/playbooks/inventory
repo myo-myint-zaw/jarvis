@@ -1,0 +1,3 @@
+[apic]
+#192.168.12.2 username=admin password=P@ssw0rd123 ansible_connection=local
+10.88.88.131 username=admin password=P@ssw0rd123 ansible_connection=local

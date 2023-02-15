@@ -1,0 +1,2858 @@
+[
+    {
+        "deviceType": [
+            "vedge-cloud"
+        ],
+        "deviceModels": [
+            {
+                "name": "vedge-cloud",
+                "displayName": "vEdge Cloud",
+                "deviceType": "vedge",
+                "isCliSupported": false,
+                "isCiscoDeviceModel": true
+            }
+        ],
+        "feature": "vmanage-default",
+        "factoryDefault": false,
+        "templateName": "vEdge-Cloud-SNMPv3",
+        "templateDescription": "vEdge-Cloud-SNMPv3",
+        "templateType": "snmp",
+        "templateMinVersion": "15.0.0",
+        "templateDefinition": {
+            "shutdown": {
+                "vipObjectType": "object",
+                "vipType": "constant",
+                "vipValue": "false",
+                "vipVariableName": "snmp_shutdown"
+            },
+            "contact": {
+                "vipObjectType": "object",
+                "vipType": "ignore",
+                "vipVariableName": "snmp_contact"
+            },
+            "name": {
+                "vipObjectType": "object",
+                "vipType": "ignore",
+                "vipVariableName": "snmp_device_name"
+            },
+            "location": {
+                "vipObjectType": "object",
+                "vipType": "ignore",
+                "vipVariableName": "snmp_device_location"
+            },
+            "view": {
+                "vipType": "constant",
+                "vipValue": [
+                    {
+                        "name": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "snmp_view"
+                        },
+                        "oid": {
+                            "vipType": "constant",
+                            "vipValue": [
+                                {
+                                    "id": {
+                                        "vipObjectType": "object",
+                                        "vipType": "constant",
+                                        "vipValue": "1.3.6",
+                                        "vipVariableName": "snmp_view_id_0"
+                                    },
+                                    "exclude": {
+                                        "vipObjectType": "node-only",
+                                        "vipType": "ignore",
+                                        "vipValue": "false",
+                                        "vipVariableName": "snmp_view_exclude_0"
+                                    },
+                                    "priority-order": [
+                                        "id",
+                                        "exclude"
+                                    ]
+                                }
+                            ],
+                            "vipObjectType": "tree",
+                            "vipPrimaryKey": [
+                                "id"
+                            ]
+                        },
+                        "priority-order": [
+                            "name",
+                            "oid"
+                        ]
+                    }
+                ],
+                "vipObjectType": "tree",
+                "vipPrimaryKey": [
+                    "name"
+                ]
+            },
+            "group": {
+                "vipType": "constant",
+                "vipValue": [
+                    {
+                        "name": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "snmp_group"
+                        },
+                        "security-level": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "no-auth-no-priv"
+                        },
+                        "view": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "snmp_view",
+                            "vipVariableName": "snmp_group_view"
+                        },
+                        "priority-order": [
+                            "name",
+                            "security-level",
+                            "view"
+                        ]
+                    }
+                ],
+                "vipObjectType": "tree",
+                "vipPrimaryKey": [
+                    "name",
+                    "security-level"
+                ]
+            },
+            "user": {
+                "vipType": "constant",
+                "vipValue": [
+                    {
+                        "name": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "snmp_user"
+                        },
+                        "auth": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "md5",
+                            "vipVariableName": "snmp_user_auth"
+                        },
+                        "auth-password": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "P@ssw0rd",
+                            "vipVariableName": "snmp_user_auth_password"
+                        },
+                        "priv": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "aes-cfb-128",
+                            "vipVariableName": "snmp_user_priv"
+                        },
+                        "priv-password": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "P@ssw0rd",
+                            "vipVariableName": "snmp_user_priv_password"
+                        },
+                        "group": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "snmp_group",
+                            "vipVariableName": "snmp_user_group"
+                        },
+                        "priority-order": [
+                            "name",
+                            "auth",
+                            "auth-password",
+                            "priv",
+                            "priv-password",
+                            "group"
+                        ]
+                    }
+                ],
+                "vipObjectType": "tree",
+                "vipPrimaryKey": [
+                    "name"
+                ]
+            },
+            "trap": {
+                "group": {
+                    "vipType": "constant",
+                    "vipValue": [
+                        {
+                            "group-name": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "v3_track_group"
+                            },
+                            "enable": {
+                                "vipType": "constant",
+                                "vipValue": [
+                                    {
+                                        "module": {
+                                            "vipObjectType": "object",
+                                            "vipType": "constant",
+                                            "vipValue": "all",
+                                            "vipVariableName": "snmp_trap_types_module_0"
+                                        },
+                                        "level": {
+                                            "vipType": "constant",
+                                            "vipValue": [
+                                                [
+                                                    "critical",
+                                                    "major",
+                                                    "minor"
+                                                ]
+                                            ],
+                                            "vipObjectType": "list",
+                                            "vipVariableName": "snmp_trap_types_level_0"
+                                        },
+                                        "priority-order": [
+                                            "module",
+                                            "level"
+                                        ]
+                                    }
+                                ],
+                                "vipObjectType": "tree",
+                                "vipPrimaryKey": [
+                                    "module"
+                                ]
+                            },
+                            "priority-order": [
+                                "group-name",
+                                "enable"
+                            ]
+                        }
+                    ],
+                    "vipObjectType": "tree",
+                    "vipPrimaryKey": [
+                        "group-name"
+                    ]
+                },
+                "target": {
+                    "vipType": "constant",
+                    "vipValue": [
+                        {
+                            "vpn-id": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": 511,
+                                "vipVariableName": "snmp_trapv3_vpn_id"
+                            },
+                            "ip": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "10.1.1.1",
+                                "vipVariableName": "snmp_trapv3_ip"
+                            },
+                            "port": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": 162,
+                                "vipVariableName": "snmp_trapv3_port"
+                            },
+                            "group-name": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "v3_track_group",
+                                "vipVariableName": "snmp_trapv3_trap_group_name"
+                            },
+                            "community-name": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "_blank",
+                                "vipNeedsEncryption": "true"
+                            },
+                            "user": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "snmp_user",
+                                "vipVariableName": "snmp_trapv3_user"
+                            },
+                            "source-interface": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "ge0/0",
+                                "vipVariableName": "snmp_trapv3_source_interface"
+                            },
+                            "users": {
+                                "vipObjectType": "object",
+                                "vipType": "constant"
+                            },
+                            "priority-order": [
+                                "vpn-id",
+                                "ip",
+                                "port",
+                                "group-name",
+                                "user",
+                                "source-interface"
+                            ]
+                        },
+                        {
+                            "vpn-id": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": 512,
+                                "vipVariableName": "snmp_trapv3_vpn_id"
+                            },
+                            "ip": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "10.2.2.2",
+                                "vipVariableName": "snmp_trapv3_ip"
+                            },
+                            "port": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": 162,
+                                "vipVariableName": "snmp_trapv3_port"
+                            },
+                            "group-name": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "v3_track_group",
+                                "vipVariableName": "snmp_trapv3_trap_group_name"
+                            },
+                            "community-name": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "_blank",
+                                "vipNeedsEncryption": "true"
+                            },
+                            "user": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "snmp_user",
+                                "vipVariableName": "snmp_trapv3_user"
+                            },
+                            "source-interface": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "ge0/1",
+                                "vipVariableName": "snmp_trapv3_source_interface"
+                            },
+                            "users": {
+                                "vipObjectType": "object",
+                                "vipType": "constant"
+                            },
+                            "priority-order": [
+                                "vpn-id",
+                                "ip",
+                                "port",
+                                "group-name",
+                                "user",
+                                "source-interface"
+                            ]
+                        }
+                    ],
+                    "vipObjectType": "tree",
+                    "vipPrimaryKey": [
+                        "vpn-id",
+                        "ip",
+                        "port"
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "deviceType": [
+            "vedge-1000"
+        ],
+        "deviceModels": [
+            {
+                "name": "vedge-1000",
+                "displayName": "vEdge 1000",
+                "deviceType": "vedge",
+                "isCliSupported": false,
+                "isCiscoDeviceModel": true
+            }
+        ],
+        "feature": "vmanage-default",
+        "factoryDefault": false,
+        "templateName": "vEdge1000-SNMPv3",
+        "templateDescription": "vEdge1000-SNMPv3",
+        "templateType": "snmp",
+        "templateMinVersion": "15.0.0",
+        "templateDefinition": {
+            "shutdown": {
+                "vipObjectType": "object",
+                "vipType": "constant",
+                "vipValue": "false",
+                "vipVariableName": "snmp_shutdown"
+            },
+            "contact": {
+                "vipObjectType": "object",
+                "vipType": "ignore",
+                "vipVariableName": "snmp_contact"
+            },
+            "name": {
+                "vipObjectType": "object",
+                "vipType": "ignore",
+                "vipVariableName": "snmp_device_name"
+            },
+            "location": {
+                "vipObjectType": "object",
+                "vipType": "ignore",
+                "vipVariableName": "snmp_device_location"
+            },
+            "view": {
+                "vipType": "constant",
+                "vipValue": [
+                    {
+                        "name": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "snmp_view"
+                        },
+                        "oid": {
+                            "vipType": "constant",
+                            "vipValue": [
+                                {
+                                    "id": {
+                                        "vipObjectType": "object",
+                                        "vipType": "constant",
+                                        "vipValue": "1.3.6",
+                                        "vipVariableName": "snmp_view_id_0"
+                                    },
+                                    "exclude": {
+                                        "vipObjectType": "node-only",
+                                        "vipType": "ignore",
+                                        "vipValue": "false",
+                                        "vipVariableName": "snmp_view_exclude_0"
+                                    },
+                                    "priority-order": [
+                                        "id",
+                                        "exclude"
+                                    ]
+                                }
+                            ],
+                            "vipObjectType": "tree",
+                            "vipPrimaryKey": [
+                                "id"
+                            ]
+                        },
+                        "priority-order": [
+                            "name",
+                            "oid"
+                        ]
+                    }
+                ],
+                "vipObjectType": "tree",
+                "vipPrimaryKey": [
+                    "name"
+                ]
+            },
+            "group": {
+                "vipType": "constant",
+                "vipValue": [
+                    {
+                        "name": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "snmp_group"
+                        },
+                        "security-level": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "no-auth-no-priv"
+                        },
+                        "view": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "snmp_view",
+                            "vipVariableName": "snmp_group_view"
+                        },
+                        "priority-order": [
+                            "name",
+                            "security-level",
+                            "view"
+                        ]
+                    }
+                ],
+                "vipObjectType": "tree",
+                "vipPrimaryKey": [
+                    "name",
+                    "security-level"
+                ]
+            },
+            "user": {
+                "vipType": "constant",
+                "vipValue": [
+                    {
+                        "name": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "snmp_user"
+                        },
+                        "auth": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "md5",
+                            "vipVariableName": "snmp_user_auth"
+                        },
+                        "auth-password": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "P@ssw0rd",
+                            "vipVariableName": "snmp_user_auth_password"
+                        },
+                        "priv": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "aes-cfb-128",
+                            "vipVariableName": "snmp_user_priv"
+                        },
+                        "priv-password": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "P@ssw0rd",
+                            "vipVariableName": "snmp_user_priv_password"
+                        },
+                        "group": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "snmp_group",
+                            "vipVariableName": "snmp_user_group"
+                        },
+                        "priority-order": [
+                            "name",
+                            "auth",
+                            "auth-password",
+                            "priv",
+                            "priv-password",
+                            "group"
+                        ]
+                    }
+                ],
+                "vipObjectType": "tree",
+                "vipPrimaryKey": [
+                    "name"
+                ]
+            },
+            "trap": {
+                "group": {
+                    "vipType": "constant",
+                    "vipValue": [
+                        {
+                            "group-name": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "v3_track_group"
+                            },
+                            "enable": {
+                                "vipType": "constant",
+                                "vipValue": [
+                                    {
+                                        "module": {
+                                            "vipObjectType": "object",
+                                            "vipType": "constant",
+                                            "vipValue": "all",
+                                            "vipVariableName": "snmp_trap_types_module_0"
+                                        },
+                                        "level": {
+                                            "vipType": "constant",
+                                            "vipValue": [
+                                                [
+                                                    "critical",
+                                                    "major",
+                                                    "minor"
+                                                ]
+                                            ],
+                                            "vipObjectType": "list",
+                                            "vipVariableName": "snmp_trap_types_level_0"
+                                        },
+                                        "priority-order": [
+                                            "module",
+                                            "level"
+                                        ]
+                                    }
+                                ],
+                                "vipObjectType": "tree",
+                                "vipPrimaryKey": [
+                                    "module"
+                                ]
+                            },
+                            "priority-order": [
+                                "group-name",
+                                "enable"
+                            ]
+                        }
+                    ],
+                    "vipObjectType": "tree",
+                    "vipPrimaryKey": [
+                        "group-name"
+                    ]
+                },
+                "target": {
+                    "vipType": "constant",
+                    "vipValue": [
+                        {
+                            "vpn-id": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": 511,
+                                "vipVariableName": "snmp_trapv3_vpn_id"
+                            },
+                            "ip": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "10.1.1.1",
+                                "vipVariableName": "snmp_trapv3_ip"
+                            },
+                            "port": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": 162,
+                                "vipVariableName": "snmp_trapv3_port"
+                            },
+                            "group-name": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "v3_track_group",
+                                "vipVariableName": "snmp_trapv3_trap_group_name"
+                            },
+                            "community-name": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "_blank",
+                                "vipNeedsEncryption": "true"
+                            },
+                            "user": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "snmp_user",
+                                "vipVariableName": "snmp_trapv3_user"
+                            },
+                            "source-interface": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "ge0/0",
+                                "vipVariableName": "snmp_trapv3_source_interface"
+                            },
+                            "users": {
+                                "vipObjectType": "object",
+                                "vipType": "constant"
+                            },
+                            "priority-order": [
+                                "vpn-id",
+                                "ip",
+                                "port",
+                                "group-name",
+                                "user",
+                                "source-interface"
+                            ]
+                        },
+                        {
+                            "vpn-id": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": 512,
+                                "vipVariableName": "snmp_trapv3_vpn_id"
+                            },
+                            "ip": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "10.2.2.2",
+                                "vipVariableName": "snmp_trapv3_ip"
+                            },
+                            "port": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": 162,
+                                "vipVariableName": "snmp_trapv3_port"
+                            },
+                            "group-name": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "v3_track_group",
+                                "vipVariableName": "snmp_trapv3_trap_group_name"
+                            },
+                            "community-name": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "_blank",
+                                "vipNeedsEncryption": "true"
+                            },
+                            "user": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "snmp_user",
+                                "vipVariableName": "snmp_trapv3_user"
+                            },
+                            "source-interface": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "ge0/1",
+                                "vipVariableName": "snmp_trapv3_source_interface"
+                            },
+                            "users": {
+                                "vipObjectType": "object",
+                                "vipType": "constant"
+                            },
+                            "priority-order": [
+                                "vpn-id",
+                                "ip",
+                                "port",
+                                "group-name",
+                                "user",
+                                "source-interface"
+                            ]
+                        }
+                    ],
+                    "vipObjectType": "tree",
+                    "vipPrimaryKey": [
+                        "vpn-id",
+                        "ip",
+                        "port"
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "deviceType": [
+            "vedge-2000"
+        ],
+        "deviceModels": [
+            {
+                "name": "vedge-2000",
+                "displayName": "vEdge 2000",
+                "deviceType": "vedge",
+                "isCliSupported": false,
+                "isCiscoDeviceModel": true
+            }
+        ],
+        "feature": "vmanage-default",
+        "factoryDefault": false,
+        "templateName": "vEdge2000-SNMPv3",
+        "templateDescription": "vEdge2000-SNMPv3",
+        "templateType": "snmp",
+        "templateMinVersion": "15.0.0",
+        "templateDefinition": {
+            "shutdown": {
+                "vipObjectType": "object",
+                "vipType": "constant",
+                "vipValue": "false",
+                "vipVariableName": "snmp_shutdown"
+            },
+            "contact": {
+                "vipObjectType": "object",
+                "vipType": "ignore",
+                "vipVariableName": "snmp_contact"
+            },
+            "name": {
+                "vipObjectType": "object",
+                "vipType": "ignore",
+                "vipVariableName": "snmp_device_name"
+            },
+            "location": {
+                "vipObjectType": "object",
+                "vipType": "ignore",
+                "vipVariableName": "snmp_device_location"
+            },
+            "view": {
+                "vipType": "constant",
+                "vipValue": [
+                    {
+                        "name": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "snmp_view"
+                        },
+                        "oid": {
+                            "vipType": "constant",
+                            "vipValue": [
+                                {
+                                    "id": {
+                                        "vipObjectType": "object",
+                                        "vipType": "constant",
+                                        "vipValue": "1.3.6",
+                                        "vipVariableName": "snmp_view_id_0"
+                                    },
+                                    "exclude": {
+                                        "vipObjectType": "node-only",
+                                        "vipType": "ignore",
+                                        "vipValue": "false",
+                                        "vipVariableName": "snmp_view_exclude_0"
+                                    },
+                                    "priority-order": [
+                                        "id",
+                                        "exclude"
+                                    ]
+                                }
+                            ],
+                            "vipObjectType": "tree",
+                            "vipPrimaryKey": [
+                                "id"
+                            ]
+                        },
+                        "priority-order": [
+                            "name",
+                            "oid"
+                        ]
+                    }
+                ],
+                "vipObjectType": "tree",
+                "vipPrimaryKey": [
+                    "name"
+                ]
+            },
+            "group": {
+                "vipType": "constant",
+                "vipValue": [
+                    {
+                        "name": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "snmp_group"
+                        },
+                        "security-level": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "auth-no-priv"
+                        },
+                        "view": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "snmp_view",
+                            "vipVariableName": "snmp_group_view"
+                        },
+                        "priority-order": [
+                            "name",
+                            "security-level",
+                            "view"
+                        ]
+                    }
+                ],
+                "vipObjectType": "tree",
+                "vipPrimaryKey": [
+                    "name",
+                    "security-level"
+                ]
+            },
+            "user": {
+                "vipType": "constant",
+                "vipValue": [
+                    {
+                        "name": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "snmp_user"
+                        },
+                        "auth": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "sha",
+                            "vipVariableName": "snmp_user_auth"
+                        },
+                        "auth-password": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "P@ssw0rd",
+                            "vipVariableName": "snmp_user_auth_password"
+                        },
+                        "priv": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "aes-cfb-128",
+                            "vipVariableName": "snmp_user_priv"
+                        },
+                        "priv-password": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "P@ssw0rd",
+                            "vipVariableName": "snmp_user_priv_password"
+                        },
+                        "group": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "snmp_group",
+                            "vipVariableName": "snmp_user_group"
+                        },
+                        "priority-order": [
+                            "name",
+                            "auth",
+                            "auth-password",
+                            "priv",
+                            "priv-password",
+                            "group"
+                        ]
+                    }
+                ],
+                "vipObjectType": "tree",
+                "vipPrimaryKey": [
+                    "name"
+                ]
+            },
+            "trap": {
+                "group": {
+                    "vipType": "constant",
+                    "vipValue": [
+                        {
+                            "group-name": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "v3_track_group"
+                            },
+                            "enable": {
+                                "vipType": "constant",
+                                "vipValue": [
+                                    {
+                                        "module": {
+                                            "vipObjectType": "object",
+                                            "vipType": "constant",
+                                            "vipValue": "all",
+                                            "vipVariableName": "snmp_trap_types_module_0"
+                                        },
+                                        "level": {
+                                            "vipType": "constant",
+                                            "vipValue": [
+                                                [
+                                                    "critical",
+                                                    "major",
+                                                    "minor"
+                                                ]
+                                            ],
+                                            "vipObjectType": "list",
+                                            "vipVariableName": "snmp_trap_types_level_0"
+                                        },
+                                        "priority-order": [
+                                            "module",
+                                            "level"
+                                        ]
+                                    }
+                                ],
+                                "vipObjectType": "tree",
+                                "vipPrimaryKey": [
+                                    "module"
+                                ]
+                            },
+                            "priority-order": [
+                                "group-name",
+                                "enable"
+                            ]
+                        }
+                    ],
+                    "vipObjectType": "tree",
+                    "vipPrimaryKey": [
+                        "group-name"
+                    ]
+                },
+                "target": {
+                    "vipType": "constant",
+                    "vipValue": [
+                        {
+                            "vpn-id": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": 511,
+                                "vipVariableName": "snmp_trapv3_vpn_id"
+                            },
+                            "ip": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "10.1.1.1",
+                                "vipVariableName": "snmp_trapv3_ip"
+                            },
+                            "port": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": 162,
+                                "vipVariableName": "snmp_trapv3_port"
+                            },
+                            "group-name": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "v3_track_group",
+                                "vipVariableName": "snmp_trapv3_trap_group_name"
+                            },
+                            "community-name": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "_blank",
+                                "vipNeedsEncryption": "true"
+                            },
+                            "user": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "snmp_user",
+                                "vipVariableName": "snmp_trapv3_user"
+                            },
+                            "source-interface": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "ge0/0",
+                                "vipVariableName": "snmp_trapv3_source_interface"
+                            },
+                            "users": {
+                                "vipObjectType": "object",
+                                "vipType": "constant"
+                            },
+                            "priority-order": [
+                                "vpn-id",
+                                "ip",
+                                "port",
+                                "group-name",
+                                "user",
+                                "source-interface"
+                            ]
+                        },
+                        {
+                            "vpn-id": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": 512,
+                                "vipVariableName": "snmp_trapv3_vpn_id"
+                            },
+                            "ip": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "10.2.2.2",
+                                "vipVariableName": "snmp_trapv3_ip"
+                            },
+                            "port": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": 162,
+                                "vipVariableName": "snmp_trapv3_port"
+                            },
+                            "group-name": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "v3_track_group",
+                                "vipVariableName": "snmp_trapv3_trap_group_name"
+                            },
+                            "community-name": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "_blank",
+                                "vipNeedsEncryption": "true"
+                            },
+                            "user": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "snmp_user",
+                                "vipVariableName": "snmp_trapv3_user"
+                            },
+                            "source-interface": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "ge0/1",
+                                "vipVariableName": "snmp_trapv3_source_interface"
+                            },
+                            "users": {
+                                "vipObjectType": "object",
+                                "vipType": "constant"
+                            },
+                            "priority-order": [
+                                "vpn-id",
+                                "ip",
+                                "port",
+                                "group-name",
+                                "user",
+                                "source-interface"
+                            ]
+                        }
+                    ],
+                    "vipObjectType": "tree",
+                    "vipPrimaryKey": [
+                        "vpn-id",
+                        "ip",
+                        "port"
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "deviceType": [
+            "vedge-5000"
+        ],
+        "deviceModels": [
+            {
+                "name": "vedge-5000",
+                "displayName": "vEdge 5000",
+                "deviceType": "vedge",
+                "isCliSupported": false,
+                "isCiscoDeviceModel": true
+            }
+        ],
+        "feature": "vmanage-default",
+        "factoryDefault": false,
+        "templateName": "vEdge5000-SNMPv3",
+        "templateDescription": "vEdge5000-SNMPv3",
+        "templateType": "snmp",
+        "templateMinVersion": "15.0.0",
+        "templateDefinition": {
+            "shutdown": {
+                "vipObjectType": "object",
+                "vipType": "constant",
+                "vipValue": "false",
+                "vipVariableName": "snmp_shutdown"
+            },
+            "contact": {
+                "vipObjectType": "object",
+                "vipType": "ignore",
+                "vipVariableName": "snmp_contact"
+            },
+            "name": {
+                "vipObjectType": "object",
+                "vipType": "ignore",
+                "vipVariableName": "snmp_device_name"
+            },
+            "location": {
+                "vipObjectType": "object",
+                "vipType": "ignore",
+                "vipVariableName": "snmp_device_location"
+            },
+            "view": {
+                "vipType": "constant",
+                "vipValue": [
+                    {
+                        "name": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "snmp_view"
+                        },
+                        "oid": {
+                            "vipType": "constant",
+                            "vipValue": [
+                                {
+                                    "id": {
+                                        "vipObjectType": "object",
+                                        "vipType": "constant",
+                                        "vipValue": "1.3.6",
+                                        "vipVariableName": "snmp_view_id_0"
+                                    },
+                                    "exclude": {
+                                        "vipObjectType": "node-only",
+                                        "vipType": "ignore",
+                                        "vipValue": "false",
+                                        "vipVariableName": "snmp_view_exclude_0"
+                                    },
+                                    "priority-order": [
+                                        "id",
+                                        "exclude"
+                                    ]
+                                }
+                            ],
+                            "vipObjectType": "tree",
+                            "vipPrimaryKey": [
+                                "id"
+                            ]
+                        },
+                        "priority-order": [
+                            "name",
+                            "oid"
+                        ]
+                    }
+                ],
+                "vipObjectType": "tree",
+                "vipPrimaryKey": [
+                    "name"
+                ]
+            },
+            "group": {
+                "vipType": "constant",
+                "vipValue": [
+                    {
+                        "name": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "snmp_group"
+                        },
+                        "security-level": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "auth-no-priv"
+                        },
+                        "view": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "snmp_view",
+                            "vipVariableName": "snmp_group_view"
+                        },
+                        "priority-order": [
+                            "name",
+                            "security-level",
+                            "view"
+                        ]
+                    }
+                ],
+                "vipObjectType": "tree",
+                "vipPrimaryKey": [
+                    "name",
+                    "security-level"
+                ]
+            },
+            "user": {
+                "vipType": "constant",
+                "vipValue": [
+                    {
+                        "name": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "snmp_user"
+                        },
+                        "auth": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "sha",
+                            "vipVariableName": "snmp_user_auth"
+                        },
+                        "auth-password": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "P@ssw0rd",
+                            "vipVariableName": "snmp_user_auth_password"
+                        },
+                        "priv": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "aes-cfb-128",
+                            "vipVariableName": "snmp_user_priv"
+                        },
+                        "priv-password": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "P@ssw0rd",
+                            "vipVariableName": "snmp_user_priv_password"
+                        },
+                        "group": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "snmp_group",
+                            "vipVariableName": "snmp_user_group"
+                        },
+                        "priority-order": [
+                            "name",
+                            "auth",
+                            "auth-password",
+                            "priv",
+                            "priv-password",
+                            "group"
+                        ]
+                    }
+                ],
+                "vipObjectType": "tree",
+                "vipPrimaryKey": [
+                    "name"
+                ]
+            },
+            "trap": {
+                "group": {
+                    "vipType": "constant",
+                    "vipValue": [
+                        {
+                            "group-name": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "v3_track_group"
+                            },
+                            "enable": {
+                                "vipType": "constant",
+                                "vipValue": [
+                                    {
+                                        "module": {
+                                            "vipObjectType": "object",
+                                            "vipType": "constant",
+                                            "vipValue": "all",
+                                            "vipVariableName": "snmp_trap_types_module_0"
+                                        },
+                                        "level": {
+                                            "vipType": "constant",
+                                            "vipValue": [
+                                                [
+                                                    "critical",
+                                                    "major"
+                                                ]
+                                            ],
+                                            "vipObjectType": "list",
+                                            "vipVariableName": "snmp_trap_types_level_0"
+                                        },
+                                        "priority-order": [
+                                            "module",
+                                            "level"
+                                        ]
+                                    }
+                                ],
+                                "vipObjectType": "tree",
+                                "vipPrimaryKey": [
+                                    "module"
+                                ]
+                            },
+                            "priority-order": [
+                                "group-name",
+                                "enable"
+                            ]
+                        }
+                    ],
+                    "vipObjectType": "tree",
+                    "vipPrimaryKey": [
+                        "group-name"
+                    ]
+                },
+                "target": {
+                    "vipType": "constant",
+                    "vipValue": [
+                        {
+                            "vpn-id": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": 511,
+                                "vipVariableName": "snmp_trapv3_vpn_id"
+                            },
+                            "ip": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "10.1.1.1",
+                                "vipVariableName": "snmp_trapv3_ip"
+                            },
+                            "port": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": 162,
+                                "vipVariableName": "snmp_trapv3_port"
+                            },
+                            "group-name": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "v3_track_group",
+                                "vipVariableName": "snmp_trapv3_trap_group_name"
+                            },
+                            "community-name": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "_blank",
+                                "vipNeedsEncryption": "true"
+                            },
+                            "user": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "snmp_user",
+                                "vipVariableName": "snmp_trapv3_user"
+                            },
+                            "source-interface": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "ge0/0",
+                                "vipVariableName": "snmp_trapv3_source_interface"
+                            },
+                            "users": {
+                                "vipObjectType": "object",
+                                "vipType": "constant"
+                            },
+                            "priority-order": [
+                                "vpn-id",
+                                "ip",
+                                "port",
+                                "group-name",
+                                "user",
+                                "source-interface"
+                            ]
+                        },
+                        {
+                            "vpn-id": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": 512,
+                                "vipVariableName": "snmp_trapv3_vpn_id"
+                            },
+                            "ip": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "10.2.2.2",
+                                "vipVariableName": "snmp_trapv3_ip"
+                            },
+                            "port": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": 162,
+                                "vipVariableName": "snmp_trapv3_port"
+                            },
+                            "group-name": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "v3_track_group",
+                                "vipVariableName": "snmp_trapv3_trap_group_name"
+                            },
+                            "community-name": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "_blank",
+                                "vipNeedsEncryption": "true"
+                            },
+                            "user": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "snmp_user",
+                                "vipVariableName": "snmp_trapv3_user"
+                            },
+                            "source-interface": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "ge0/1",
+                                "vipVariableName": "snmp_trapv3_source_interface"
+                            },
+                            "users": {
+                                "vipObjectType": "object",
+                                "vipType": "constant"
+                            },
+                            "priority-order": [
+                                "vpn-id",
+                                "ip",
+                                "port",
+                                "group-name",
+                                "user",
+                                "source-interface"
+                            ]
+                        }
+                    ],
+                    "vipObjectType": "tree",
+                    "vipPrimaryKey": [
+                        "vpn-id",
+                        "ip",
+                        "port"
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "deviceType": [
+            "vedge-ISRv"
+        ],
+        "deviceModels": [
+            {
+                "name": "vedge-ISRv",
+                "displayName": "ISRv",
+                "deviceType": "vedge",
+                "isCliSupported": false,
+                "isCiscoDeviceModel": true
+            }
+        ],
+        "feature": "vmanage-default",
+        "factoryDefault": false,
+        "templateName": "ISRv-SNMPv3",
+        "templateDescription": "ISRv-SNMPv3",
+        "templateType": "snmp",
+        "templateMinVersion": "15.0.0",
+        "templateDefinition": {
+            "shutdown": {
+                "vipObjectType": "object",
+                "vipType": "constant",
+                "vipValue": "false",
+                "vipVariableName": "snmp_shutdown"
+            },
+            "contact": {
+                "vipObjectType": "object",
+                "vipType": "ignore",
+                "vipVariableName": "snmp_contact"
+            },
+            "name": {
+                "vipObjectType": "object",
+                "vipType": "ignore",
+                "vipVariableName": "snmp_device_name"
+            },
+            "location": {
+                "vipObjectType": "object",
+                "vipType": "ignore",
+                "vipVariableName": "snmp_device_location"
+            },
+            "view": {
+                "vipType": "constant",
+                "vipValue": [
+                    {
+                        "name": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "snmp_view"
+                        },
+                        "oid": {
+                            "vipType": "constant",
+                            "vipValue": [
+                                {
+                                    "id": {
+                                        "vipObjectType": "object",
+                                        "vipType": "constant",
+                                        "vipValue": "1.3.6",
+                                        "vipVariableName": "snmp_view_id_0"
+                                    },
+                                    "exclude": {
+                                        "vipObjectType": "node-only",
+                                        "vipType": "ignore",
+                                        "vipValue": "false",
+                                        "vipVariableName": "snmp_view_exclude_0"
+                                    },
+                                    "priority-order": [
+                                        "id",
+                                        "exclude"
+                                    ]
+                                }
+                            ],
+                            "vipObjectType": "tree",
+                            "vipPrimaryKey": [
+                                "id"
+                            ]
+                        },
+                        "priority-order": [
+                            "name",
+                            "oid"
+                        ]
+                    }
+                ],
+                "vipObjectType": "tree",
+                "vipPrimaryKey": [
+                    "name"
+                ]
+            },
+            "group": {
+                "vipType": "constant",
+                "vipValue": [
+                    {
+                        "name": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "snmp_group"
+                        },
+                        "security-level": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "auth-priv"
+                        },
+                        "view": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "snmp_view",
+                            "vipVariableName": "snmp_group_view"
+                        },
+                        "priority-order": [
+                            "name",
+                            "security-level",
+                            "view"
+                        ]
+                    }
+                ],
+                "vipObjectType": "tree",
+                "vipPrimaryKey": [
+                    "name",
+                    "security-level"
+                ]
+            },
+            "user": {
+                "vipType": "constant",
+                "vipValue": [
+                    {
+                        "name": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "snmp_user"
+                        },
+                        "auth": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "sha-256",
+                            "vipVariableName": "snmp_user_auth"
+                        },
+                        "auth-password": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "P@ssw0rd",
+                            "vipVariableName": "snmp_user_auth_password"
+                        },
+                        "priv": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "aes-cfb-128",
+                            "vipVariableName": "snmp_user_priv"
+                        },
+                        "priv-password": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "P@ssw0rd",
+                            "vipVariableName": "snmp_user_priv_password"
+                        },
+                        "group": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "snmp_group",
+                            "vipVariableName": "snmp_user_group"
+                        },
+                        "priority-order": [
+                            "name",
+                            "auth",
+                            "auth-password",
+                            "priv",
+                            "priv-password",
+                            "group"
+                        ]
+                    }
+                ],
+                "vipObjectType": "tree",
+                "vipPrimaryKey": [
+                    "name"
+                ]
+            },
+            "trap": {
+                "group": {
+                    "vipType": "constant",
+                    "vipValue": [
+                        {
+                            "group-name": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "v3_track_group"
+                            },
+                            "enable": {
+                                "vipType": "constant",
+                                "vipValue": [
+                                    {
+                                        "module": {
+                                            "vipObjectType": "object",
+                                            "vipType": "constant",
+                                            "vipValue": "all",
+                                            "vipVariableName": "snmp_trap_types_module_0"
+                                        },
+                                        "level": {
+                                            "vipType": "constant",
+                                            "vipValue": [
+                                                [
+                                                    "critical",
+                                                    "major"
+                                                ]
+                                            ],
+                                            "vipObjectType": "list",
+                                            "vipVariableName": "snmp_trap_types_level_0"
+                                        },
+                                        "priority-order": [
+                                            "module",
+                                            "level"
+                                        ]
+                                    }
+                                ],
+                                "vipObjectType": "tree",
+                                "vipPrimaryKey": [
+                                    "module"
+                                ]
+                            },
+                            "priority-order": [
+                                "group-name",
+                                "enable"
+                            ]
+                        }
+                    ],
+                    "vipObjectType": "tree",
+                    "vipPrimaryKey": [
+                        "group-name"
+                    ]
+                },
+                "target": {
+                    "vipType": "constant",
+                    "vipValue": [
+                        {
+                            "vpn-id": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": 511,
+                                "vipVariableName": "snmp_trapv3_vpn_id"
+                            },
+                            "ip": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "10.1.1.1",
+                                "vipVariableName": "snmp_trapv3_ip"
+                            },
+                            "port": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": 162,
+                                "vipVariableName": "snmp_trapv3_port"
+                            },
+                            "group-name": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "v3_track_group",
+                                "vipVariableName": "snmp_trapv3_trap_group_name"
+                            },
+                            "community-name": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "_blank",
+                                "vipNeedsEncryption": "true"
+                            },
+                            "user": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "snmp_user",
+                                "vipVariableName": "snmp_trapv3_user"
+                            },
+                            "source-interface": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "ge0/0",
+                                "vipVariableName": "snmp_trapv3_source_interface"
+                            },
+                            "users": {
+                                "vipObjectType": "object",
+                                "vipType": "constant"
+                            },
+                            "priority-order": [
+                                "vpn-id",
+                                "ip",
+                                "port",
+                                "group-name",
+                                "user",
+                                "source-interface"
+                            ]
+                        },
+                        {
+                            "vpn-id": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": 512,
+                                "vipVariableName": "snmp_trapv3_vpn_id"
+                            },
+                            "ip": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "10.2.2.2",
+                                "vipVariableName": "snmp_trapv3_ip"
+                            },
+                            "port": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": 162,
+                                "vipVariableName": "snmp_trapv3_port"
+                            },
+                            "group-name": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "v3_track_group",
+                                "vipVariableName": "snmp_trapv3_trap_group_name"
+                            },
+                            "community-name": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "_blank",
+                                "vipNeedsEncryption": "true"
+                            },
+                            "user": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "snmp_user",
+                                "vipVariableName": "snmp_trapv3_user"
+                            },
+                            "source-interface": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "ge0/1",
+                                "vipVariableName": "snmp_trapv3_source_interface"
+                            },
+                            "users": {
+                                "vipObjectType": "object",
+                                "vipType": "constant"
+                            },
+                            "priority-order": [
+                                "vpn-id",
+                                "ip",
+                                "port",
+                                "group-name",
+                                "user",
+                                "source-interface"
+                            ]
+                        }
+                    ],
+                    "vipObjectType": "tree",
+                    "vipPrimaryKey": [
+                        "vpn-id",
+                        "ip",
+                        "port"
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "deviceType": [
+            "vedge-1000"
+        ],
+        "deviceModels": [
+            {
+                "name": "vedge-1000",
+                "displayName": "vEdge 1000",
+                "deviceType": "vedge",
+                "isCliSupported": false,
+                "isCiscoDeviceModel": true
+            }
+        ],
+        "feature": "vmanage-default",
+        "factoryDefault": false,
+        "templateName": "AgencyA-SNMPv3",
+        "templateDescription": "AgencyA-SNMPv3",
+        "templateType": "snmp",
+        "templateMinVersion": "15.0.0",
+        "templateDefinition": {
+            "shutdown": {
+                "vipObjectType": "object",
+                "vipType": "constant",
+                "vipValue": "false",
+                "vipVariableName": "snmp_shutdown"
+            },
+            "contact": {
+                "vipObjectType": "object",
+                "vipType": "ignore",
+                "vipVariableName": "snmp_contact"
+            },
+            "name": {
+                "vipObjectType": "object",
+                "vipType": "ignore",
+                "vipVariableName": "snmp_device_name"
+            },
+            "location": {
+                "vipObjectType": "object",
+                "vipType": "ignore",
+                "vipVariableName": "snmp_device_location"
+            },
+            "view": {
+                "vipType": "constant",
+                "vipValue": [
+                    {
+                        "name": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "snmp_view"
+                        },
+                        "oid": {
+                            "vipType": "constant",
+                            "vipValue": [
+                                {
+                                    "id": {
+                                        "vipObjectType": "object",
+                                        "vipType": "constant",
+                                        "vipValue": "1.3.6",
+                                        "vipVariableName": "snmp_view_id_0"
+                                    },
+                                    "exclude": {
+                                        "vipObjectType": "node-only",
+                                        "vipType": "ignore",
+                                        "vipValue": "false",
+                                        "vipVariableName": "snmp_view_exclude_0"
+                                    },
+                                    "priority-order": [
+                                        "id",
+                                        "exclude"
+                                    ]
+                                }
+                            ],
+                            "vipObjectType": "tree",
+                            "vipPrimaryKey": [
+                                "id"
+                            ]
+                        },
+                        "priority-order": [
+                            "name",
+                            "oid"
+                        ]
+                    }
+                ],
+                "vipObjectType": "tree",
+                "vipPrimaryKey": [
+                    "name"
+                ]
+            },
+            "group": {
+                "vipType": "constant",
+                "vipValue": [
+                    {
+                        "name": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "snmp_group"
+                        },
+                        "security-level": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "auth-priv"
+                        },
+                        "view": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "snmp_view",
+                            "vipVariableName": "snmp_group_view"
+                        },
+                        "priority-order": [
+                            "name",
+                            "security-level",
+                            "view"
+                        ]
+                    }
+                ],
+                "vipObjectType": "tree",
+                "vipPrimaryKey": [
+                    "name",
+                    "security-level"
+                ]
+            },
+            "user": {
+                "vipType": "constant",
+                "vipValue": [
+                    {
+                        "name": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "snmp_user"
+                        },
+                        "auth": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "sha-256",
+                            "vipVariableName": "snmp_user_auth"
+                        },
+                        "auth-password": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "P@ssw0rd",
+                            "vipVariableName": "snmp_user_auth_password"
+                        },
+                        "priv": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "aes-cfb-128",
+                            "vipVariableName": "snmp_user_priv"
+                        },
+                        "priv-password": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "P@ssw0rd",
+                            "vipVariableName": "snmp_user_priv_password"
+                        },
+                        "group": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "snmp_group",
+                            "vipVariableName": "snmp_user_group"
+                        },
+                        "priority-order": [
+                            "name",
+                            "auth",
+                            "auth-password",
+                            "priv",
+                            "priv-password",
+                            "group"
+                        ]
+                    }
+                ],
+                "vipObjectType": "tree",
+                "vipPrimaryKey": [
+                    "name"
+                ]
+            },
+            "trap": {
+                "group": {
+                    "vipType": "constant",
+                    "vipValue": [
+                        {
+                            "group-name": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "v3_track_group"
+                            },
+                            "enable": {
+                                "vipType": "constant",
+                                "vipValue": [
+                                    {
+                                        "module": {
+                                            "vipObjectType": "object",
+                                            "vipType": "constant",
+                                            "vipValue": "all",
+                                            "vipVariableName": "snmp_trap_types_module_0"
+                                        },
+                                        "level": {
+                                            "vipType": "constant",
+                                            "vipValue": [
+                                                [
+                                                    "critical"
+                                                ]
+                                            ],
+                                            "vipObjectType": "list",
+                                            "vipVariableName": "snmp_trap_types_level_0"
+                                        },
+                                        "priority-order": [
+                                            "module",
+                                            "level"
+                                        ]
+                                    }
+                                ],
+                                "vipObjectType": "tree",
+                                "vipPrimaryKey": [
+                                    "module"
+                                ]
+                            },
+                            "priority-order": [
+                                "group-name",
+                                "enable"
+                            ]
+                        }
+                    ],
+                    "vipObjectType": "tree",
+                    "vipPrimaryKey": [
+                        "group-name"
+                    ]
+                },
+                "target": {
+                    "vipType": "constant",
+                    "vipValue": [
+                        {
+                            "vpn-id": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": 511,
+                                "vipVariableName": "snmp_trapv3_vpn_id"
+                            },
+                            "ip": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "10.1.1.1",
+                                "vipVariableName": "snmp_trapv3_ip"
+                            },
+                            "port": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": 162,
+                                "vipVariableName": "snmp_trapv3_port"
+                            },
+                            "group-name": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "v3_track_group",
+                                "vipVariableName": "snmp_trapv3_trap_group_name"
+                            },
+                            "community-name": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "_blank",
+                                "vipNeedsEncryption": "true"
+                            },
+                            "user": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "snmp_user",
+                                "vipVariableName": "snmp_trapv3_user"
+                            },
+                            "source-interface": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "ge0/0",
+                                "vipVariableName": "snmp_trapv3_source_interface"
+                            },
+                            "users": {
+                                "vipObjectType": "object",
+                                "vipType": "constant"
+                            },
+                            "priority-order": [
+                                "vpn-id",
+                                "ip",
+                                "port",
+                                "group-name",
+                                "user",
+                                "source-interface"
+                            ]
+                        },
+                        {
+                            "vpn-id": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": 512,
+                                "vipVariableName": "snmp_trapv3_vpn_id"
+                            },
+                            "ip": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "10.2.2.2",
+                                "vipVariableName": "snmp_trapv3_ip"
+                            },
+                            "port": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": 162,
+                                "vipVariableName": "snmp_trapv3_port"
+                            },
+                            "group-name": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "v3_track_group",
+                                "vipVariableName": "snmp_trapv3_trap_group_name"
+                            },
+                            "community-name": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "_blank",
+                                "vipNeedsEncryption": "true"
+                            },
+                            "user": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "snmp_user",
+                                "vipVariableName": "snmp_trapv3_user"
+                            },
+                            "source-interface": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "ge0/1",
+                                "vipVariableName": "snmp_trapv3_source_interface"
+                            },
+                            "users": {
+                                "vipObjectType": "object",
+                                "vipType": "constant"
+                            },
+                            "priority-order": [
+                                "vpn-id",
+                                "ip",
+                                "port",
+                                "group-name",
+                                "user",
+                                "source-interface"
+                            ]
+                        }
+                    ],
+                    "vipObjectType": "tree",
+                    "vipPrimaryKey": [
+                        "vpn-id",
+                        "ip",
+                        "port"
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "deviceType": [
+            "vedge-1000",
+            "vedge-2000"
+        ],
+        "deviceModels": [
+            {
+                "name": "vedge-1000",
+                "displayName": "vEdge 1000",
+                "deviceType": "vedge",
+                "isCliSupported": false,
+                "isCiscoDeviceModel": true
+            },
+            {
+                "name": "vedge-2000",
+                "displayName": "vEdge 2000",
+                "deviceType": "vedge",
+                "isCliSupported": false,
+                "isCiscoDeviceModel": true
+            }
+        ],
+        "feature": "vmanage-default",
+        "factoryDefault": false,
+        "templateName": "AgencyB-SNMPv3",
+        "templateDescription": "AgencyB-SNMPv3",
+        "templateType": "snmp",
+        "templateMinVersion": "15.0.0",
+        "templateDefinition": {
+            "shutdown": {
+                "vipObjectType": "object",
+                "vipType": "constant",
+                "vipValue": "false",
+                "vipVariableName": "snmp_shutdown"
+            },
+            "contact": {
+                "vipObjectType": "object",
+                "vipType": "ignore",
+                "vipVariableName": "snmp_contact"
+            },
+            "name": {
+                "vipObjectType": "object",
+                "vipType": "ignore",
+                "vipVariableName": "snmp_device_name"
+            },
+            "location": {
+                "vipObjectType": "object",
+                "vipType": "ignore",
+                "vipVariableName": "snmp_device_location"
+            },
+            "view": {
+                "vipType": "constant",
+                "vipValue": [
+                    {
+                        "name": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "snmp_view"
+                        },
+                        "oid": {
+                            "vipType": "constant",
+                            "vipValue": [
+                                {
+                                    "id": {
+                                        "vipObjectType": "object",
+                                        "vipType": "constant",
+                                        "vipValue": "1.3.6",
+                                        "vipVariableName": "snmp_view_id_0"
+                                    },
+                                    "exclude": {
+                                        "vipObjectType": "node-only",
+                                        "vipType": "ignore",
+                                        "vipValue": "false",
+                                        "vipVariableName": "snmp_view_exclude_0"
+                                    },
+                                    "priority-order": [
+                                        "id",
+                                        "exclude"
+                                    ]
+                                }
+                            ],
+                            "vipObjectType": "tree",
+                            "vipPrimaryKey": [
+                                "id"
+                            ]
+                        },
+                        "priority-order": [
+                            "name",
+                            "oid"
+                        ]
+                    }
+                ],
+                "vipObjectType": "tree",
+                "vipPrimaryKey": [
+                    "name"
+                ]
+            },
+            "group": {
+                "vipType": "constant",
+                "vipValue": [
+                    {
+                        "name": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "snmp_group"
+                        },
+                        "security-level": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "auth-priv"
+                        },
+                        "view": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "snmp_view",
+                            "vipVariableName": "snmp_group_view"
+                        },
+                        "priority-order": [
+                            "name",
+                            "security-level",
+                            "view"
+                        ]
+                    }
+                ],
+                "vipObjectType": "tree",
+                "vipPrimaryKey": [
+                    "name",
+                    "security-level"
+                ]
+            },
+            "user": {
+                "vipType": "constant",
+                "vipValue": [
+                    {
+                        "name": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "snmp_user"
+                        },
+                        "auth": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "sha-256",
+                            "vipVariableName": "snmp_user_auth"
+                        },
+                        "auth-password": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "P@ssw0rd",
+                            "vipVariableName": "snmp_user_auth_password"
+                        },
+                        "priv": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "aes-cfb-128",
+                            "vipVariableName": "snmp_user_priv"
+                        },
+                        "priv-password": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "P@ssw0rd",
+                            "vipVariableName": "snmp_user_priv_password"
+                        },
+                        "group": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "snmp_group",
+                            "vipVariableName": "snmp_user_group"
+                        },
+                        "priority-order": [
+                            "name",
+                            "auth",
+                            "auth-password",
+                            "priv",
+                            "priv-password",
+                            "group"
+                        ]
+                    }
+                ],
+                "vipObjectType": "tree",
+                "vipPrimaryKey": [
+                    "name"
+                ]
+            },
+            "trap": {
+                "group": {
+                    "vipType": "constant",
+                    "vipValue": [
+                        {
+                            "group-name": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "v3_track_group"
+                            },
+                            "enable": {
+                                "vipType": "constant",
+                                "vipValue": [
+                                    {
+                                        "module": {
+                                            "vipObjectType": "object",
+                                            "vipType": "constant",
+                                            "vipValue": "all",
+                                            "vipVariableName": "snmp_trap_types_module_0"
+                                        },
+                                        "level": {
+                                            "vipType": "constant",
+                                            "vipValue": [
+                                                [
+                                                    "critical"
+                                                ]
+                                            ],
+                                            "vipObjectType": "list",
+                                            "vipVariableName": "snmp_trap_types_level_0"
+                                        },
+                                        "priority-order": [
+                                            "module",
+                                            "level"
+                                        ]
+                                    }
+                                ],
+                                "vipObjectType": "tree",
+                                "vipPrimaryKey": [
+                                    "module"
+                                ]
+                            },
+                            "priority-order": [
+                                "group-name",
+                                "enable"
+                            ]
+                        }
+                    ],
+                    "vipObjectType": "tree",
+                    "vipPrimaryKey": [
+                        "group-name"
+                    ]
+                },
+                "target": {
+                    "vipType": "constant",
+                    "vipValue": [
+                        {
+                            "vpn-id": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": 511,
+                                "vipVariableName": "snmp_trapv3_vpn_id"
+                            },
+                            "ip": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "10.1.1.1",
+                                "vipVariableName": "snmp_trapv3_ip"
+                            },
+                            "port": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": 162,
+                                "vipVariableName": "snmp_trapv3_port"
+                            },
+                            "group-name": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "v3_track_group",
+                                "vipVariableName": "snmp_trapv3_trap_group_name"
+                            },
+                            "community-name": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "_blank",
+                                "vipNeedsEncryption": "true"
+                            },
+                            "user": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "snmp_user",
+                                "vipVariableName": "snmp_trapv3_user"
+                            },
+                            "source-interface": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "ge0/0",
+                                "vipVariableName": "snmp_trapv3_source_interface"
+                            },
+                            "users": {
+                                "vipObjectType": "object",
+                                "vipType": "constant"
+                            },
+                            "priority-order": [
+                                "vpn-id",
+                                "ip",
+                                "port",
+                                "group-name",
+                                "user",
+                                "source-interface"
+                            ]
+                        },
+                        {
+                            "vpn-id": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": 512,
+                                "vipVariableName": "snmp_trapv3_vpn_id"
+                            },
+                            "ip": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "10.2.2.2",
+                                "vipVariableName": "snmp_trapv3_ip"
+                            },
+                            "port": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": 162,
+                                "vipVariableName": "snmp_trapv3_port"
+                            },
+                            "group-name": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "v3_track_group",
+                                "vipVariableName": "snmp_trapv3_trap_group_name"
+                            },
+                            "community-name": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "_blank",
+                                "vipNeedsEncryption": "true"
+                            },
+                            "user": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "snmp_user",
+                                "vipVariableName": "snmp_trapv3_user"
+                            },
+                            "source-interface": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "ge0/1",
+                                "vipVariableName": "snmp_trapv3_source_interface"
+                            },
+                            "users": {
+                                "vipObjectType": "object",
+                                "vipType": "constant"
+                            },
+                            "priority-order": [
+                                "vpn-id",
+                                "ip",
+                                "port",
+                                "group-name",
+                                "user",
+                                "source-interface"
+                            ]
+                        }
+                    ],
+                    "vipObjectType": "tree",
+                    "vipPrimaryKey": [
+                        "vpn-id",
+                        "ip",
+                        "port"
+                    ]
+                }
+            }
+        }
+    },
+    {
+        "deviceType": [
+            "vedge-1000",
+            "vedge-2000",
+            "vedge-5000"
+        ],
+        "deviceModels": [
+            {
+                "name": "vedge-1000",
+                "displayName": "vEdge 1000",
+                "deviceType": "vedge",
+                "isCliSupported": false,
+                "isCiscoDeviceModel": true
+            },
+            {
+                "name": "vedge-2000",
+                "displayName": "vEdge 2000",
+                "deviceType": "vedge",
+                "isCliSupported": false,
+                "isCiscoDeviceModel": true
+            },
+            {
+                "name": "vedge-5000",
+                "displayName": "vEdge 5000",
+                "deviceType": "vedge",
+                "isCliSupported": false,
+                "isCiscoDeviceModel": true
+            }
+        ],
+        "feature": "vmanage-default",
+        "factoryDefault": false,
+        "templateName": "AgencyC-SNMPv3",
+        "templateDescription": "AgencyC-SNMPv3",
+        "templateType": "snmp",
+        "templateMinVersion": "15.0.0",
+        "templateDefinition": {
+            "shutdown": {
+                "vipObjectType": "object",
+                "vipType": "constant",
+                "vipValue": "false",
+                "vipVariableName": "snmp_shutdown"
+            },
+            "contact": {
+                "vipObjectType": "object",
+                "vipType": "ignore",
+                "vipVariableName": "snmp_contact"
+            },
+            "name": {
+                "vipObjectType": "object",
+                "vipType": "ignore",
+                "vipVariableName": "snmp_device_name"
+            },
+            "location": {
+                "vipObjectType": "object",
+                "vipType": "ignore",
+                "vipVariableName": "snmp_device_location"
+            },
+            "view": {
+                "vipType": "constant",
+                "vipValue": [
+                    {
+                        "name": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "snmp_view"
+                        },
+                        "oid": {
+                            "vipType": "constant",
+                            "vipValue": [
+                                {
+                                    "id": {
+                                        "vipObjectType": "object",
+                                        "vipType": "constant",
+                                        "vipValue": "1.3.6",
+                                        "vipVariableName": "snmp_view_id_0"
+                                    },
+                                    "exclude": {
+                                        "vipObjectType": "node-only",
+                                        "vipType": "ignore",
+                                        "vipValue": "false",
+                                        "vipVariableName": "snmp_view_exclude_0"
+                                    },
+                                    "priority-order": [
+                                        "id",
+                                        "exclude"
+                                    ]
+                                }
+                            ],
+                            "vipObjectType": "tree",
+                            "vipPrimaryKey": [
+                                "id"
+                            ]
+                        },
+                        "priority-order": [
+                            "name",
+                            "oid"
+                        ]
+                    }
+                ],
+                "vipObjectType": "tree",
+                "vipPrimaryKey": [
+                    "name"
+                ]
+            },
+            "group": {
+                "vipType": "constant",
+                "vipValue": [
+                    {
+                        "name": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "snmp_group"
+                        },
+                        "security-level": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "auth-priv"
+                        },
+                        "view": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "snmp_view",
+                            "vipVariableName": "snmp_group_view"
+                        },
+                        "priority-order": [
+                            "name",
+                            "security-level",
+                            "view"
+                        ]
+                    }
+                ],
+                "vipObjectType": "tree",
+                "vipPrimaryKey": [
+                    "name",
+                    "security-level"
+                ]
+            },
+            "user": {
+                "vipType": "constant",
+                "vipValue": [
+                    {
+                        "name": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "snmp_user"
+                        },
+                        "auth": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "sha-256",
+                            "vipVariableName": "snmp_user_auth"
+                        },
+                        "auth-password": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "P@ssw0rd",
+                            "vipVariableName": "snmp_user_auth_password"
+                        },
+                        "priv": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "aes-cfb-128",
+                            "vipVariableName": "snmp_user_priv"
+                        },
+                        "priv-password": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "P@ssw0rd",
+                            "vipVariableName": "snmp_user_priv_password"
+                        },
+                        "group": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "snmp_group",
+                            "vipVariableName": "snmp_user_group"
+                        },
+                        "priority-order": [
+                            "name",
+                            "auth",
+                            "auth-password",
+                            "priv",
+                            "priv-password",
+                            "group"
+                        ]
+                    }
+                ],
+                "vipObjectType": "tree",
+                "vipPrimaryKey": [
+                    "name"
+                ]
+            },
+            "trap": {
+                "group": {
+                    "vipType": "constant",
+                    "vipValue": [
+                        {
+                            "group-name": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "v3_track_group"
+                            },
+                            "enable": {
+                                "vipType": "constant",
+                                "vipValue": [
+                                    {
+                                        "module": {
+                                            "vipObjectType": "object",
+                                            "vipType": "constant",
+                                            "vipValue": "all",
+                                            "vipVariableName": "snmp_trap_types_module_0"
+                                        },
+                                        "level": {
+                                            "vipType": "constant",
+                                            "vipValue": [
+                                                [
+                                                    "critical"
+                                                ]
+                                            ],
+                                            "vipObjectType": "list",
+                                            "vipVariableName": "snmp_trap_types_level_0"
+                                        },
+                                        "priority-order": [
+                                            "module",
+                                            "level"
+                                        ]
+                                    }
+                                ],
+                                "vipObjectType": "tree",
+                                "vipPrimaryKey": [
+                                    "module"
+                                ]
+                            },
+                            "priority-order": [
+                                "group-name",
+                                "enable"
+                            ]
+                        }
+                    ],
+                    "vipObjectType": "tree",
+                    "vipPrimaryKey": [
+                        "group-name"
+                    ]
+                },
+                "target": {
+                    "vipType": "constant",
+                    "vipValue": [
+                        {
+                            "vpn-id": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": 511,
+                                "vipVariableName": "snmp_trapv3_vpn_id"
+                            },
+                            "ip": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "10.1.1.1",
+                                "vipVariableName": "snmp_trapv3_ip"
+                            },
+                            "port": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": 162,
+                                "vipVariableName": "snmp_trapv3_port"
+                            },
+                            "group-name": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "v3_track_group",
+                                "vipVariableName": "snmp_trapv3_trap_group_name"
+                            },
+                            "community-name": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "_blank",
+                                "vipNeedsEncryption": "true"
+                            },
+                            "user": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "snmp_user",
+                                "vipVariableName": "snmp_trapv3_user"
+                            },
+                            "source-interface": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "ge0/0",
+                                "vipVariableName": "snmp_trapv3_source_interface"
+                            },
+                            "users": {
+                                "vipObjectType": "object",
+                                "vipType": "constant"
+                            },
+                            "priority-order": [
+                                "vpn-id",
+                                "ip",
+                                "port",
+                                "group-name",
+                                "user",
+                                "source-interface"
+                            ]
+                        },
+                        {
+                            "vpn-id": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": 512,
+                                "vipVariableName": "snmp_trapv3_vpn_id"
+                            },
+                            "ip": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "10.2.2.2",
+                                "vipVariableName": "snmp_trapv3_ip"
+                            },
+                            "port": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": 162,
+                                "vipVariableName": "snmp_trapv3_port"
+                            },
+                            "group-name": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "v3_track_group",
+                                "vipVariableName": "snmp_trapv3_trap_group_name"
+                            },
+                            "community-name": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "_blank",
+                                "vipNeedsEncryption": "true"
+                            },
+                            "user": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "snmp_user",
+                                "vipVariableName": "snmp_trapv3_user"
+                            },
+                            "source-interface": {
+                                "vipObjectType": "object",
+                                "vipType": "constant",
+                                "vipValue": "ge0/1",
+                                "vipVariableName": "snmp_trapv3_source_interface"
+                            },
+                            "users": {
+                                "vipObjectType": "object",
+                                "vipType": "constant"
+                            },
+                            "priority-order": [
+                                "vpn-id",
+                                "ip",
+                                "port",
+                                "group-name",
+                                "user",
+                                "source-interface"
+                            ]
+                        }
+                    ],
+                    "vipObjectType": "tree",
+                    "vipPrimaryKey": [
+                        "vpn-id",
+                        "ip",
+                        "port"
+                    ]
+                }
+            }
+        }
+    }
+]

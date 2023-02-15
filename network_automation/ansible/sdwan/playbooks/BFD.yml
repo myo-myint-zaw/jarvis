@@ -4,12 +4,10 @@
   connection: local
   gather_facts: no
   vars:
-    templatename: []
-    templateid: []
+    file_contents: "{{ lookup('file', './templates/bfd_data.json') }}"
   tasks:
-  - name: Get facts from XLSX file
-    xls_to_facts:
-      src: ../SDWAN_Deployment_Template.xlsx
+  - name: Parse excel and make json file
+    command: "python spreadsheet_parser.py SDWAN_Deployment_Template.xlsx BFD"
     no_log: true
 
   - name: Authentication
@@ -42,88 +40,5 @@
         Cookie: "{{ cookie }}"
       return_content: yes
       body_format: json
-      body: |
-        {
-          "deviceType": [
-            "{{ item.Device_Model }}"
-          ],
-          "deviceModels": [
-              {
-                  "name": "{{ item.Device_Model }}",
-                  "displayName": "{{ item.Display_Name }}",
-                  "deviceType": "{{ item.Device_Type }}",
-                  "isCliSupported": true,
-                  "isCiscoDeviceModel": false
-              }
-          ],
-          "templateName": "{{ item.Name }}",
-          "templateDescription": "{{ item.Description }}",
-          "templateType": "bfd-vedge",
-          "templateMinVersion": "15.0.0",
-          "transitionInProgress": true,
-          "viewMode": "add",
-          "factoryDefault": false,
-          "templateDefinition": {
-              "app-route": {
-                  "multiplier": {
-                      "vipObjectType": "object",
-                      "vipType": "constant",
-                      "vipValue": {{ item.BFD_Multiplier }},
-                      "vipVariableName": "bfd_multiplier"
-                  },
-                  "poll-interval": {
-                      "vipObjectType": "object",
-                      "vipType": "constant",
-                      "vipValue": {{ item.Poll_Interval }},
-                      "vipVariableName": "bfd_poll_interval"
-                  }
-              },
-              "color": {
-                  "vipType": "constant",
-                  "vipValue": [
-                      {
-                          "color": {
-                              "vipObjectType": "object",
-                              "vipType": "constant",
-                              "vipValue": "{{ item.Color }}",
-                              "vipVariableName": "bfd_color"
-                          },
-                          "hello-interval": {
-                              "vipObjectType": "object",
-                              "vipType": "constant",
-                              "vipValue": {{ item.Hello_Interval }},
-                              "vipVariableName": "bfd_hello_interval"
-                          },
-                          "multiplier": {
-                              "vipObjectType": "object",
-                              "vipType": "constant",
-                              "vipValue": {{ item.Hello_Multiplier }},
-                              "vipVariableName": "bfd_color_multiplier"
-                          },
-                          "pmtu-discovery": {
-                              "vipObjectType": "object",
-                              "vipType": "constant",
-                              "vipValue": "{{ item.PMTU_Discovery }}",
-                              "vipVariableName": "bfd_pmtu_discovery"
-                          },
-                          "priority-order": [
-                              "color",
-                              "hello-interval",
-                              "multiplier",
-                              "pmtu-discovery"
-                          ]
-                      }
-                  ],
-                  "vipObjectType": "tree",
-                  "vipPrimaryKey": [
-                      "color"
-                  ]
-              }
-          }
-        }
-    when: item.State == "present"
-    with_items: "{{ spreadsheet_BFD }}"
-    register: output
-
-  - debug:
-      msg: "{{ output | to_nice_json }}"
+      body: "{{ item }}"
+    with_items: "{{ file_contents }}"

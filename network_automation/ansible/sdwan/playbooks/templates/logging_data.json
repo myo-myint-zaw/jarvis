@@ -1,0 +1,1010 @@
+[
+    {
+        "deviceType": [
+            "vedge-cloud"
+        ],
+        "deviceModels": [
+            {
+                "name": "vedge-cloud",
+                "displayName": "vEdge Cloud",
+                "deviceType": "vedge",
+                "isCliSupported": false,
+                "isCiscoDeviceModel": true
+            }
+        ],
+        "feature": "vmanage-default",
+        "factoryDefault": false,
+        "templateName": "vEdge-Cloud-Logging",
+        "templateDescription": "vEdge-Cloud-Logging",
+        "templateType": "logging",
+        "templateMinVersion": "15.0.0",
+        "templateDefinition": {
+            "disk": {
+                "enable": {
+                    "vipObjectType": "object",
+                    "vipType": "ignore",
+                    "vipValue": 1,
+                    "vipVariableName": "logging_disk_enable"
+                },
+                "file": {
+                    "size": {
+                        "vipObjectType": "object",
+                        "vipType": "ignore",
+                        "vipValue": 1,
+                        "vipVariableName": "logging_max_file_size"
+                    },
+                    "rotate": {
+                        "vipObjectType": "object",
+                        "vipType": "ignore",
+                        "vipValue": 1,
+                        "vipVariableName": "logging_disk_rotation"
+                    }
+                },
+                "priority": {
+                    "vipObjectType": "object",
+                    "vipType": "ignore",
+                    "vipValue": "information",
+                    "vipVariableName": "logging_disk_priority"
+                }
+            },
+            "server": {
+                "vipType": "constant",
+                "vipValue": [
+                    {
+                        "name": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "192.168.1.1",
+                            "vipVariableName": "logging_server_name"
+                        },
+                        "vpn": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": 511,
+                            "vipVariableName": "logging_server_vpn"
+                        },
+                        "source-interface": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "ge0/1",
+                            "vipVariableName": "logging_server_source_interface"
+                        },
+                        "priority": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "emergency",
+                            "vipVariableName": "logging_server_server_priority"
+                        },
+                        "priority-order": [
+                            "name",
+                            "vpn",
+                            "source-interface",
+                            "priority"
+                        ]
+                    },
+                    {
+                        "name": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "10.1.1.1",
+                            "vipVariableName": "logging_server_name"
+                        },
+                        "vpn": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": 512,
+                            "vipVariableName": "logging_server_vpn"
+                        },
+                        "source-interface": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "ge0/2",
+                            "vipVariableName": "logging_server_source_interface"
+                        },
+                        "priority": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "alert",
+                            "vipVariableName": "logging_server_server_priority"
+                        },
+                        "priority-order": [
+                            "name",
+                            "vpn",
+                            "source-interface",
+                            "priority"
+                        ]
+                    }
+                ],
+                "vipObjectType": "tree",
+                "vipPrimaryKey": [
+                    "name"
+                ]
+            }
+        }
+    },
+    {
+        "deviceType": [
+            "vedge-1000"
+        ],
+        "deviceModels": [
+            {
+                "name": "vedge-1000",
+                "displayName": "vEdge 1000",
+                "deviceType": "vedge",
+                "isCliSupported": false,
+                "isCiscoDeviceModel": true
+            }
+        ],
+        "feature": "vmanage-default",
+        "factoryDefault": false,
+        "templateName": "vEdge1000-Logging",
+        "templateDescription": "vEdge1000-Logging",
+        "templateType": "logging",
+        "templateMinVersion": "15.0.0",
+        "templateDefinition": {
+            "disk": {
+                "enable": {
+                    "vipObjectType": "object",
+                    "vipType": "ignore",
+                    "vipValue": 1,
+                    "vipVariableName": "logging_disk_enable"
+                },
+                "file": {
+                    "size": {
+                        "vipObjectType": "object",
+                        "vipType": "ignore",
+                        "vipValue": 1,
+                        "vipVariableName": "logging_max_file_size"
+                    },
+                    "rotate": {
+                        "vipObjectType": "object",
+                        "vipType": "ignore",
+                        "vipValue": 1,
+                        "vipVariableName": "logging_disk_rotation"
+                    }
+                },
+                "priority": {
+                    "vipObjectType": "object",
+                    "vipType": "ignore",
+                    "vipValue": "information",
+                    "vipVariableName": "logging_disk_priority"
+                }
+            },
+            "server": {
+                "vipType": "constant",
+                "vipValue": [
+                    {
+                        "name": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "192.168.1.1",
+                            "vipVariableName": "logging_server_name"
+                        },
+                        "vpn": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": 511,
+                            "vipVariableName": "logging_server_vpn"
+                        },
+                        "source-interface": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "ge0/1",
+                            "vipVariableName": "logging_server_source_interface"
+                        },
+                        "priority": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "alert",
+                            "vipVariableName": "logging_server_server_priority"
+                        },
+                        "priority-order": [
+                            "name",
+                            "vpn",
+                            "source-interface",
+                            "priority"
+                        ]
+                    },
+                    {
+                        "name": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "10.1.1.1",
+                            "vipVariableName": "logging_server_name"
+                        },
+                        "vpn": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": 512,
+                            "vipVariableName": "logging_server_vpn"
+                        },
+                        "source-interface": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "ge0/2",
+                            "vipVariableName": "logging_server_source_interface"
+                        },
+                        "priority": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "information",
+                            "vipVariableName": "logging_server_server_priority"
+                        },
+                        "priority-order": [
+                            "name",
+                            "vpn",
+                            "source-interface",
+                            "priority"
+                        ]
+                    }
+                ],
+                "vipObjectType": "tree",
+                "vipPrimaryKey": [
+                    "name"
+                ]
+            }
+        }
+    },
+    {
+        "deviceType": [
+            "vedge-2000"
+        ],
+        "deviceModels": [
+            {
+                "name": "vedge-2000",
+                "displayName": "vEdge 2000",
+                "deviceType": "vedge",
+                "isCliSupported": false,
+                "isCiscoDeviceModel": true
+            }
+        ],
+        "feature": "vmanage-default",
+        "factoryDefault": false,
+        "templateName": "vEdge2000-Logging",
+        "templateDescription": "vEdge2000-Logging",
+        "templateType": "logging",
+        "templateMinVersion": "15.0.0",
+        "templateDefinition": {
+            "disk": {
+                "enable": {
+                    "vipObjectType": "object",
+                    "vipType": "ignore",
+                    "vipValue": 1,
+                    "vipVariableName": "logging_disk_enable"
+                },
+                "file": {
+                    "size": {
+                        "vipObjectType": "object",
+                        "vipType": "ignore",
+                        "vipValue": 1,
+                        "vipVariableName": "logging_max_file_size"
+                    },
+                    "rotate": {
+                        "vipObjectType": "object",
+                        "vipType": "ignore",
+                        "vipValue": 1,
+                        "vipVariableName": "logging_disk_rotation"
+                    }
+                },
+                "priority": {
+                    "vipObjectType": "object",
+                    "vipType": "ignore",
+                    "vipValue": "information",
+                    "vipVariableName": "logging_disk_priority"
+                }
+            },
+            "server": {
+                "vipType": "constant",
+                "vipValue": [
+                    {
+                        "name": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "192.168.1.1",
+                            "vipVariableName": "logging_server_name"
+                        },
+                        "vpn": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": 511,
+                            "vipVariableName": "logging_server_vpn"
+                        },
+                        "source-interface": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "ge0/1",
+                            "vipVariableName": "logging_server_source_interface"
+                        },
+                        "priority": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "critical",
+                            "vipVariableName": "logging_server_server_priority"
+                        },
+                        "priority-order": [
+                            "name",
+                            "vpn",
+                            "source-interface",
+                            "priority"
+                        ]
+                    },
+                    {
+                        "name": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "10.1.1.1",
+                            "vipVariableName": "logging_server_name"
+                        },
+                        "vpn": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": 512,
+                            "vipVariableName": "logging_server_vpn"
+                        },
+                        "source-interface": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "ge0/2",
+                            "vipVariableName": "logging_server_source_interface"
+                        },
+                        "priority": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "critical",
+                            "vipVariableName": "logging_server_server_priority"
+                        },
+                        "priority-order": [
+                            "name",
+                            "vpn",
+                            "source-interface",
+                            "priority"
+                        ]
+                    }
+                ],
+                "vipObjectType": "tree",
+                "vipPrimaryKey": [
+                    "name"
+                ]
+            }
+        }
+    },
+    {
+        "deviceType": [
+            "vedge-5000"
+        ],
+        "deviceModels": [
+            {
+                "name": "vedge-5000",
+                "displayName": "vEdge 5000",
+                "deviceType": "vedge",
+                "isCliSupported": false,
+                "isCiscoDeviceModel": true
+            }
+        ],
+        "feature": "vmanage-default",
+        "factoryDefault": false,
+        "templateName": "vEdge5000-Logging",
+        "templateDescription": "vEdge5000-Logging",
+        "templateType": "logging",
+        "templateMinVersion": "15.0.0",
+        "templateDefinition": {
+            "disk": {
+                "enable": {
+                    "vipObjectType": "object",
+                    "vipType": "ignore",
+                    "vipValue": 1,
+                    "vipVariableName": "logging_disk_enable"
+                },
+                "file": {
+                    "size": {
+                        "vipObjectType": "object",
+                        "vipType": "ignore",
+                        "vipValue": 1,
+                        "vipVariableName": "logging_max_file_size"
+                    },
+                    "rotate": {
+                        "vipObjectType": "object",
+                        "vipType": "ignore",
+                        "vipValue": 1,
+                        "vipVariableName": "logging_disk_rotation"
+                    }
+                },
+                "priority": {
+                    "vipObjectType": "object",
+                    "vipType": "ignore",
+                    "vipValue": "information",
+                    "vipVariableName": "logging_disk_priority"
+                }
+            },
+            "server": {
+                "vipType": "constant",
+                "vipValue": [
+                    {
+                        "name": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "192.168.1.1",
+                            "vipVariableName": "logging_server_name"
+                        },
+                        "vpn": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": 511,
+                            "vipVariableName": "logging_server_vpn"
+                        },
+                        "source-interface": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "ge0/1",
+                            "vipVariableName": "logging_server_source_interface"
+                        },
+                        "priority": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "error",
+                            "vipVariableName": "logging_server_server_priority"
+                        },
+                        "priority-order": [
+                            "name",
+                            "vpn",
+                            "source-interface",
+                            "priority"
+                        ]
+                    },
+                    {
+                        "name": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "10.1.1.1",
+                            "vipVariableName": "logging_server_name"
+                        },
+                        "vpn": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": 512,
+                            "vipVariableName": "logging_server_vpn"
+                        },
+                        "source-interface": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "ge0/2",
+                            "vipVariableName": "logging_server_source_interface"
+                        },
+                        "priority": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "error",
+                            "vipVariableName": "logging_server_server_priority"
+                        },
+                        "priority-order": [
+                            "name",
+                            "vpn",
+                            "source-interface",
+                            "priority"
+                        ]
+                    }
+                ],
+                "vipObjectType": "tree",
+                "vipPrimaryKey": [
+                    "name"
+                ]
+            }
+        }
+    },
+    {
+        "deviceType": [
+            "vedge-ISRv"
+        ],
+        "deviceModels": [
+            {
+                "name": "vedge-ISRv",
+                "displayName": "ISRv",
+                "deviceType": "vedge",
+                "isCliSupported": false,
+                "isCiscoDeviceModel": true
+            }
+        ],
+        "feature": "vmanage-default",
+        "factoryDefault": false,
+        "templateName": "ISRv-Logging",
+        "templateDescription": "ISRv-Logging",
+        "templateType": "logging",
+        "templateMinVersion": "15.0.0",
+        "templateDefinition": {
+            "disk": {
+                "enable": {
+                    "vipObjectType": "object",
+                    "vipType": "ignore",
+                    "vipValue": 1,
+                    "vipVariableName": "logging_disk_enable"
+                },
+                "file": {
+                    "size": {
+                        "vipObjectType": "object",
+                        "vipType": "ignore",
+                        "vipValue": 1,
+                        "vipVariableName": "logging_max_file_size"
+                    },
+                    "rotate": {
+                        "vipObjectType": "object",
+                        "vipType": "ignore",
+                        "vipValue": 1,
+                        "vipVariableName": "logging_disk_rotation"
+                    }
+                },
+                "priority": {
+                    "vipObjectType": "object",
+                    "vipType": "ignore",
+                    "vipValue": "information",
+                    "vipVariableName": "logging_disk_priority"
+                }
+            },
+            "server": {
+                "vipType": "constant",
+                "vipValue": [
+                    {
+                        "name": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "192.168.1.1",
+                            "vipVariableName": "logging_server_name"
+                        },
+                        "vpn": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": 511,
+                            "vipVariableName": "logging_server_vpn"
+                        },
+                        "source-interface": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "ge0/1",
+                            "vipVariableName": "logging_server_source_interface"
+                        },
+                        "priority": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "warn",
+                            "vipVariableName": "logging_server_server_priority"
+                        },
+                        "priority-order": [
+                            "name",
+                            "vpn",
+                            "source-interface",
+                            "priority"
+                        ]
+                    },
+                    {
+                        "name": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "10.1.1.1",
+                            "vipVariableName": "logging_server_name"
+                        },
+                        "vpn": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": 512,
+                            "vipVariableName": "logging_server_vpn"
+                        },
+                        "source-interface": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "ge0/2",
+                            "vipVariableName": "logging_server_source_interface"
+                        },
+                        "priority": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "notice",
+                            "vipVariableName": "logging_server_server_priority"
+                        },
+                        "priority-order": [
+                            "name",
+                            "vpn",
+                            "source-interface",
+                            "priority"
+                        ]
+                    }
+                ],
+                "vipObjectType": "tree",
+                "vipPrimaryKey": [
+                    "name"
+                ]
+            }
+        }
+    },
+    {
+        "deviceType": [
+            "vedge-1000"
+        ],
+        "deviceModels": [
+            {
+                "name": "vedge-1000",
+                "displayName": "vEdge 1000",
+                "deviceType": "vedge",
+                "isCliSupported": false,
+                "isCiscoDeviceModel": true
+            }
+        ],
+        "feature": "vmanage-default",
+        "factoryDefault": false,
+        "templateName": "AgencyA-Logging",
+        "templateDescription": "AgencyA-Logging",
+        "templateType": "logging",
+        "templateMinVersion": "15.0.0",
+        "templateDefinition": {
+            "disk": {
+                "enable": {
+                    "vipObjectType": "object",
+                    "vipType": "ignore",
+                    "vipValue": 1,
+                    "vipVariableName": "logging_disk_enable"
+                },
+                "file": {
+                    "size": {
+                        "vipObjectType": "object",
+                        "vipType": "ignore",
+                        "vipValue": 1,
+                        "vipVariableName": "logging_max_file_size"
+                    },
+                    "rotate": {
+                        "vipObjectType": "object",
+                        "vipType": "ignore",
+                        "vipValue": 1,
+                        "vipVariableName": "logging_disk_rotation"
+                    }
+                },
+                "priority": {
+                    "vipObjectType": "object",
+                    "vipType": "ignore",
+                    "vipValue": "information",
+                    "vipVariableName": "logging_disk_priority"
+                }
+            },
+            "server": {
+                "vipType": "constant",
+                "vipValue": [
+                    {
+                        "name": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "192.168.1.1",
+                            "vipVariableName": "logging_server_name"
+                        },
+                        "vpn": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": 511,
+                            "vipVariableName": "logging_server_vpn"
+                        },
+                        "source-interface": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "ge0/1",
+                            "vipVariableName": "logging_server_source_interface"
+                        },
+                        "priority": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "notice",
+                            "vipVariableName": "logging_server_server_priority"
+                        },
+                        "priority-order": [
+                            "name",
+                            "vpn",
+                            "source-interface",
+                            "priority"
+                        ]
+                    },
+                    {
+                        "name": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "10.1.1.1",
+                            "vipVariableName": "logging_server_name"
+                        },
+                        "vpn": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": 512,
+                            "vipVariableName": "logging_server_vpn"
+                        },
+                        "source-interface": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "ge0/2",
+                            "vipVariableName": "logging_server_source_interface"
+                        },
+                        "priority": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "notice",
+                            "vipVariableName": "logging_server_server_priority"
+                        },
+                        "priority-order": [
+                            "name",
+                            "vpn",
+                            "source-interface",
+                            "priority"
+                        ]
+                    }
+                ],
+                "vipObjectType": "tree",
+                "vipPrimaryKey": [
+                    "name"
+                ]
+            }
+        }
+    },
+    {
+        "deviceType": [
+            "vedge-1000",
+            "vedge-2000"
+        ],
+        "deviceModels": [
+            {
+                "name": "vedge-1000",
+                "displayName": "vEdge 1000",
+                "deviceType": "vedge",
+                "isCliSupported": false,
+                "isCiscoDeviceModel": true
+            },
+            {
+                "name": "vedge-2000",
+                "displayName": "vEdge 2000",
+                "deviceType": "vedge",
+                "isCliSupported": false,
+                "isCiscoDeviceModel": true
+            }
+        ],
+        "feature": "vmanage-default",
+        "factoryDefault": false,
+        "templateName": "AgencyB-Logging",
+        "templateDescription": "AgencyB-Logging",
+        "templateType": "logging",
+        "templateMinVersion": "15.0.0",
+        "templateDefinition": {
+            "disk": {
+                "enable": {
+                    "vipObjectType": "object",
+                    "vipType": "ignore",
+                    "vipValue": 1,
+                    "vipVariableName": "logging_disk_enable"
+                },
+                "file": {
+                    "size": {
+                        "vipObjectType": "object",
+                        "vipType": "ignore",
+                        "vipValue": 1,
+                        "vipVariableName": "logging_max_file_size"
+                    },
+                    "rotate": {
+                        "vipObjectType": "object",
+                        "vipType": "ignore",
+                        "vipValue": 1,
+                        "vipVariableName": "logging_disk_rotation"
+                    }
+                },
+                "priority": {
+                    "vipObjectType": "object",
+                    "vipType": "ignore",
+                    "vipValue": "information",
+                    "vipVariableName": "logging_disk_priority"
+                }
+            },
+            "server": {
+                "vipType": "constant",
+                "vipValue": [
+                    {
+                        "name": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "192.168.1.1",
+                            "vipVariableName": "logging_server_name"
+                        },
+                        "vpn": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": 511,
+                            "vipVariableName": "logging_server_vpn"
+                        },
+                        "source-interface": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "ge0/1",
+                            "vipVariableName": "logging_server_source_interface"
+                        },
+                        "priority": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "information",
+                            "vipVariableName": "logging_server_server_priority"
+                        },
+                        "priority-order": [
+                            "name",
+                            "vpn",
+                            "source-interface",
+                            "priority"
+                        ]
+                    },
+                    {
+                        "name": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "10.1.1.1",
+                            "vipVariableName": "logging_server_name"
+                        },
+                        "vpn": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": 512,
+                            "vipVariableName": "logging_server_vpn"
+                        },
+                        "source-interface": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "ge0/2",
+                            "vipVariableName": "logging_server_source_interface"
+                        },
+                        "priority": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "information",
+                            "vipVariableName": "logging_server_server_priority"
+                        },
+                        "priority-order": [
+                            "name",
+                            "vpn",
+                            "source-interface",
+                            "priority"
+                        ]
+                    }
+                ],
+                "vipObjectType": "tree",
+                "vipPrimaryKey": [
+                    "name"
+                ]
+            }
+        }
+    },
+    {
+        "deviceType": [
+            "vedge-1000",
+            "vedge-2000",
+            "vedge-5000"
+        ],
+        "deviceModels": [
+            {
+                "name": "vedge-1000",
+                "displayName": "vEdge 1000",
+                "deviceType": "vedge",
+                "isCliSupported": false,
+                "isCiscoDeviceModel": true
+            },
+            {
+                "name": "vedge-2000",
+                "displayName": "vEdge 2000",
+                "deviceType": "vedge",
+                "isCliSupported": false,
+                "isCiscoDeviceModel": true
+            },
+            {
+                "name": "vedge-5000",
+                "displayName": "vEdge 5000",
+                "deviceType": "vedge",
+                "isCliSupported": false,
+                "isCiscoDeviceModel": true
+            }
+        ],
+        "feature": "vmanage-default",
+        "factoryDefault": false,
+        "templateName": "AgencyC-Logging",
+        "templateDescription": "AgencyC-Logging",
+        "templateType": "logging",
+        "templateMinVersion": "15.0.0",
+        "templateDefinition": {
+            "disk": {
+                "enable": {
+                    "vipObjectType": "object",
+                    "vipType": "ignore",
+                    "vipValue": 1,
+                    "vipVariableName": "logging_disk_enable"
+                },
+                "file": {
+                    "size": {
+                        "vipObjectType": "object",
+                        "vipType": "ignore",
+                        "vipValue": 1,
+                        "vipVariableName": "logging_max_file_size"
+                    },
+                    "rotate": {
+                        "vipObjectType": "object",
+                        "vipType": "ignore",
+                        "vipValue": 1,
+                        "vipVariableName": "logging_disk_rotation"
+                    }
+                },
+                "priority": {
+                    "vipObjectType": "object",
+                    "vipType": "ignore",
+                    "vipValue": "information",
+                    "vipVariableName": "logging_disk_priority"
+                }
+            },
+            "server": {
+                "vipType": "constant",
+                "vipValue": [
+                    {
+                        "name": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "192.168.1.1",
+                            "vipVariableName": "logging_server_name"
+                        },
+                        "vpn": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": 511,
+                            "vipVariableName": "logging_server_vpn"
+                        },
+                        "source-interface": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "ge0/1",
+                            "vipVariableName": "logging_server_source_interface"
+                        },
+                        "priority": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "information",
+                            "vipVariableName": "logging_server_server_priority"
+                        },
+                        "priority-order": [
+                            "name",
+                            "vpn",
+                            "source-interface",
+                            "priority"
+                        ]
+                    },
+                    {
+                        "name": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "10.1.1.1",
+                            "vipVariableName": "logging_server_name"
+                        },
+                        "vpn": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": 512,
+                            "vipVariableName": "logging_server_vpn"
+                        },
+                        "source-interface": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "ge0/2",
+                            "vipVariableName": "logging_server_source_interface"
+                        },
+                        "priority": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "information",
+                            "vipVariableName": "logging_server_server_priority"
+                        },
+                        "priority-order": [
+                            "name",
+                            "vpn",
+                            "source-interface",
+                            "priority"
+                        ]
+                    }
+                ],
+                "vipObjectType": "tree",
+                "vipPrimaryKey": [
+                    "name"
+                ]
+            }
+        }
+    }
+]

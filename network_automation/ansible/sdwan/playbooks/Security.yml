@@ -4,10 +4,10 @@
   connection: local
   gather_facts: no
   vars:
-    file_contents: "{{ lookup('file', './templates/aaa_data.json') }}"
+    file_contents: "{{ lookup('file', './templates/security_data.json') }}"
   tasks:
   - name: Parse excel and make json file
-    command: "python spreadsheet_parser.py SDWAN_Deployment_Template.xlsx AAA"
+    command: "python spreadsheet_parser.py SDWAN_Deployment_Template.xlsx Security"
     no_log: true
 
   - name: Authentication
@@ -30,7 +30,7 @@
       cookie: "{{auth_output.cookies_string }}"
     no_log: true
 
-  - name: Create Feature Template - AAA
+  - name: Create Feature Template - Security
     uri:
       url: https://{{ host_ip }}:443/dataservice/template/feature
       method: 'POST'

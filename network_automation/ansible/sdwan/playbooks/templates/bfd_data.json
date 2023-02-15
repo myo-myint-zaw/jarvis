@@ -1,0 +1,642 @@
+[
+    {
+        "deviceType": [
+            "vedge-cloud"
+        ],
+        "deviceModels": [
+            {
+                "name": "vedge-cloud",
+                "displayName": "vEdge Cloud",
+                "deviceType": "vedge",
+                "isCliSupported": false,
+                "isCiscoDeviceModel": true
+            }
+        ],
+        "feature": "vmanage-default",
+        "factoryDefault": false,
+        "templateName": "vEdge-Cloud-BFD",
+        "templateDescription": "vEdge-Cloud-BFD",
+        "templateType": "bfd-vedge",
+        "templateMinVersion": "15.0.0",
+        "templateDefinition": {
+            "app-route": {
+                "multiplier": {
+                    "vipObjectType": "object",
+                    "vipType": "constant",
+                    "vipValue": 5,
+                    "vipVariableName": "bfd_multiplier"
+                },
+                "poll-interval": {
+                    "vipObjectType": "object",
+                    "vipType": "constant",
+                    "vipValue": 600000,
+                    "vipVariableName": "bfd_poll_interval"
+                }
+            },
+            "color": {
+                "vipType": "constant",
+                "vipValue": [
+                    {
+                        "color": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "private1",
+                            "vipVariableName": "bfd_color"
+                        },
+                        "hello-interval": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": 60000,
+                            "vipVariableName": "bfd_hello_interval"
+                        },
+                        "multiplier": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": 15,
+                            "vipVariableName": "bfd_color_multiplier"
+                        },
+                        "pmtu-discovery": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": true,
+                            "vipVariableName": "bfd_pmtu_discovery"
+                        },
+                        "priority-order": [
+                            "color",
+                            "hello-interval",
+                            "multiplier",
+                            "pmtu-discovery"
+                        ]
+                    }
+                ],
+                "vipObjectType": "tree",
+                "vipPrimaryKey": [
+                    "color"
+                ]
+            }
+        }
+    },
+    {
+        "deviceType": [
+            "vedge-1000"
+        ],
+        "deviceModels": [
+            {
+                "name": "vedge-1000",
+                "displayName": "vEdge 1000",
+                "deviceType": "vedge",
+                "isCliSupported": false,
+                "isCiscoDeviceModel": true
+            }
+        ],
+        "feature": "vmanage-default",
+        "factoryDefault": false,
+        "templateName": "vEdge1000-BFD",
+        "templateDescription": "vEdge1000-BFD",
+        "templateType": "bfd-vedge",
+        "templateMinVersion": "15.0.0",
+        "templateDefinition": {
+            "app-route": {
+                "multiplier": {
+                    "vipObjectType": "object",
+                    "vipType": "constant",
+                    "vipValue": 5,
+                    "vipVariableName": "bfd_multiplier"
+                },
+                "poll-interval": {
+                    "vipObjectType": "object",
+                    "vipType": "constant",
+                    "vipValue": 600000,
+                    "vipVariableName": "bfd_poll_interval"
+                }
+            },
+            "color": {
+                "vipType": "constant",
+                "vipValue": [
+                    {
+                        "color": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "mpls",
+                            "vipVariableName": "bfd_color"
+                        },
+                        "hello-interval": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": 60000,
+                            "vipVariableName": "bfd_hello_interval"
+                        },
+                        "multiplier": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": 15,
+                            "vipVariableName": "bfd_color_multiplier"
+                        },
+                        "pmtu-discovery": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": true,
+                            "vipVariableName": "bfd_pmtu_discovery"
+                        },
+                        "priority-order": [
+                            "color",
+                            "hello-interval",
+                            "multiplier",
+                            "pmtu-discovery"
+                        ]
+                    }
+                ],
+                "vipObjectType": "tree",
+                "vipPrimaryKey": [
+                    "color"
+                ]
+            }
+        }
+    },
+    {
+        "deviceType": [
+            "vedge-2000"
+        ],
+        "deviceModels": [
+            {
+                "name": "vedge-2000",
+                "displayName": "vEdge 2000",
+                "deviceType": "vedge",
+                "isCliSupported": false,
+                "isCiscoDeviceModel": true
+            }
+        ],
+        "feature": "vmanage-default",
+        "factoryDefault": false,
+        "templateName": "vEdge2000-BFD",
+        "templateDescription": "vEdge2000-BFD",
+        "templateType": "bfd-vedge",
+        "templateMinVersion": "15.0.0",
+        "templateDefinition": {
+            "app-route": {
+                "multiplier": {
+                    "vipObjectType": "object",
+                    "vipType": "constant",
+                    "vipValue": 5,
+                    "vipVariableName": "bfd_multiplier"
+                },
+                "poll-interval": {
+                    "vipObjectType": "object",
+                    "vipType": "constant",
+                    "vipValue": 600000,
+                    "vipVariableName": "bfd_poll_interval"
+                }
+            },
+            "color": {
+                "vipType": "constant",
+                "vipValue": [
+                    {
+                        "color": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "red",
+                            "vipVariableName": "bfd_color"
+                        },
+                        "hello-interval": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": 60000,
+                            "vipVariableName": "bfd_hello_interval"
+                        },
+                        "multiplier": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": 15,
+                            "vipVariableName": "bfd_color_multiplier"
+                        },
+                        "pmtu-discovery": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": true,
+                            "vipVariableName": "bfd_pmtu_discovery"
+                        },
+                        "priority-order": [
+                            "color",
+                            "hello-interval",
+                            "multiplier",
+                            "pmtu-discovery"
+                        ]
+                    }
+                ],
+                "vipObjectType": "tree",
+                "vipPrimaryKey": [
+                    "color"
+                ]
+            }
+        }
+    },
+    {
+        "deviceType": [
+            "vedge-5000"
+        ],
+        "deviceModels": [
+            {
+                "name": "vedge-5000",
+                "displayName": "vEdge 5000",
+                "deviceType": "vedge",
+                "isCliSupported": false,
+                "isCiscoDeviceModel": true
+            }
+        ],
+        "feature": "vmanage-default",
+        "factoryDefault": false,
+        "templateName": "vEdge5000-BFD",
+        "templateDescription": "vEdge5000-BFD",
+        "templateType": "bfd-vedge",
+        "templateMinVersion": "15.0.0",
+        "templateDefinition": {
+            "app-route": {
+                "multiplier": {
+                    "vipObjectType": "object",
+                    "vipType": "constant",
+                    "vipValue": 5,
+                    "vipVariableName": "bfd_multiplier"
+                },
+                "poll-interval": {
+                    "vipObjectType": "object",
+                    "vipType": "constant",
+                    "vipValue": 600000,
+                    "vipVariableName": "bfd_poll_interval"
+                }
+            },
+            "color": {
+                "vipType": "constant",
+                "vipValue": [
+                    {
+                        "color": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "silver",
+                            "vipVariableName": "bfd_color"
+                        },
+                        "hello-interval": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": 60000,
+                            "vipVariableName": "bfd_hello_interval"
+                        },
+                        "multiplier": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": 15,
+                            "vipVariableName": "bfd_color_multiplier"
+                        },
+                        "pmtu-discovery": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": false,
+                            "vipVariableName": "bfd_pmtu_discovery"
+                        },
+                        "priority-order": [
+                            "color",
+                            "hello-interval",
+                            "multiplier",
+                            "pmtu-discovery"
+                        ]
+                    }
+                ],
+                "vipObjectType": "tree",
+                "vipPrimaryKey": [
+                    "color"
+                ]
+            }
+        }
+    },
+    {
+        "deviceType": [
+            "vedge-ISRv"
+        ],
+        "deviceModels": [
+            {
+                "name": "vedge-ISRv",
+                "displayName": "ISRv",
+                "deviceType": "vedge",
+                "isCliSupported": false,
+                "isCiscoDeviceModel": true
+            }
+        ],
+        "feature": "vmanage-default",
+        "factoryDefault": false,
+        "templateName": "ISRv-BFD",
+        "templateDescription": "ISRv-BFD",
+        "templateType": "bfd-vedge",
+        "templateMinVersion": "15.0.0",
+        "templateDefinition": {
+            "app-route": {
+                "multiplier": {
+                    "vipObjectType": "object",
+                    "vipType": "constant",
+                    "vipValue": 5,
+                    "vipVariableName": "bfd_multiplier"
+                },
+                "poll-interval": {
+                    "vipObjectType": "object",
+                    "vipType": "constant",
+                    "vipValue": 600000,
+                    "vipVariableName": "bfd_poll_interval"
+                }
+            },
+            "color": {
+                "vipType": "constant",
+                "vipValue": [
+                    {
+                        "color": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "lte",
+                            "vipVariableName": "bfd_color"
+                        },
+                        "hello-interval": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": 60000,
+                            "vipVariableName": "bfd_hello_interval"
+                        },
+                        "multiplier": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": 15,
+                            "vipVariableName": "bfd_color_multiplier"
+                        },
+                        "pmtu-discovery": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": false,
+                            "vipVariableName": "bfd_pmtu_discovery"
+                        },
+                        "priority-order": [
+                            "color",
+                            "hello-interval",
+                            "multiplier",
+                            "pmtu-discovery"
+                        ]
+                    }
+                ],
+                "vipObjectType": "tree",
+                "vipPrimaryKey": [
+                    "color"
+                ]
+            }
+        }
+    },
+    {
+        "deviceType": [
+            "vedge-1000"
+        ],
+        "deviceModels": [
+            {
+                "name": "vedge-1000",
+                "displayName": "vEdge 1000",
+                "deviceType": "vedge",
+                "isCliSupported": false,
+                "isCiscoDeviceModel": true
+            }
+        ],
+        "feature": "vmanage-default",
+        "factoryDefault": false,
+        "templateName": "AgencyA-BFD",
+        "templateDescription": "AgencyA-BFD",
+        "templateType": "bfd-vedge",
+        "templateMinVersion": "15.0.0",
+        "templateDefinition": {
+            "app-route": {
+                "multiplier": {
+                    "vipObjectType": "object",
+                    "vipType": "constant",
+                    "vipValue": 5,
+                    "vipVariableName": "bfd_multiplier"
+                },
+                "poll-interval": {
+                    "vipObjectType": "object",
+                    "vipType": "constant",
+                    "vipValue": 600000,
+                    "vipVariableName": "bfd_poll_interval"
+                }
+            },
+            "color": {
+                "vipType": "constant",
+                "vipValue": [
+                    {
+                        "color": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "lte",
+                            "vipVariableName": "bfd_color"
+                        },
+                        "hello-interval": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": 60000,
+                            "vipVariableName": "bfd_hello_interval"
+                        },
+                        "multiplier": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": 15,
+                            "vipVariableName": "bfd_color_multiplier"
+                        },
+                        "pmtu-discovery": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": false,
+                            "vipVariableName": "bfd_pmtu_discovery"
+                        },
+                        "priority-order": [
+                            "color",
+                            "hello-interval",
+                            "multiplier",
+                            "pmtu-discovery"
+                        ]
+                    }
+                ],
+                "vipObjectType": "tree",
+                "vipPrimaryKey": [
+                    "color"
+                ]
+            }
+        }
+    },
+    {
+        "deviceType": [
+            "vedge-1000",
+            "vedge-2000"
+        ],
+        "deviceModels": [
+            {
+                "name": "vedge-1000",
+                "displayName": "vEdge 1000",
+                "deviceType": "vedge",
+                "isCliSupported": false,
+                "isCiscoDeviceModel": true
+            },
+            {
+                "name": "vedge-2000",
+                "displayName": "vEdge 2000",
+                "deviceType": "vedge",
+                "isCliSupported": false,
+                "isCiscoDeviceModel": true
+            }
+        ],
+        "feature": "vmanage-default",
+        "factoryDefault": false,
+        "templateName": "AgencyB-BFD",
+        "templateDescription": "AgencyB-BFD",
+        "templateType": "bfd-vedge",
+        "templateMinVersion": "15.0.0",
+        "templateDefinition": {
+            "app-route": {
+                "multiplier": {
+                    "vipObjectType": "object",
+                    "vipType": "constant",
+                    "vipValue": 5,
+                    "vipVariableName": "bfd_multiplier"
+                },
+                "poll-interval": {
+                    "vipObjectType": "object",
+                    "vipType": "constant",
+                    "vipValue": 600000,
+                    "vipVariableName": "bfd_poll_interval"
+                }
+            },
+            "color": {
+                "vipType": "constant",
+                "vipValue": [
+                    {
+                        "color": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "lte",
+                            "vipVariableName": "bfd_color"
+                        },
+                        "hello-interval": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": 60000,
+                            "vipVariableName": "bfd_hello_interval"
+                        },
+                        "multiplier": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": 15,
+                            "vipVariableName": "bfd_color_multiplier"
+                        },
+                        "pmtu-discovery": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": false,
+                            "vipVariableName": "bfd_pmtu_discovery"
+                        },
+                        "priority-order": [
+                            "color",
+                            "hello-interval",
+                            "multiplier",
+                            "pmtu-discovery"
+                        ]
+                    }
+                ],
+                "vipObjectType": "tree",
+                "vipPrimaryKey": [
+                    "color"
+                ]
+            }
+        }
+    },
+    {
+        "deviceType": [
+            "vedge-1000",
+            "vedge-2000",
+            "vedge-5000"
+        ],
+        "deviceModels": [
+            {
+                "name": "vedge-1000",
+                "displayName": "vEdge 1000",
+                "deviceType": "vedge",
+                "isCliSupported": false,
+                "isCiscoDeviceModel": true
+            },
+            {
+                "name": "vedge-2000",
+                "displayName": "vEdge 2000",
+                "deviceType": "vedge",
+                "isCliSupported": false,
+                "isCiscoDeviceModel": true
+            },
+            {
+                "name": "vedge-5000",
+                "displayName": "vEdge 5000",
+                "deviceType": "vedge",
+                "isCliSupported": false,
+                "isCiscoDeviceModel": true
+            }
+        ],
+        "feature": "vmanage-default",
+        "factoryDefault": false,
+        "templateName": "AgencyC-BFD",
+        "templateDescription": "AgencyC-BFD",
+        "templateType": "bfd-vedge",
+        "templateMinVersion": "15.0.0",
+        "templateDefinition": {
+            "app-route": {
+                "multiplier": {
+                    "vipObjectType": "object",
+                    "vipType": "constant",
+                    "vipValue": 5,
+                    "vipVariableName": "bfd_multiplier"
+                },
+                "poll-interval": {
+                    "vipObjectType": "object",
+                    "vipType": "constant",
+                    "vipValue": 600000,
+                    "vipVariableName": "bfd_poll_interval"
+                }
+            },
+            "color": {
+                "vipType": "constant",
+                "vipValue": [
+                    {
+                        "color": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": "lte",
+                            "vipVariableName": "bfd_color"
+                        },
+                        "hello-interval": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": 60000,
+                            "vipVariableName": "bfd_hello_interval"
+                        },
+                        "multiplier": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": 15,
+                            "vipVariableName": "bfd_color_multiplier"
+                        },
+                        "pmtu-discovery": {
+                            "vipObjectType": "object",
+                            "vipType": "constant",
+                            "vipValue": false,
+                            "vipVariableName": "bfd_pmtu_discovery"
+                        },
+                        "priority-order": [
+                            "color",
+                            "hello-interval",
+                            "multiplier",
+                            "pmtu-discovery"
+                        ]
+                    }
+                ],
+                "vipObjectType": "tree",
+                "vipPrimaryKey": [
+                    "color"
+                ]
+            }
+        }
+    }
+]

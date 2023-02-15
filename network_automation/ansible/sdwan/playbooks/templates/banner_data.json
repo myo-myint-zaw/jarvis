@@ -1,0 +1,298 @@
+[
+    {
+        "deviceType": [
+            "vedge-cloud"
+        ],
+        "deviceModels": [
+            {
+                "name": "vedge-cloud",
+                "displayName": "vEdge Cloud",
+                "deviceType": "vedge",
+                "isCliSupported": false,
+                "isCiscoDeviceModel": true
+            }
+        ],
+        "feature": "vmanage-default",
+        "factoryDefault": false,
+        "templateName": "vEdge-Cloud-Banner",
+        "templateDescription": "vEdge-Cloud-Banner",
+        "templateType": "banner",
+        "templateMinVersion": "15.0.0",
+        "templateDefinition": {
+            "login": {
+                "vipObjectType": "object",
+                "vipType": "constant",
+                "vipValue": "WARNING: Use of this System is restricted to authorised users only.  User activity may be monitored and/or recorded. Anyone using this   System expressly consents to such monitoring and/or recording.If   possible criminal activity is detected, these records, along with   certain personal information, may be provided to law enforcement   officials",
+                "vipVariableName": "login_banner"
+            },
+            "motd": {
+                "vipObjectType": "object",
+                "vipType": "constant",
+                "vipValue": "WARNING: Use of this System is restricted to authorised users only.  User activity may be monitored and/or recorded. Anyone using this   System expressly consents to such monitoring and/or recording.If   possible criminal activity is detected, these records, along with   certain personal information, may be provided to law enforcement   officials",
+                "vipVariableName": "motd_banner"
+            }
+        }
+    },
+    {
+        "deviceType": [
+            "vedge-1000"
+        ],
+        "deviceModels": [
+            {
+                "name": "vedge-1000",
+                "displayName": "vEdge 1000",
+                "deviceType": "vedge",
+                "isCliSupported": false,
+                "isCiscoDeviceModel": true
+            }
+        ],
+        "feature": "vmanage-default",
+        "factoryDefault": false,
+        "templateName": "vEdge1000-Banner",
+        "templateDescription": "vEdge1000-Banner",
+        "templateType": "banner",
+        "templateMinVersion": "15.0.0",
+        "templateDefinition": {
+            "login": {
+                "vipObjectType": "object",
+                "vipType": "constant",
+                "vipValue": "WARNING: Use of this System is restricted to authorised users only.  User activity may be monitored and/or recorded. Anyone using this   System expressly consents to such monitoring and/or recording.If   possible criminal activity is detected, these records, along with   certain personal information, may be provided to law enforcement   officials",
+                "vipVariableName": "login_banner"
+            },
+            "motd": {
+                "vipObjectType": "object",
+                "vipType": "constant",
+                "vipValue": "WARNING: Use of this System is restricted to authorised users only.  User activity may be monitored and/or recorded. Anyone using this   System expressly consents to such monitoring and/or recording.If   possible criminal activity is detected, these records, along with   certain personal information, may be provided to law enforcement   officials",
+                "vipVariableName": "motd_banner"
+            }
+        }
+    },
+    {
+        "deviceType": [
+            "vedge-2000"
+        ],
+        "deviceModels": [
+            {
+                "name": "vedge-2000",
+                "displayName": "vEdge 2000",
+                "deviceType": "vedge",
+                "isCliSupported": false,
+                "isCiscoDeviceModel": true
+            }
+        ],
+        "feature": "vmanage-default",
+        "factoryDefault": false,
+        "templateName": "vEdge2000-Banner",
+        "templateDescription": "vEdge2000-Banner",
+        "templateType": "banner",
+        "templateMinVersion": "15.0.0",
+        "templateDefinition": {
+            "login": {
+                "vipObjectType": "object",
+                "vipType": "constant",
+                "vipValue": "WARNING: Use of this System is restricted to authorised users only.  User activity may be monitored and/or recorded. Anyone using this   System expressly consents to such monitoring and/or recording.If   possible criminal activity is detected, these records, along with   certain personal information, may be provided to law enforcement   officials",
+                "vipVariableName": "login_banner"
+            },
+            "motd": {
+                "vipObjectType": "object",
+                "vipType": "constant",
+                "vipValue": "WARNING: Use of this System is restricted to authorised users only.  User activity may be monitored and/or recorded. Anyone using this   System expressly consents to such monitoring and/or recording.If   possible criminal activity is detected, these records, along with   certain personal information, may be provided to law enforcement   officials",
+                "vipVariableName": "motd_banner"
+            }
+        }
+    },
+    {
+        "deviceType": [
+            "vedge-5000"
+        ],
+        "deviceModels": [
+            {
+                "name": "vedge-5000",
+                "displayName": "vEdge 5000",
+                "deviceType": "vedge",
+                "isCliSupported": false,
+                "isCiscoDeviceModel": true
+            }
+        ],
+        "feature": "vmanage-default",
+        "factoryDefault": false,
+        "templateName": "vEdge5000-Banner",
+        "templateDescription": "vEdge5000-Banner",
+        "templateType": "banner",
+        "templateMinVersion": "15.0.0",
+        "templateDefinition": {
+            "login": {
+                "vipObjectType": "object",
+                "vipType": "constant",
+                "vipValue": "WARNING: Use of this System is restricted to authorised users only.  User activity may be monitored and/or recorded. Anyone using this   System expressly consents to such monitoring and/or recording.If   possible criminal activity is detected, these records, along with   certain personal information, may be provided to law enforcement   officials",
+                "vipVariableName": "login_banner"
+            },
+            "motd": {
+                "vipObjectType": "object",
+                "vipType": "constant",
+                "vipValue": "WARNING: Use of this System is restricted to authorised users only.  User activity may be monitored and/or recorded. Anyone using this   System expressly consents to such monitoring and/or recording.If   possible criminal activity is detected, these records, along with   certain personal information, may be provided to law enforcement   officials",
+                "vipVariableName": "motd_banner"
+            }
+        }
+    },
+    {
+        "deviceType": [
+            "vedge-ISRv"
+        ],
+        "deviceModels": [
+            {
+                "name": "vedge-ISRv",
+                "displayName": "ISRv",
+                "deviceType": "vedge",
+                "isCliSupported": false,
+                "isCiscoDeviceModel": true
+            }
+        ],
+        "feature": "vmanage-default",
+        "factoryDefault": false,
+        "templateName": "ISRv-Banner",
+        "templateDescription": "ISRv-Banner",
+        "templateType": "banner",
+        "templateMinVersion": "15.0.0",
+        "templateDefinition": {
+            "login": {
+                "vipObjectType": "object",
+                "vipType": "constant",
+                "vipValue": "WARNING: Use of this System is restricted to authorised users only.  User activity may be monitored and/or recorded. Anyone using this   System expressly consents to such monitoring and/or recording.If   possible criminal activity is detected, these records, along with   certain personal information, may be provided to law enforcement   officials",
+                "vipVariableName": "login_banner"
+            },
+            "motd": {
+                "vipObjectType": "object",
+                "vipType": "constant",
+                "vipValue": "WARNING: Use of this System is restricted to authorised users only.  User activity may be monitored and/or recorded. Anyone using this   System expressly consents to such monitoring and/or recording.If   possible criminal activity is detected, these records, along with   certain personal information, may be provided to law enforcement   officials",
+                "vipVariableName": "motd_banner"
+            }
+        }
+    },
+    {
+        "deviceType": [
+            "vedge-1000"
+        ],
+        "deviceModels": [
+            {
+                "name": "vedge-1000",
+                "displayName": "vEdge 1000",
+                "deviceType": "vedge",
+                "isCliSupported": false,
+                "isCiscoDeviceModel": true
+            }
+        ],
+        "feature": "vmanage-default",
+        "factoryDefault": false,
+        "templateName": "AgencyA-Banner",
+        "templateDescription": "AgencyA-Banner",
+        "templateType": "banner",
+        "templateMinVersion": "15.0.0",
+        "templateDefinition": {
+            "login": {
+                "vipObjectType": "object",
+                "vipType": "constant",
+                "vipValue": "WARNING: Use of this System is restricted to authorised users only.  User activity may be monitored and/or recorded. Anyone using this   System expressly consents to such monitoring and/or recording.If   possible criminal activity is detected, these records, along with   certain personal information, may be provided to law enforcement   officials",
+                "vipVariableName": "login_banner"
+            },
+            "motd": {
+                "vipObjectType": "object",
+                "vipType": "constant",
+                "vipValue": "WARNING: Use of this System is restricted to authorised users only.  User activity may be monitored and/or recorded. Anyone using this   System expressly consents to such monitoring and/or recording.If   possible criminal activity is detected, these records, along with   certain personal information, may be provided to law enforcement   officials",
+                "vipVariableName": "motd_banner"
+            }
+        }
+    },
+    {
+        "deviceType": [
+            "vedge-1000",
+            "vedge-2000"
+        ],
+        "deviceModels": [
+            {
+                "name": "vedge-1000",
+                "displayName": "vEdge 1000",
+                "deviceType": "vedge",
+                "isCliSupported": false,
+                "isCiscoDeviceModel": true
+            },
+            {
+                "name": "vedge-2000",
+                "displayName": "vEdge 2000",
+                "deviceType": "vedge",
+                "isCliSupported": false,
+                "isCiscoDeviceModel": true
+            }
+        ],
+        "feature": "vmanage-default",
+        "factoryDefault": false,
+        "templateName": "AgencyB-Banner",
+        "templateDescription": "AgencyB-Banner",
+        "templateType": "banner",
+        "templateMinVersion": "15.0.0",
+        "templateDefinition": {
+            "login": {
+                "vipObjectType": "object",
+                "vipType": "constant",
+                "vipValue": "WARNING: Use of this System is restricted to authorised users only.  User activity may be monitored and/or recorded. Anyone using this   System expressly consents to such monitoring and/or recording.If   possible criminal activity is detected, these records, along with   certain personal information, may be provided to law enforcement   officials",
+                "vipVariableName": "login_banner"
+            },
+            "motd": {
+                "vipObjectType": "object",
+                "vipType": "constant",
+                "vipValue": "WARNING: Use of this System is restricted to authorised users only.  User activity may be monitored and/or recorded. Anyone using this   System expressly consents to such monitoring and/or recording.If   possible criminal activity is detected, these records, along with   certain personal information, may be provided to law enforcement   officials",
+                "vipVariableName": "motd_banner"
+            }
+        }
+    },
+    {
+        "deviceType": [
+            "vedge-1000",
+            "vedge-2000",
+            "vedge-5000"
+        ],
+        "deviceModels": [
+            {
+                "name": "vedge-1000",
+                "displayName": "vEdge 1000",
+                "deviceType": "vedge",
+                "isCliSupported": false,
+                "isCiscoDeviceModel": true
+            },
+            {
+                "name": "vedge-2000",
+                "displayName": "vEdge 2000",
+                "deviceType": "vedge",
+                "isCliSupported": false,
+                "isCiscoDeviceModel": true
+            },
+            {
+                "name": "vedge-5000",
+                "displayName": "vEdge 5000",
+                "deviceType": "vedge",
+                "isCliSupported": false,
+                "isCiscoDeviceModel": true
+            }
+        ],
+        "feature": "vmanage-default",
+        "factoryDefault": false,
+        "templateName": "AgencyC-Banner",
+        "templateDescription": "AgencyC-Banner",
+        "templateType": "banner",
+        "templateMinVersion": "15.0.0",
+        "templateDefinition": {
+            "login": {
+                "vipObjectType": "object",
+                "vipType": "constant",
+                "vipValue": "WARNING: Use of this System is restricted to authorised users only.  User activity may be monitored and/or recorded. Anyone using this   System expressly consents to such monitoring and/or recording.If   possible criminal activity is detected, these records, along with   certain personal information, may be provided to law enforcement   officials",
+                "vipVariableName": "login_banner"
+            },
+            "motd": {
+                "vipObjectType": "object",
+                "vipType": "constant",
+                "vipValue": "WARNING: Use of this System is restricted to authorised users only.  User activity may be monitored and/or recorded. Anyone using this   System expressly consents to such monitoring and/or recording.If   possible criminal activity is detected, these records, along with   certain personal information, may be provided to law enforcement   officials",
+                "vipVariableName": "motd_banner"
+            }
+        }
+    }
+]
